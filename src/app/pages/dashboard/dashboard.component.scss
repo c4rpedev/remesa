@@ -1,0 +1,29 @@
+.navbar {
+  background: #ffffff;
+  grid-area: nav;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px 0 30px;
+  border-bottom: 1px solid lightgray;
+}
+#sidebar{
+  background: white;  
+  box-shadow: 1px 0px 0px 0px lightgray;
+
+}
+
+//  @import '../../../styles.scss';
+
+//  /* Give every child element its grid name */
+//  .header {
+//     grid-area: header;
+//     display: flex;    
+//     align-items: flex-start;  
+//     justify-content: space-between;       
+//     background-color: white;
+//     margin-left: 42px;
+//     margin-top: 20px;
+//     margin-bottom: 20px;
+//   }

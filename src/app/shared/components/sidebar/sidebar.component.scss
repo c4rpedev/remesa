@@ -1,0 +1,29 @@
+.title__container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0px;
+
+    h1{
+        font-size: 20px;
+    }
+}
+.links__container{
+    padding: 0px 20px;
+}
+.links{
+    display: flex;
+    align-items: center;
+
+    span{
+        padding: 0px 20px;
+    }
+}
+.icon{
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}

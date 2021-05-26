@@ -1,0 +1,32 @@
+// -- Progress Bar Style -- //
+.progressbar__item{
+    display: flex;
+    align-items: flex-start;
+    
+}
+.progressbar__main{
+    flex-direction: column;    
+    width: 100%;
+    padding-top: 5px;
+}
+.progressbar__icon{
+    height: 50px;
+    width: 50px;
+}
+.progressbar__title{
+    margin-left: 20px;
+}
+.shopping__progressbar{
+    background-color: #db8c14;
+  }
+  .electronics__progressbar{
+    background-color: #30ed01;
+  }
+  .travel__progressbar{
+    background-color: #01aeed;
+  }
+  .outcome__percent{
+      font-size: 25px;
+      font-weight: 550;
+      font-style: normal;
+  }

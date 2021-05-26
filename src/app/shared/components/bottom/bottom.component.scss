@@ -1,0 +1,56 @@
+.loan__card{    
+    flex-direction: row;
+    align-items: flex-end;
+    height: 150px;
+    background-image: url('../../../../assets/images/card-background-red.svg')
+}
+.loan__text{    
+    color: white;
+    font-weight: bold;
+
+}
+.transactions{
+    display: flex;
+    justify-content: space-around;
+}
+
+.transactions__items{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        height: 50px;
+    }
+}
+.send__transfer{
+   display: flex;
+   justify-content: space-between;
+}
+.amount__input{
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    input{
+        border: none;
+        outline: none;
+        width: 100%;
+    }
+}
+.amount__button{
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    background: orange;
+    input{
+        border: none;
+        outline: none;
+        width: 100%;
+        background: none;
+    }
+}
+.input__icon{
+    height: 20px;
+    width: 20px;
+}
