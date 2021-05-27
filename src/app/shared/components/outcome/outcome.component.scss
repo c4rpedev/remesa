@@ -1,8 +1,15 @@
+.outcome__card{
+    padding: 6px 12px;
+}
+.progressbar__group{
+    padding-top: 7px;
+}
 // -- Progress Bar Style -- //
 .progressbar__item{
     display: flex;
     align-items: flex-start;
-    
+    margin-bottom: 20px;    
+    margin-right: 35px;
 }
 .progressbar__main{
     flex-direction: column;    
@@ -10,23 +17,40 @@
     padding-top: 5px;
 }
 .progressbar__icon{
-    height: 50px;
-    width: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    width: 27px;        
+}
+.electronics{
+    fill: #25AC4B;
+    background: #DDF9E4;  
+}
+.travels{
+    fill: #70A6E8;
+    background: #E4F0FF;    
+}
+.shopping{
+    fill: #F9984E;
+    background: #FFEADA;   
 }
 .progressbar__title{
     margin-left: 20px;
 }
 .shopping__progressbar{
-    background-color: #db8c14;
+    background-color: #F9984E;
   }
   .electronics__progressbar{
-    background-color: #30ed01;
+    background-color: #25AC4B;
   }
   .travel__progressbar{
-    background-color: #01aeed;
+    background-color: #70A6E8;
   }
   .outcome__percent{
-      font-size: 25px;
-      font-weight: 550;
-      font-style: normal;
+    font-size: 23px;
+    font-weight: 548;
+    font-style: normal;
+    color: #7C7C7C;
   }

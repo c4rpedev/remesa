@@ -4,3 +4,37 @@
     justify-content: space-around;
 
 }
+.goals__card{
+    padding-left: 6px;
+}
+.goal{
+    margin-top: 0px;
+    margin-right: 18px;
+    margin-left: 5px;
+    margin-bottom: 0px;
+    padding: 15px 20px;
+}
+.goal__number{
+    font-size: 24px;
+}
+.goals__container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.goal__icon{
+    height: 30px;
+    width: 30px;
+}
+.goal__top{
+    padding-bottom: 34px;
+}
+.holiday{    
+        fill: rgb(61, 58, 252);    
+}
+.brush{
+    fill: orangered;
+}
+.gamepad{
+    fill: green;
+}
