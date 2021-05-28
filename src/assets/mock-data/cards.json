@@ -1,0 +1,12 @@
+[   
+    {
+        "account_type":"PREMIUM",
+        "number":"5840 **** **** 6745",
+        "card_holder": "Mike Smith",
+        "exp_date": "06/21",
+        "balance": "2850.75",
+        "income": "1500.50",
+        "outcome": "350.60",
+        "weekly_limit": "4000"
+    }  
+]

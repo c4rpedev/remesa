@@ -5,13 +5,13 @@
         Goals
       </div>
       <div class="goals__container">
-        <div class="card border__shadow goal">  
+        <div *ngFor="let goal of goals| slice:0:3; let i=index" class="card border__shadow goal">  
           <div class="goal__top">
             <div class="goal__number">
-              $550
+              {{goal.amount}}
             </div>
             <div class="goal__date">
-              <span>12/20/20</span>
+              <span>{{goal.date}}</span>
             </div>
           </div>                
             <div class="goal__icon">
@@ -22,11 +22,14 @@
               </svg>
             </div>
             <div class="goal__name">
-              Holiday
+              {{goal.name}}
             </div>
           
         </div>
-        <div class="card border__shadow goal">
+        <div class="next" (click)="next()">
+          >
+        </div>
+        <!-- <div class="card border__shadow goal">
             <div class="goal__top">
               <div class="goal__number">
                 $550
@@ -69,7 +72,7 @@
           </div>            
             <div class="goal__icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-                <!-- Font Awesome Free 5.15.3 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) -->
+                
                 <path class="gamepad"
                   d="M480.07 96H160a160 160 0 1 0 114.24 272h91.52A160 160 0 1 0 480.07 96zM248 268a12 12 0 0 1-12 12h-52v52a12 12 0 0 1-12 12h-24a12 12 0 0 1-12-12v-52H84a12 12 0 0 1-12-12v-24a12 12 0 0 1 12-12h52v-52a12 12 0 0 1 12-12h24a12 12 0 0 1 12 12v52h52a12 12 0 0 1 12 12zm216 76a40 40 0 1 1 40-40 40 40 0 0 1-40 40zm64-96a40 40 0 1 1 40-40 40 40 0 0 1-40 40z" />
               </svg>
@@ -78,8 +81,10 @@
               Xbox
             </div>
          
-        </div>
+        </div> -->
+       
       </div>
+      
     </div>
   </div>
   <div class="outcome">

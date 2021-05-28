@@ -18,6 +18,29 @@
     box-sizing: border-box;
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+.account__type{
+  font-size: 10px;
+}
+.card__number{
+  color: white;
+  font-size: 20px;
+  text-align: center;
+}
+.title{
+  font-size: 13px;
+  margin-right: 33px;
+  span{
+    font-size: 9px;
+    color: white;
+  }
+}
+.card__bottom{
+  display: flex;
 }
 // -- Balance Style --//
 .card__balance{
@@ -119,9 +142,7 @@ input:checked + .slide:before {
     width: 100%;
   }
   
-  #progressbar > div {    
-    width: 22%;
-    /* Adjust with JavaScript */
+  #progressbar > div {  
     height: 8px;
     border-radius: 10px;
   }

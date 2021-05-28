@@ -10,7 +10,11 @@ import { GoalsComponent } from './shared/components/goals/goals.component';
 import { TransactionsComponent } from './shared/components/transactions/transactions.component';
 import { OutcomeComponent } from './shared/components/outcome/outcome.component';
 import { BottomComponent } from './shared/components/bottom/bottom.component';
-
+import { UserComponent } from './core/components/user/user.component';
+import { HttpClientModule } from '@angular/common/http'
+import { UserService } from './core/services/user.service';
+import { GoalService } from './core/services/goal.service';
+import { TransactionsService } from './core/services/transactions.service';
 
 
 @NgModule({
@@ -23,13 +27,19 @@ import { BottomComponent } from './shared/components/bottom/bottom.component';
     GoalsComponent,
     TransactionsComponent,
     OutcomeComponent,
-    BottomComponent    
+    BottomComponent,
+    UserComponent    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserService, 
+    GoalService,
+    TransactionsService  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

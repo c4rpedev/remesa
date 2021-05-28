@@ -4,13 +4,37 @@
       <div class="card__title">
         Cards
       </div>
-      <div class="card__inner">
+      <div class="card__inner" *ngFor="let card of cards">
         <div class="card__column">
-          <div class="thumbs__card">           
+          <div class="thumbs__card" >
+            <div class="card__top">
+              cloudclash
+            <div class="account__type">
+              {{ card.account_type }} ACCOUNT
+            </div>
+            </div>
+            
+            <div class="card__number">
+              {{ card.number }}
+            </div>
+            <div class="card__bottom">
+              <div class="title">
+                <span>Card holder</span>
+                <div class="card__holder">
+                  {{ card.card_holder }}
+                </div>
+              </div>
+              <div class="title">
+                <span>Expire date</span>
+                <div class="exp__date">
+                  {{ card.exp_date }}
+                </div>
+              </div>
+            </div>
           </div>
           <div class="progressbar__group row">
             <div id="progressbar">
-              <div class="weekly__progressbar"></div>
+              <div class="weekly__progressbar" [style.width]="percent"></div>
             </div>
           </div>
           <div class="weekly__payment row">
@@ -18,34 +42,33 @@
               Weekly payment limit.
             </span>
             <div class="limit__number">
-              $350.60/ $4000
-            </div>           
+              ${{card.outcome}}/ ${{ card.weekly_limit }}
+            </div>
           </div>
         </div>
         <div class="card__balance">
           <div class="balance">
             <div class="current__balance__number">
-              $2850.75</div>
+              {{card.balance}}</div>
             <span>Current balance</span>
           </div>
           <div class="balance">
             <div class="income__number">
-              $2850.75</div>
+              ${{card.income}}</div>
             <span>Income</span>
           </div>
           <div class="balance">
             <div class="outcome__number">
-              $2850.75</div>
+              ${{card.outcome}}</div>
             <span>Outcome</span>
           </div>
           <div class="card__switchbutton">
             <label class="switch__button">
               <input type="checkbox">
-              <div class="slide round"></div>            
+              <div class="slide round"></div>
             </label>
-           <span>Deactivate card</span>
+            <span>Deactivate card</span>
           </div>
-          
         </div>
       </div>
     </div>
