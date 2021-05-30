@@ -100,7 +100,30 @@
         color: white;
     }
   }
- 
+  @media only screen and (min-width: 768px) {
+    .navbar{
+      display: flex;
+      justify-content: space-between;
+      text-align: start;
+    }
+    .navbar__left{
+      text-align: start;
+      margin-top: 40px;
+      margin-bottom: 35px;
+      margin-right: 40;
+      margin-left: 40px;
+    }
+    .navbar__right{
+      margin: 0px 26px;
+      padding-top: 10px;
+      margin: 5px 52px 0px 0px;
+    }
+    .navbar__title {    
+      font-size: 39px;       
+    }  
+  
+  }
+
   @media only screen and (min-width: 1024px) {     
     .navbar{
       display: flex;

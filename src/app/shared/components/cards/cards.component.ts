@@ -2,11 +2,24 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICard } from 'src/app/core/interfaces/icard.interface';
 import { ITransactions } from 'src/app/core/interfaces/itransactions.interface';
 import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss']
+  styleUrls: ['./cards.component.scss'],
+  animations: [
+    trigger('flyInOut', [
+      state('in', style({ transform: 'translateX(0)' })),
+      transition('void => *', [
+        style({ transform: 'translateX(-100%)' }),
+        animate(100)
+      ]),
+      transition('* => void', [
+        animate(100, style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class CardsComponent implements OnInit {
   checked = false;
