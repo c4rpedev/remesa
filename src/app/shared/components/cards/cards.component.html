@@ -10,7 +10,7 @@
             <div class="card__previous" (click)="onPrevious()">
               <fa-icon [icon]="faAngleLeft"></fa-icon>
             </div>
-            <div class="thumbs__card"
+            <div class="thumbs__card" 
               [ngStyle]="checked ? {'background-image': 'linear-gradient(rgb(85, 85, 85) 0%, rgb(142, 142, 142) 100%)' } : {}">
               <div class="card__top">
                 cloudclash
@@ -36,7 +36,7 @@
                 </div>
               </div>
             </div>
-            <div class="card__next" (click)="onNext()">
+            <div class="card__next" (click)="onNext()" >
               <fa-icon [icon]="faAngleRight"></fa-icon>
             </div>
           </div>

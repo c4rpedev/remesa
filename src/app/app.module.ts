@@ -13,6 +13,7 @@ import { BottomComponent } from './shared/components/bottom/bottom.component';
 import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './core/services/user.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -32,7 +33,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [
     UserService   

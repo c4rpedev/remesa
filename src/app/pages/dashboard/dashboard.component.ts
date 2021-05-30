@@ -22,6 +22,8 @@ export class DashboardComponent implements OnInit {
   friends!: Array<IFriends>;
   count: number = 0;
   user_count: number = 0;
+  card_empty = false;
+
 
   constructor(private service: UserService) { }
 
@@ -34,11 +36,18 @@ export class DashboardComponent implements OnInit {
     this.service.getUserProperties().subscribe(
       (data: IUser[]) => {
         this.user = data[user_count];
-        this.cards = this.user.user.cards[count];
-        this.transactions = this.user.user.cards[count].transactions;
+        if(count < this.user.user.cards.length ){
+          this.cards = this.user.user.cards[count];
+          this.transactions = this.user.user.cards[count].transactions;
+          if(count == this.user.user.cards.length-1){
+            this.card_empty = true;
+          }
+          if(count == 0){
+            this.card_empty = false;
+          }         
+        }  
         this.goals = this.user.user.goals;
-        this.friends = this.user.user.friends;
-        console.log("Count :" + count);
+        this.friends = this.user.user.friends;        
       }, (err: any) => {
         console.error(err);
         this.notFound = true;
