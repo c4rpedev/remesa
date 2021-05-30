@@ -10,11 +10,10 @@ import { GoalsComponent } from './shared/components/goals/goals.component';
 import { TransactionsComponent } from './shared/components/transactions/transactions.component';
 import { OutcomeComponent } from './shared/components/outcome/outcome.component';
 import { BottomComponent } from './shared/components/bottom/bottom.component';
-import { UserComponent } from './core/components/user/user.component';
 import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './core/services/user.service';
-import { GoalService } from './core/services/goal.service';
-import { TransactionsService } from './core/services/transactions.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
@@ -27,18 +26,16 @@ import { TransactionsService } from './core/services/transactions.service';
     GoalsComponent,
     TransactionsComponent,
     OutcomeComponent,
-    BottomComponent,
-    UserComponent    
+    BottomComponent     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   providers: [
-    UserService, 
-    GoalService,
-    TransactionsService  
+    UserService   
   ],
   bootstrap: [AppComponent]
 })

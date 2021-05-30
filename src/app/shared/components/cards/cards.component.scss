@@ -2,7 +2,6 @@
   display: flex;  
   flex-direction: column;
 }
-
 .card__inner{
   display: grid;
   grid-template-columns: 68% 32%;
@@ -23,6 +22,9 @@
     justify-content: space-between;
     color: white;
 }
+.card__slider{
+  display: flex;
+}
 .account__type{
   font-size: 10px;
 }
@@ -42,20 +44,39 @@
 .card__bottom{
   display: flex;
 }
-// -- Balance Style --//
 .card__balance{
   text-align: end;  
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+  padding-right: 16px;
 }
 .card__column{
   display: flex;
   flex-direction: column;
-  margin-right: 38px;
+  margin-right: 23px;
 }  
-// -- Text Style -- //
+.card__next{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;  
+  color: #027eac;
+  font-size: 24px;
+  margin-left: 4px;
+  cursor: pointer;  
+}
+.card__previous{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;  
+  color: #027eac;
+  font-size: 24px;
+  margin-right: 4px;
+  cursor: pointer;  
+}
 .current__balance__number{
     font-size: 31px;
     font-weight: bold;
@@ -66,20 +87,17 @@
     font-weight: bold;
     color: #33af2f;
   }
-
   .outcome__number{
     font-size: 18px;
     font-weight: bold;
     color: #c01f2d;
   }
-
 .card__switchbutton{
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   padding-bottom: 20px;
 }
-// -- Slide Button -- //
 .switch__button {
   position: relative;
   display: inline-block;
@@ -105,13 +123,11 @@
   content: "";
   height: 20px;
   width: 20px;
-  left: 25px;
+  left: 0px;
   bottom: 0px;
-  background-color: white;
-  -webkit-transition: .4s;
+  background-color: #828282;
   transition: 0.4s;
 }
-
 input:checked + .slide {
   background-color: #8CE196;
   padding-left: 40px;
@@ -123,25 +139,21 @@ input:checked + .slide:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-  left: -25px;
+  left: 0px;
+  background: green;
 }
-
 .slide.round {
   border-radius: 34px;
 }
 .slide.round:before {
   border-radius: 50%;
 }
-
-
-// -- Progressbar -- //
 #progressbar {
     background-color: #F1F1F1;
     border-radius: 13px;    
-    margin: 10px 0px;
+    margin: 10px 25px;
     width: 100%;
-  }
-  
+  }  
   #progressbar > div {  
     height: 8px;
     border-radius: 10px;
@@ -152,10 +164,8 @@ input:checked + .slide:before {
   .weekly__progressbar{
     background-color: #027eac;
   }
-  .weekly__payment{
-    align-content: center;
-    align-items: center;
-    justify-content: space-between;
+  .weekly__payment{    
+    justify-content: space-around;
     width: 100%;
     padding-bottom: 20px;
 }
@@ -163,10 +173,8 @@ input:checked + .slide:before {
   font-size: 14px;
 }
   
-
 @media only screen and (max-width: 650px) {
     .thumbs__card{
       height: 190px;
-    }
-    
-  }
+    }    
+}

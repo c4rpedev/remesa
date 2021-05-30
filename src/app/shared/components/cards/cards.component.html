@@ -4,37 +4,45 @@
       <div class="card__title">
         Cards
       </div>
-      <div class="card__inner" *ngFor="let card of cards">
+      <div class="card__inner">
         <div class="card__column">
-          <div class="thumbs__card" >
-            <div class="card__top">
-              cloudclash
-            <div class="account__type">
-              {{ card.account_type }} ACCOUNT
+          <div class="card__slider">
+            <div class="card__previous" (click)="onPrevious()">
+              <fa-icon [icon]="faAngleLeft"></fa-icon>
             </div>
-            </div>
-            
-            <div class="card__number">
-              {{ card.number }}
-            </div>
-            <div class="card__bottom">
-              <div class="title">
-                <span>Card holder</span>
-                <div class="card__holder">
-                  {{ card.card_holder }}
+            <div class="thumbs__card"
+              [ngStyle]="checked ? {'background-image': 'linear-gradient(rgb(85, 85, 85) 0%, rgb(142, 142, 142) 100%)' } : {}">
+              <div class="card__top">
+                cloudclash
+                <div class="account__type">
+                  {{ cards.account_type }} ACCOUNT
                 </div>
               </div>
-              <div class="title">
-                <span>Expire date</span>
-                <div class="exp__date">
-                  {{ card.exp_date }}
+              <div class="card__number">
+                {{ cards.number }}
+              </div>
+              <div class="card__bottom">
+                <div class="title">
+                  <span>Card holder</span>
+                  <div class="card__holder">
+                    {{ cards.card_holder }}
+                  </div>
+                </div>
+                <div class="title">
+                  <span>Expire date</span>
+                  <div class="exp__date">
+                    {{ cards.exp_date }}
+                  </div>
                 </div>
               </div>
+            </div>
+            <div class="card__next" (click)="onNext()">
+              <fa-icon [icon]="faAngleRight"></fa-icon>
             </div>
           </div>
           <div class="progressbar__group row">
             <div id="progressbar">
-              <div class="weekly__progressbar" [style.width]="percent"></div>
+              <div class="weekly__progressbar" [style.width]="((cards.outcome / cards.weekly_limit) * 100) + '%'"></div>
             </div>
           </div>
           <div class="weekly__payment row">
@@ -42,29 +50,29 @@
               Weekly payment limit.
             </span>
             <div class="limit__number">
-              ${{card.outcome}}/ ${{ card.weekly_limit }}
+              ${{cards.outcome}}/ ${{ cards.weekly_limit }}
             </div>
           </div>
         </div>
         <div class="card__balance">
           <div class="balance">
             <div class="current__balance__number">
-              {{card.balance}}</div>
+              {{cards.balance}}</div>
             <span>Current balance</span>
           </div>
           <div class="balance">
             <div class="income__number">
-              ${{card.income}}</div>
+              ${{cards.income}}</div>
             <span>Income</span>
           </div>
           <div class="balance">
             <div class="outcome__number">
-              ${{card.outcome}}</div>
+              ${{cards.outcome}}</div>
             <span>Outcome</span>
           </div>
           <div class="card__switchbutton">
             <label class="switch__button">
-              <input type="checkbox">
+              <input type="checkbox" [checked]="checked" (change)="checked = !checked">
               <div class="slide round"></div>
             </label>
             <span>Deactivate card</span>
@@ -74,6 +82,6 @@
     </div>
   </div>
   <div class="transaction__container">
-    <app-transactions></app-transactions>
+    <app-transactions [transactions]="transactions"></app-transactions>
   </div>
 </div>

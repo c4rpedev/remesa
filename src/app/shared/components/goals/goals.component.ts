@@ -1,40 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IGoal } from 'src/app/core/interfaces/igoal.interface';
-import { GoalService } from 'src/app/core/services/goal.service';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faAngleRight, faAngleLeft, faTruck, faMountain, faGamepad, faBrush } from '@fortawesome/free-solid-svg-icons';
+import { IFriends } from 'src/app/core/interfaces/ifriends.service';
+import { ITransactions } from 'src/app/core/interfaces/itransactions.interface';
 
 @Component({
   selector: 'app-goals',
   templateUrl: './goals.component.html',
   styleUrls: ['./goals.component.scss']
 })
-export class GoalsComponent implements OnInit {
-  notFound = false;
-  goals!: Array<IGoal>;
-  goalsStore: Array<IGoal> = [];
-  i: Number = 0;
-  sliceIndex: Number = 0;
-  sliceEnd: Number =3;
-  constructor(private service: GoalService) { }
+export class GoalsComponent implements OnInit {  
+  slice_begin: number = 0;
+  slice_end: number = 3;  
+  @Input() goals!: Array<IGoal>;
+  @Input() transactions!: Array<ITransactions>;
+  @Input() friends!: Array<IFriends>;
+  
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(faAngleRight, faAngleLeft, faTruck, faMountain, faGamepad, faBrush );
+   }
 
-  ngOnInit(): void {
-    this.getGoal();
-    
-  }
+  ngOnInit(): void { }
 
-  getGoal(){
-    this.service.getGoalProperties().subscribe(
-      (data:Array<IGoal>)=>{
-        this.goals = data;   
-        console.log(this.goals);        
-      },(err: any)=>{
-        console.error(err);
-        this.notFound = true;
-      }
-    ) 
-  }
-  next(){    
-    
-    
-  }
-
+  onNext(){
+    if (this.slice_end != this.goals.length-3) {
+      this.slice_begin++;
+      this.slice_end++;
+    }    
+  } 
+  
 }

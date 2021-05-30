@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { UserComponent } from 'src/app/core/components/user/user.component';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUser } from 'src/app/core/interfaces/iuser.interface';
-import { UserService } from 'src/app/core/services/user.service';
+import { faEnvelope, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navbar',
@@ -10,23 +8,24 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {  
-  notFound = false;
-  user!: IUser;
- 
-  constructor(private service: UserService) { }
+  faEnvelope = faEnvelope;
+  faBell = faBell;
+  faUser = faUser;
+  notFound = false; 
+  userStore!: IUser[];  
+  @Input() user_count!: number;
+  @Input() count!: number;
+  @Output () countChange= new EventEmitter<{count:number, user_count:number}>();
+  @Input()  user!: IUser;
+  
+ constructor() { }
     
-  ngOnInit(): void {    
-    this.getUser();
-       
+  ngOnInit(): void { }
+  
+  onAccountChange(){
+    this.user_count++;
+    this.count = 0;
+    this.countChange.emit({count: this.count, user_count: this.user_count});
   }
-  getUser(){
-    this.service.getUserProperties().subscribe(
-      (data:IUser)=>{
-        this.user = data;           
-      },(err: any)=>{
-        console.error(err);
-        this.notFound = true;
-      }
-    ) 
-  }
+  
 }

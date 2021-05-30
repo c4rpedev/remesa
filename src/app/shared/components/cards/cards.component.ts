@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ICard } from 'src/app/core/interfaces/icard.interface';
-import { CardsService } from 'src/app/core/services/cards.service';
+import { ITransactions } from 'src/app/core/interfaces/itransactions.interface';
+import { faAngleRight, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-cards',
@@ -8,37 +9,27 @@ import { CardsService } from 'src/app/core/services/cards.service';
   styleUrls: ['./cards.component.scss']
 })
 export class CardsComponent implements OnInit {
-  notFound = false;
-  cards!: Array<ICard>;
-  limit: number = 0;
-  outcome: number = 0;
-  percent: string = '';
+  checked = false;
+  faAngleRight = faAngleRight;
+  faAngleLeft = faAngleLeft;
+  @Input() count!: number;
+  @Input() user_count!: number;
+  @Output () countChange= new EventEmitter<{count:number, user_count:number}>();
+  @Input() transactions!: Array<ITransactions>;
+  @Input() cards!: ICard;
 
-  constructor(private service: CardsService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.getCards();
-    
-  }
-  getCards(){
-    this.service.getGoalProperties().subscribe(
-      (data:Array<ICard>)=>{
-        this.cards = data;  
-        for (let index = 0; index < this.cards.length; index++) {          
-          this.limit = this.cards[index].weekly_limit;
-          this.outcome = this.cards[index].outcome;         
-          this.percent = ((this.outcome /this.limit)*100)+'%';
-          console.log("Result :"+this.percent);
-        }       
-        console.log(this.cards);        
-      },(err: any)=>{
-        console.error(err);
-        this.notFound = true;
-      }
-    ) 
+  ngOnInit(): void { } 
+        
+  onNext(){
+    this.count++;
+    this.countChange.emit({count: this.count, user_count: this.user_count});
   }
 
-
-
-
+  onPrevious(){
+    this.count--;
+    this.countChange.emit({count: this.count, user_count: this.user_count});
+  }
+  
 }

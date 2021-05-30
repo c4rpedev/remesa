@@ -18,14 +18,28 @@
 .links{
     display: flex;
     align-items: center;
-    
+    background: aliceblue;
+    cursor: pointer;
+    fa-icon{
+        height: 20px;
+        width: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 19px;
+        color: #197BBD;
+    }
+    span{
+        color: #197BBD;
+    }
 }
-.icon{
-    height: 20px;
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 19px;
-    fill: #197BBD;
+.links:hover{
+    background-color: #197BBD;
+    span{
+        color: white;
+    }
+    fa-icon{
+        color: white;
+    }    
 }
+

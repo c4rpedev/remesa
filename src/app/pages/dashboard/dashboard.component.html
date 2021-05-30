@@ -1,18 +1,7 @@
 <div class="container">
-  <nav><app-navbar></app-navbar></nav> 
+  <nav><app-navbar [user]="user" [user_count]="user_count" (countChange)="getUser($event.count, $event.user_count)"></app-navbar></nav> 
   <div id="sidebar"><app-sidebar></app-sidebar></div>
-  <div id="first__column"><app-cards></app-cards></div>
-  <div id="second__column"><app-goals></app-goals></div>
+  <div id="first__column"><app-cards [cards]="cards" [transactions]="transactions" [count]="count" [user_count]="user_count" (countChange)="getUser($event.count, $event.user_count)"></app-cards></div>
+  <div id="second__column"><app-goals [goals]="goals" [friends]="friends" [transactions]="transactions"></app-goals></div>
 </div>
 
-<!-- Old code -->
-<!-- <div class="grid-container">
-  <div class="menu-icon">
-    <i class="fas fa-bars header__menu"></i>
-  </div>
-  <app-header class="header"></app-header>
-  <aside class="sidenav">
-    <app-sidenav></app-sidenav>
-  </aside>
-  <app-card class="main"></app-card>
-</div> -->

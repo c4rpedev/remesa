@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { IUser } from '../interfaces/iuser.interface';
 import { Observable } from 'rxjs';
 
@@ -10,8 +9,8 @@ import { Observable } from 'rxjs';
 export class UserService {
 
 constructor(private http:HttpClient) { }
-
-getUserProperties(): Observable<IUser> {  
-  return this.http.get<IUser>('assets/mock-data/user.json');
-}
+  // -- Get User Properties from mock data -- // 
+  getUserProperties(): Observable<IUser[]> {  
+    return this.http.get<IUser[]>('assets/mock-data/user.json');
+  }
 }

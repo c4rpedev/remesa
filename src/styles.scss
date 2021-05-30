@@ -18,37 +18,30 @@ body {
 }
 .row{
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: row;  
 }
-
 .column{
   display: flex;
   flex-direction: column;
 }
-
 nav {
     grid-area: nav;  
 }
-
 main {
   grid-area: main;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
 }
-
 #sidebar {  
   grid-area: sidebar;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
 }
-
 #first__column {  
   grid-area: first__column;
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
 }
-
 #second__column { 
   grid-area: second__column;
   border-radius: var(--main-radius);
@@ -62,8 +55,6 @@ a {
   font-weight: bold;
   margin: 5px;
 }
-
-
 .card{
   display: flex;    
   flex-direction: column;       
@@ -71,7 +62,7 @@ a {
   height: 100%;
   background-color: white;    
   -webkit-column-break-inside: avoid;
-  padding: 10px 23px;
+  padding: 10px;
   box-sizing: border-box; 
   margin: 10px 0px 29px 0px;
 }
@@ -82,28 +73,23 @@ a {
 .card__inner{
   display: grid;
   grid-template-columns: 1.5fr 0.5fr;
-  margin-left: 10px;
-  margin-top: 2px;
+  
 }
 .card__title{
   font-size: 19px;
   font-weight: 600;
   padding-bottom: 10px;
+  margin-left: 11px;
 }
 #sidebar{
   display: none;
 }
-
- // -- Global Progressbar Style -- //
- #progressbar {
+#progressbar {
   background-color: #F1F1F1;
   border-radius: 13px;    
   margin: 0px 17px 5px 10px;
 }
-
-#progressbar>div {    
-  //width: 40%;
-  /* Adjust with JavaScript */
+#progressbar>div {      
   height: 9px;
   border-radius: 10px;
 }
@@ -133,6 +119,7 @@ span{
   }  
 
 }
+
 @media only screen and (min-width: 1024px) {
   body {
     font-family: "roboto", sans-serif;

@@ -1,3 +1,5 @@
+import { ITransactions } from "./itransactions.interface";
+
 export interface ICard {
     account_type:string,
     number: string,
@@ -6,5 +8,6 @@ export interface ICard {
     balance: number,
     income: number,
     outcome: number,
-    weekly_limit: number
+    weekly_limit: number,
+    transactions: ITransactions[]
 }

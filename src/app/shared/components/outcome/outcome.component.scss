@@ -4,7 +4,6 @@
 .progressbar__group{
     padding-top: 7px;
 }
-// -- Progress Bar Style -- //
 .progressbar__item{
     display: flex;
     align-items: flex-start;
@@ -25,15 +24,15 @@
     width: 27px;        
 }
 .electronics{
-    fill: #25AC4B;
+    color: #25AC4B;
     background: #DDF9E4;  
 }
 .travels{
-    fill: #70A6E8;
+    color: #70A6E8;
     background: #E4F0FF;    
 }
 .shopping{
-    fill: #F9984E;
+    color: #F9984E;
     background: #FFEADA;   
 }
 .progressbar__title{

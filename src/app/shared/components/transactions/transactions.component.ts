@@ -1,30 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ITransactions } from 'src/app/core/interfaces/itransactions.interface';
-import { TransactionsService } from 'src/app/core/services/transactions.service';
+import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faShoppingCart, faTruck, faFutbol, faUser, faBeer } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss']
 })
-export class TransactionsComponent implements OnInit {
-  notFound = false;
-  transactions!: Array<ITransactions>;
-  constructor(private service: TransactionsService) { }
 
-  ngOnInit(): void {
-    this.getTransactions();
+export class TransactionsComponent implements OnInit {   
+  @Input() transactions!: Array<ITransactions>;
+
+  constructor(private library: FaIconLibrary) { 
+    library.addIcons(faShoppingCart, faTruck, faFutbol, faUser, faBeer);
   }
-  getTransactions(){
-    this.service.getGoalProperties().subscribe(
-      (data:Array<ITransactions>)=>{
-        this.transactions = data;   
-        console.log(this.transactions);        
-      },(err: any)=>{
-        console.error(err);
-        this.notFound = true;
-      }
-    ) 
-  }
+
+  ngOnInit(): void { }
 
 }
