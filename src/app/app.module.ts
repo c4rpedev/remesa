@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './core/services/user.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UserCountService } from './core/services/user-count.service';
 
 
 
@@ -37,7 +38,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    UserService   
+    UserService,
+    UserCountService   
   ],
   bootstrap: [AppComponent]
 })

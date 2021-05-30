@@ -16,7 +16,7 @@ export class CardsComponent implements OnInit {
   faAngleLeft = faAngleLeft;
   @Input() count!: number;
   @Input() user_count!: number;
-  @Output () countChange= new EventEmitter<{count:number, user_count:number}>();
+  @Output () countChange= new EventEmitter<number>();
   @Input() transactions!: Array<ITransactions>;
   @Input() cards!: ICard;  
   
@@ -31,7 +31,7 @@ export class CardsComponent implements OnInit {
   onNext(){    
     if(!this.card_empty){
       this.count++;
-      this.countChange.emit({count: this.count, user_count: this.user_count});   
+      this.countChange.emit(this.count);   
       console.log(this.count)
     }      
   }
@@ -39,7 +39,7 @@ export class CardsComponent implements OnInit {
   onPrevious(){
     if(this.card_empty){
       this.count--;
-      this.countChange.emit({count: this.count, user_count: this.user_count});  
+      this.countChange.emit(this.count);  
     }      
   }
   

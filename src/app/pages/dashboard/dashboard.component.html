@@ -1,8 +1,8 @@
 <div class="container">
   <nav>
     <app-navbar [user]="user" 
-    [user_count]="user_count" 
-    (countChange)="getUser($event.count, $event.user_count)">
+    [count]="user_count" 
+    (countChange)="getUser($event)">
   </app-navbar>
 </nav> 
   <div id="sidebar">
@@ -15,7 +15,7 @@
     [transactions]="transactions" 
     [count]="count" 
     [user_count]="user_count" 
-    (countChange)="getUser($event.count, $event.user_count)"></app-cards>
+    (countChange)="getUser($event)"></app-cards>
   </div>
   <div id="second__column">
     <app-goals 

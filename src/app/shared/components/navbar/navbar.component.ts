@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IUser } from 'src/app/core/interfaces/iuser.interface';
 import { faEnvelope, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
+import { UserCountService } from 'src/app/core/services/user-count.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,17 +16,17 @@ export class NavbarComponent implements OnInit {
   userStore!: IUser[];  
   @Input() user_count!: number;
   @Input() count!: number;
-  @Output () countChange= new EventEmitter<{count:number, user_count:number}>();
+  @Output () countChange= new EventEmitter<number>();
   @Input()  user!: IUser;
   
- constructor() { }
+ constructor(private count_service: UserCountService) { }
     
   ngOnInit(): void { }
   
   onAccountChange(){
-    this.user_count++;
-    this.count = 0;
-    this.countChange.emit({count: this.count, user_count: this.user_count});
+    this.count++;       
+    this.countChange.emit(0);
+    this.count_service.setCount(this.count); 
   }
   
 }
