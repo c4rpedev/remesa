@@ -1,5 +1,5 @@
 .navbar {
-    background: #ffffff;
+    background: #fff;
     grid-area: nav;
     height: 100%;
     display: flex;
@@ -51,9 +51,14 @@
     height: 20px;
   }
   .navbar__actions{
+      
+      display: flex;
+      flex-direction: row;
+      
       a{
         color: lightgray;
       }
+     
   }
   .navbar__avatar > a > img{
       height: 30px;
@@ -108,10 +113,7 @@
     }
     .navbar__left{
       text-align: start;
-      margin-top: 40px;
-      margin-bottom: 35px;
-      margin-right: 40px;
-      margin-left: 40px;
+      margin: 20px 0px 20px 0px;
     }
     .navbar__right{
       margin: 0px 26px;
@@ -132,15 +134,13 @@
     }
     .navbar__left{
       text-align: start;
-      margin-top: 40px;
-      margin-bottom: 35px;
-      margin-right: 40px;
-      margin-left: 40px;
+      margin: 10px 20px 10px 20px;
+     
     }
     .navbar__right{
       margin: 0px 26px;
-      padding-top: 10px;
-      margin: 5px 52px 0px 0px;
+      padding-top: 0px;
+      margin: 0px 52px 0px 0px;
     }
     .navbar__title {    
       font-size: 39px;       

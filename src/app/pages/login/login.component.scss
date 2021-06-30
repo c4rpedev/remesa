@@ -1,0 +1,26 @@
+
+.bg-login-image, .bg-password-image, .bg-register-image {
+    background-position: 50%;
+    background-size: cover;
+  }
+
+  form.user .form-control-user {
+    font-size: .8rem;
+    border-radius: 10rem;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  
+  .title__container{
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+    
+    img{
+        width: 40px;
+        margin-right: 10px;
+    }
+   
+}
+  

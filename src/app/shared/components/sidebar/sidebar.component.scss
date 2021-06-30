@@ -1,36 +1,41 @@
+.sidebar__container{
+    background-color: #1E4E6E;
+    height: 100%;
+}
+
 .title__container{
     display: flex;
     align-items: center;    
-    padding: 50px 40px;
-    fill: #197BBD;
-    svg{
+    padding: 50px 40px 50px 30px;
+    
+    img{
         width: 40px;
         margin-right: 10px;
     }
     h1{
-        font-size: 16px;
-        color: #1E4E6E;
+        font-size: 18px;
+        color: #ffd15d;
+        font-weight: bold;
     }
 }
-.links__container{
-    padding: 16px 36px;
-}
+
 .links{
     display: flex;
-    align-items: center;
-    background: aliceblue;
+    align-items: center;    
     cursor: pointer;
-    fa-icon{
+    margin-bottom: 20px;
+    i{
         height: 20px;
         width: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px 19px;
-        color: #197BBD;
+        margin: 10px 19px 10px 49px;
+        color: #fff;
     }
     span{
-        color: #197BBD;
+        color: #fff;
+        font-size: 15px;
     }
 }
 .links:hover{

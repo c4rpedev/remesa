@@ -1,0 +1,137 @@
+<!-- ======= Portfolio Section ======= -->
+<section id="work" class="portfolio-mf sect-pt4 pb-5 route">
+  
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="title-box text-center pt-5">
+                    <h3 class="title-a">
+                        Productos
+                    </h3>
+                    <p class="subtitle-a">
+                        Productos en existencia
+                    </p>
+                    <div class="line-mf"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="btn-toolbar product__toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="input-group ">
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+              <option selected>Seleccione una provincia</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+          <div class="btn-group " role="group" >
+            <button type="button"  (click)="btnClick()">Realizar Pedido</button>           
+          </div>
+         
+        </div>
+        <div class="row">
+            <div
+            class="col-sm-3 mb-2"
+            *ngFor="
+              let product of products"      >
+            <div class="item">
+              <div class="mb-r">
+                <!--Card-->
+                <div class="card card-cascade wider shadow">
+                  <!--Card image-->
+                  <a >
+                    <div >
+                      <img
+                        [src]="product.productImageUrl"
+                        class="img-fluid"
+                        alt=""
+                       
+                      />
+                      <a>
+                        <div
+                          class="mask waves-effect waves-light"
+                          mdbRippleRadius
+                        ></div>
+                      </a>
+                    </div>
+                  </a>
+                  <!--/.Card image-->
+                  <!--Card content-->
+                  <div class="card-body text-center no-padding">
+                    <!--Category & Title-->
+                   
+                      <h5>{{ product.productName }}</h5>
+                   
+                    <p class="card-title">
+                      <strong>
+                        <a
+                          
+                          routerLinkActive="router-link-active"
+                          >{{ product.productCategory }}</a
+                        >
+                      </strong>
+                    </p>
+                    <!--Description-->
+                    <p class="card-text">{{ product.productDescription }}</p>
+                    <!--Card footer-->
+                    <div class="card-footer">
+                      <span class="left">$ {{ product.productPrice }}</span>
+                      <span class="right">
+                        <a
+                          placement="top"
+                          mdbTooltip="Add to Wishlist"
+                          container="body"
+                          
+                        >
+                          <i class="fa fa-plus-circle"></i>
+                        </a>
+                       
+                        <!-- <a
+                          placement="top"
+                          mdbTooltip="Remove Product"
+                          container="body"
+                          *ngIf="authService.isAdmin$ | async"
+                          (click)="removeProduct(product.$key)"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </a> -->
+                      </span>
+                    </div>
+                  </div>
+                  <!--/.Card content-->
+                </div>
+                <!--/.Card-->
+              </div>
+            </div>
+          </div>
+            <!-- <div *ngFor="let project of projects" class="col-md-4">
+                <div class="work-box card">
+                    <a href="{{project.web}}" data-gall="portfolioGallery" target="_blank">
+                        <div class="work-img">
+                            <img [src]="project.url" alt="Project Portfolio" class="img-fluid">
+                        </div>
+                    </a>
+                    <div class="work-content">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <h2 class="w-title">{{ project.title }}</h2>
+                                <div class="w-more">
+                                    <span class="w-ctegory">{{ project.category }}</span> / <span class="w-date">{{ project.date }}</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="w-like pl-3">
+                                    <a href="{{project.web}}" target="_blank"> <span class="ion-android-globe"></span></a>
+                                </div>
+                                <div class="w-like">
+                                    <a href="{{project.github}}" target="_blank"> <span class="ion-social-github"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+   
+</section><!-- End Portfolio Section -->

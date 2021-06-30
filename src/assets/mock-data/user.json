@@ -1,8 +1,8 @@
 [
     {
         "user": {
-            "name": "Andrew",
-            "role": "Admin",
+            "name": "Mercadito",
+            "role": "Agencia",
             "cards": [
                 {
                     "account_type": "PREMIUM",

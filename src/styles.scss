@@ -8,13 +8,14 @@ body {
   margin: 0;
   padding: 0;
 }
-.container {
+
+
+.dashboard__main {
   grid-template-columns: 1fr;
-  grid-template-rows: 0.3fr 1.2fr 1.2fr;
+  grid-template-rows: 0.3fr 1fr;
   grid-template-areas:
     "nav"           
-    "first__column"
-    "second__column";
+    "first__column";
 }
 .row{
   display: flex;
@@ -42,6 +43,7 @@ main {
   border-radius: var(--main-radius);
   padding-top: var(--main-padding);
 }
+
 #second__column { 
   grid-area: second__column;
   border-radius: var(--main-radius);
@@ -58,8 +60,7 @@ a {
 .card{
   display: flex;    
   flex-direction: column;       
-  width: 100%;
-  height: 100%;
+  width: 100%; 
   background-color: white;    
   -webkit-column-break-inside: avoid;
   padding: 10px;
@@ -105,7 +106,7 @@ span{
 
 
 @media only screen and (min-width: 768px) {
-  .container {    
+  .dashboard__main {    
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 0.3fr 1fr;
@@ -126,14 +127,14 @@ span{
     margin: 0;
     padding: 0;
   }
-  .container {
+  .dashboard__main{
     display: grid;
     height: 100vh;
-    grid-template-columns: 17% 45% 37%;
+    grid-template-columns: 17% 83%;
     grid-template-rows: 0.2fr 1.5fr;
     grid-template-areas:
-      "sidebar nav nav"    
-      "sidebar first__column second__column";
+      "sidebar nav"    
+      "sidebar first__column";
     grid-gap: 0.2rem;     
   }
   #sidebar{
@@ -146,3 +147,5 @@ span{
     margin-left: 43px;
   }
 }
+
+
