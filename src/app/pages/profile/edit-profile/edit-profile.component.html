@@ -22,36 +22,7 @@
             
         </div>
         <div class="col-lg-8">
-            <div class="row mb-3 d-none">
-                <div class="col">
-                    <div class="card text-white bg-primary shadow">
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <p class="m-0">Peformance</p>
-                                    <p class="m-0"><strong>65.2%</strong></p>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                            </div>
-                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i> 5% since last month</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card text-white bg-success shadow">
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col">
-                                    <p class="m-0">Peformance</p>
-                                    <p class="m-0"><strong>65.2%</strong></p>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-rocket fa-2x"></i></div>
-                            </div>
-                            <p class="text-white-50 small m-0"><i class="fas fa-arrow-up"></i> 5% since last month</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col">
                     <div class="card shadow mb-3">
@@ -59,23 +30,58 @@
                             <p class="text-primary m-0 font-weight-bold">Configuración de usuario</p>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form [formGroup]="signupForm" (ngSubmit)="signup()">
                                 <div class="form-row">
                                     <div class="col">
-                                        <div class="form-group"><label for="username"><strong>Usuario</strong></label><input type="text" class="form-control" placeholder name="username" /></div>
+                                        <div class="form-group">
+                                            <label for="username"><strong>Usuario</strong></label>
+                                            <input autocomplete="off" 
+                                                   class="form-control" 
+                                                   formControlName="displayName" 
+                                                   type="text" 
+                                                   placeholder="Usuario"></div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group"><label for="email"><strong>Correo</strong><br /></label><input type="email" class="form-control" placeholder name="email" /></div>
+                                        <div class="form-group">
+                                            <label for="email"><strong>Correo</strong><br /></label>
+                                            <input formControlName="email" 
+                                                   class="form-control"  
+                                                   type="email"  
+                                                   placeholder="Correo"></div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="password"><strong>Contraseña</strong><br /></label>
+                                            <input autocomplete="off" 
+                                                   class="form-control" 
+                                                   formControlName="password" 
+                                                   type="password" 
+                                                   placeholder="Contraseña"></div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group"><label for="first_name"><strong>Rol</strong><br /></label><input type="text" class="form-control" placeholder name="first_name" /></div>
-                                        <div class="btn-toolbar"></div>
+                                <div class="form-row row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="last_name"><strong>Prefijo</strong><br /></label>
+                                            <input type="text" 
+                                                    class="form-control" 
+                                                    formControlName="prefix" 
+                                                    placeholder="Prefijo" 
+                                                    name="last_name" /></div>
                                     </div>
-                                    <div class="col">
-                                        <div class="form-group"><label for="last_name"><strong>Prefijo</strong><br /></label><input type="text" class="form-control" placeholder name="last_name" /></div>
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <label for="first_name"><strong>Rol</strong><br /></label>
+                                            <select class="form-control" formControlName="role" placeholder="Selecciona un rol">                                                
+                                                <option value="1">Administrador</option>
+                                                <option value="2">Agencia</option>
+                                                <option value="3">Sucursal</option>
+                                                <option value="4">Facturador</option>
+                                                <option value="5">Económico</option>   
+                                              </select></div>
+                                       
                                     </div>
+                                   
                                 </div>
                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button></div>
                             </form>
@@ -87,16 +93,36 @@
                         </div>
                         <div class="card-body">
                             <form>
-                                <div class="form-group"><label for="address"><strong>Dirección</strong></label><input type="text" class="form-control" placeholder="Sunset Blvd, 38" name="address" /></div>
+                                <div class="form-group">
+                                            <label for="address"><strong>Dirección</strong></label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   formControlName="address" 
+                                                   placeholder="Dirección" 
+                                                   name="address" /></div>
                                 <div class="form-row">
                                     <div class="col">
-                                        <div class="form-group"><label for="city"><strong>Teléfono</strong><br /></label><input type="text" class="form-control" placeholder="Los Angeles" name="city" /></div>
+                                        <div class="form-group">
+                                            <label for="city"><strong>Teléfono</strong><br /></label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   formControlName="phone" 
+                                                   placeholder="Teléfono" 
+                                                   name="phone" /></div>
                                     </div>
                                     <div class="col">
-                                        <div class="form-group"><label for="country"><strong>País</strong></label><input type="text" class="form-control" placeholder="USA" name="country" /></div>
+                                        <div class="form-group">
+                                            <label for="country"><strong>País</strong></label>
+                                            <input type="text" 
+                                                   class="form-control" 
+                                                   formControlName="country" 
+                                                   placeholder="País" 
+                                                   name="country" /></div>
                                     </div>
                                 </div>
-                                <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button></div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button>
+                                </div>
                             </form>
                         </div>
                     </div>

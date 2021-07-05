@@ -1,35 +1,39 @@
 <div class="sidebar__container">
-    <div class="title__container">
-        <img src="assets/images/logo.png">
-          <h1>Buttymaster</h1>
+  <div class="title__container">
+    <img src="assets/images/logo.png">
+    <h1>Buttymanager</h1>
+  </div>
+  <div class="links__container">
+    <div class="links" [routerLink]="['/']">
+      <div class="icon">
+        <i class="fa fa-shopping-cart"></i>
       </div>
-      <div class="links__container">
-        <div class="links" [routerLink]="['/']">
-            <div class="icon">
-                <i class="fa fa-shopping-cart"></i>
-            </div>
-            <span>Productos</span>
-        </div>
-          <div class="links" [routerLink]="['orders']">
-              <div class="icon">
-                <i class="fa fa-table"></i>
-              </div>
-              <span>Pedidos</span>
-          </div>
-        
-        
-          <div class="links" [routerLink]="['reports']">
-              <div class="icon">
-                <i class="fa fa-bar-chart"></i>
-              </div>
-              <span>Reportes</span>
-          </div>
-          <div class="links" [routerLink]="['add-complain']">
-            <div class="icon">
-              <i class="fa fa-archive"></i>
-            </div>
-            <span>Quejas</span>
-        </div>
+      <span>Productos</span>
+    </div>
+    <div class="links" [routerLink]="['/add-product']">
+      <div class="icon">
+        <i class="fa fa-plus-square"></i>
       </div>
-      
+      <span>Añadir Productos</span>
+    </div>
+    <div class="links" [routerLink]="['orders']">
+      <div class="icon">
+        <i class="fa fa-table"></i>
+      </div>
+      <span>Pedidos</span>
+    </div>
+    <div class="links" [routerLink]="['reports']">
+      <div class="icon">
+        <i class="fa fa-bar-chart"></i>
+      </div>
+      <span>Reportes</span>
+    </div>
+    <div class="links" [routerLink]="['add-complain']">
+      <div class="icon">
+        <i class="fa fa-archive"></i>
+      </div>
+      <span>Quejas</span>
+    </div>
+  </div>
+
 </div>

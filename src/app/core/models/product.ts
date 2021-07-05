@@ -4,6 +4,8 @@ export class Product {
   productName: string;
   productCategory: string;
   productPrice: number;
+  productCost: number;
+  productAmount: number;
   productDescription: string;
   productImageUrl: string;
   productProvince: string;   

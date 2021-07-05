@@ -5,11 +5,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { CardsComponent } from './shared/components/cards/cards.component';
-import { GoalsComponent } from './shared/components/goals/goals.component';
-import { TransactionsComponent } from './shared/components/transactions/transactions.component';
-import { OutcomeComponent } from './shared/components/outcome/outcome.component';
-import { BottomComponent } from './shared/components/bottom/bottom.component';
 import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './core/services/user.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,6 +18,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { EditOrderComponent } from './pages/order/edit-order/edit-order.component';
 import { AddComplainComponent } from './pages/complain/add-complain/add-complain.component';
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
+import { RegistroComponent } from './pages/registro/registro.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from '../environments/environment';
 
 
 
@@ -32,11 +35,6 @@ import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.
     DashboardComponent,
     SidebarComponent,
     NavbarComponent,
-    CardsComponent,
-    GoalsComponent,
-    TransactionsComponent,
-    OutcomeComponent,
-    BottomComponent,
     ListOrdersComponent,
     ReportComponent,
     AddOrderComponent,
@@ -44,6 +42,7 @@ import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.
     EditOrderComponent,
     AddComplainComponent,
     EditProfileComponent,
+    RegistroComponent,
       
   ],
   imports: [
@@ -52,7 +51,12 @@ import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.
     HttpClientModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
-    ProductModule    
+    ProductModule,
+    FormsModule,
+    AngularFireModule.initializeApp(environment.firebase), 
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
+    ReactiveFormsModule    
   ],
   providers: [
     UserService,

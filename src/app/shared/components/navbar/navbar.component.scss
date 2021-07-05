@@ -50,15 +50,12 @@
   .navbar__actions > a > img{
     height: 20px;
   }
-  .navbar__actions{
-      
+  .navbar__actions{      
       display: flex;
-      flex-direction: row;
-      
+      flex-direction: row;      
       a{
         color: lightgray;
-      }
-     
+      }     
   }
   .navbar__avatar > a > img{
       height: 30px;
@@ -76,34 +73,49 @@
   .user__role{
     color: rgb(124, 124, 124);
     font-size: 13px;
-  }
-  .dropdown:hover{
-    cursor: pointer;    
-    .dropdown__content{
-      visibility: visible;
-      transition-duration: 0.5s;
-    }
-  }
-  .dropdown__content{
+  }     
+   .dropbtn {   
+    padding: 0px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }  
+  .dropdown-content {
+    display: none;
     position: absolute;
-    visibility: hidden;    
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 143px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }  
+  .dropdown-content a {
+    color: black;
+    padding: 5px 7px;
+    text-decoration: none;
+    display: block;
+  }  
+  .dropdown-content a:hover {background-color: #f1f1f1;}
+  .dropdown:hover .dropdown-content {display: block;}
+  .dropdown__content{        
     transition: all 0.5s ease;
-    padding: 10px;
-    background: aliceblue;
+    border-radius: 15px;
+    background: white;
     color: #197bbd;
+    a{
+      text-align: left;
+      cursor: pointer;
+    }
     span{
       color: #197bbd;
-    }
-    fa-icon{
-      padding-right: 9px;
-    }
-  }
-  .dropdown__content:hover{
-    background-color: #197BBD;
-    color: white;
-    span{
-        color: white;
-    }
+      i{
+        margin-right: 9px;
+      }      
+    }    
   }
   @media only screen and (min-width: 768px) {
     .navbar{
@@ -122,10 +134,8 @@
     }
     .navbar__title {    
       font-size: 39px;       
-    }  
-  
+    }    
   }
-
   @media only screen and (min-width: 1024px) {     
     .navbar{
       display: flex;
@@ -134,8 +144,7 @@
     }
     .navbar__left{
       text-align: start;
-      margin: 10px 20px 10px 20px;
-     
+      margin: 10px 20px 10px 20px;     
     }
     .navbar__right{
       margin: 0px 26px;

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/core/services/product.service';
-import { Product } from 'src/app/shared/models/product';
-import { Project } from 'src/app/shared/models/project.interface';
+import { Product } from 'src/app/core/models/product';
+import { Project } from 'src/app/core/models/project.interface';
+import { Observable } from 'rxjs';
+import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
+import { NgForm } from '@angular/forms';
 
 
 
@@ -12,22 +15,33 @@ import { Project } from 'src/app/shared/models/project.interface';
   styleUrls: ['./list-products.component.scss']
 })
 export class ListProductsComponent implements OnInit {
-  products: Product[];
+  products: any;
+  provinces: any;
+  selectedProvince: string = 'Seleccione una provincia';
 
-  constructor(private service: ProductService, private router: Router) { }
+  constructor(private service: ProductService,
+    private router: Router,
+    private provinceService: GetProvincesService) {
+    
+  }
 
   ngOnInit(): void {
-    this.getProject();
+    this.provinces = this.provinceService.getProvinces();
+    this.provinces.unshift({
+      name:'Seleccione una provincia',
+      value: 0 
+    })
   }
   btnClick() {
-    console.log("taweaetae");
     this.router.navigateByUrl('add-order');
   };
-  getProject(){
-    this.service.getProductProperties().subscribe(
-      (data: Product[])=>{
-        this.products = data;
-      }
-    )
+  getProductForProvince() {
+    console.log(this.selectedProvince);
+    
+    this.service.getProductProperties(this.selectedProvince).subscribe(product => {
+      this.products = product;
+    }
+    );
   }
+
 }

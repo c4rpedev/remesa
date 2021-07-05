@@ -1,61 +1,133 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="title-box text-center pt-5">
-                <h3 class="title-a">
-                    Añadir producto
-                </h3>
-                <p class="subtitle-a">
-                   Añada un producto al sistema
-                </p>
-                <div class="line-mf"></div>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="title-box text-center pt-5">
+        <h3 class="title-a">
+          Añadir producto
+        </h3>
+        <p class="subtitle-a">
+          Añada un producto al sistema
+        </p>
+        <div class="line-mf"></div>
+      </div>
     </div>
-    <div class="row mb-3">
-        <div class="col-lg-4">
-            <div class="card mb-3 shadow">
-                <div class="card-body text-center "><img class="mb-3 mt-4" src="assets/images/empty.png" width="160" height="160" />
-                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Subir Foto</button></div>
-                </div>
-            </div>
-            
+  </div>
+  <div class="row mb-3">
+    <div class="col-lg-4">
+      <div class="card mb-3 shadow">
+        <div class="card-body text-center ">
+            <img class="mb-3 mt-4" src="assets/images/empty.png"/>
+          <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Subir Foto</button></div>
         </div>
-        <div class="col-lg-8">
-           
-            <div class="row">
-                <div class="col">
-                    <div class="card shadow mb-3">
-                       
-                        <div class="card-body">
-                            <form>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group"><label for="username"><strong>Nombre</strong></label><input type="text" class="form-control" placeholder name="username" /></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group"><label for="email"><strong>Precio</strong><br /></label><input type="number" class="form-control" value="0" name="email" /></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group"><label for="email"><strong>Costo</strong><br /></label><input type="number" class="form-control" value="0" name="email" /></div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group"><label for="first_name"><strong>Cantidad</strong><br /></label><input type="number" class="form-control" value="0"/></div>
-                                        <div class="btn-toolbar"></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group"><label for="last_name"><strong>Provincia</strong><br /></label><select class="form-control" id="1"><optgroup label="This is a group"><option value="12" selected>Seleccione una provincia ...</option><option value="13">This is item 2</option><option value="14">This is item 3</option></optgroup></select></div>
-                                    </div>
-                                </div>
-                                <div class="form-group"><label for="first_name"><strong>Descripción</strong><br /></label><textarea class="form-control"></textarea></div>
-                            </form><button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button></div>
+      </div>
+
+    </div>
+    <div class="col-lg-8">
+
+      <div class="row">
+        <div class="col">
+          <div class="card shadow mb-3">
+            <div class="card-body">
+              <form (ngSubmit)="saveProduct( f )" #f="ngForm">
+                <div class="form-row row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="productId"><strong>Id</strong></label>
+                      <input type="text" 
+                             class="form-control" 
+                             [(ngModel)]="product.productId" 
+                             [class.is-invalid]="productId.invalid && productId.touched"
+                             required 
+                             placeholder="Id"
+                             name="productId"
+                             #productId = "ngModel" />
                     </div>
-                   
+                  </div>
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="username"><strong>Nombre</strong></label>
+                      <input type="text" 
+                             class="form-control" 
+                             [(ngModel)]="product.productName" 
+                             [class.is-invalid]="productName.invalid && productName.touched"
+                             placeholder="Nombre"
+                             required                             
+                             name="productName"
+                             #productName="ngModel" />
+                    </div>
+                  </div>
                 </div>
+                  <div class="form-row row">
+                    <div class="col">
+                        <div class="form-group">
+                      <label for="email"><strong>Precio</strong></label>
+                      <input type="number" 
+                             [(ngModel)]="product.productPrice" 
+                             class="form-control"
+                             [class.is-invalid]="productPrice.invalid && productPrice.touched"
+                             value="0"
+                             required
+                             placeholder="Precio"
+                             name="productPrice"
+                             #productPrice="ngModel" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                      <label for="email"><strong>Costo</strong></label>
+                      <input type="number" 
+                             [(ngModel)]="product.productCost" 
+                             [class.is-invalid]="productCost.invalid && productCost.touched"
+                             class="form-control" 
+                             value="0"
+                             placeholder="Costo"
+                             name="productCost"
+                             #productCost="ngModel" />
+                    </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group"><label for="first_name"><strong>Cantidad</strong><br /></label>
+                        <input type="number" 
+                               [(ngModel)]="product.productAmount" 
+                               [class.is-invalid]="productAmount.invalid && productAmount.touched"
+                               class="form-control" 
+                               value="0"
+                               placeholder="Cantidad"
+                               name="productAmount"
+                               #productAmount="ngModel" /></div>
+                      <div class="btn-toolbar"></div>
+                    </div>
+                  </div>
+               
+                <div class="form-row">
+
+                  <div class="col">
+                    <div class="form-group"><label for="last_name"><strong>Provincia</strong><br /></label>
+                      <select [(ngModel)]="selectedProvince"  
+                              class="form-select" 
+                              name="selectProvince"
+                              [class.is-invalid]="selectProvince.invalid && selectProvince.touched"
+                              #selectProvince="ngModel"
+                              required
+                              >
+                        <option *ngFor="let p of provinces">
+                          {{p.name}}
+                        </option>
+                      </select></div>
+                  </div>
+                </div>
+                <div class="form-group ">
+                    <label for="first_name"><strong>Descripción</strong><br /></label>
+                    <textarea [(ngModel)]="product.productDescription" 
+                              name="description" 
+                              placeholder="Escriba una descripción ..."
+                              class="form-control"></textarea></div>
+                <button class="btn btn-primary btn-sm mt-4" type="submit">Guardar Cambios</button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    
+  </div>
 </div>

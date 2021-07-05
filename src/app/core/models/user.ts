@@ -2,13 +2,10 @@ export class User {
   $key: string;
   userName: string;
   emailId: string;
-  password?: string;
-  location?: {
-    lat: number;
-    lon: number;
-  };
+  password?: string;  
   phoneNumber: string;
   createdOn?: string;
+  userRole: string;
   isAdmin: boolean;
   avatar?: string;
 }
