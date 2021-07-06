@@ -50,7 +50,7 @@
                   <a >
                     <div >
                       <img
-                      src={{product.productPhoto}}
+                      src={{product.attributes.picture._url}}
                         class="img-fluid"
                         alt=""
                         
@@ -75,15 +75,15 @@
                         <a
                           
                           routerLinkActive="router-link-active"
-                          >{{ product.productProvince }}</a
+                          >{{ product.attributes.province }}</a
                         >
                       </strong>
                     </p>
                     <!--Description-->
-                    <p class="card-text">{{ product.productDescription }}</p>
+                    <p class="card-text">{{ product.attributes.category }}</p>
                     <!--Card footer-->
                     <div class="card-footer">
-                      <span class="left">$ {{ product.productPrice }}</span>
+                      <span class="left">$ {{ product.attributes.price }}</span>
                       <span class="right">
                         <a class="add__product"
                           placement="top"

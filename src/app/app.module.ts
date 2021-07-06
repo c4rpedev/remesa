@@ -7,7 +7,6 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http'
 import { UserService } from './core/services/user.service';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserCountService } from './core/services/user-count.service';
 import { ProductModule } from './pages/product/product.module';
@@ -20,14 +19,8 @@ import { AddComplainComponent } from './pages/complain/add-complain/add-complain
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from '../environments/environment';
 import * as Parse from 'parse'
-
 import { AuthModule } from '@auth0/auth0-angular';
 
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
@@ -52,15 +45,10 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    FontAwesomeModule,
+    HttpClientModule,   
     BrowserAnimationsModule,
     ProductModule,
-    FormsModule,
-     
-    AngularFirestoreModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
+    FormsModule,    
     ReactiveFormsModule,
     
     AuthModule.forRoot({

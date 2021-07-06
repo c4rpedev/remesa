@@ -34,34 +34,23 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.provinces = this.provinceService.getProvinces();  
-    //this.products =  this.service.getAllProductProperties();
-    this.service.getStores().then(res=>{
-      this.products = res;
-      console.log(this.products[1].attributes.name);
-    })
- 
-    
-    
-    
-    
-    
-    
-    
+    this.getProductForProvince();   
+    /*this.service.getAllProductProperties().then(res=>{
+      this.products = res;           
+    })  */  
   }
   
-  btnClick() {
-    
-        this.router.navigate(['/b']);
+  btnClick() {    
+    this.router.navigate(['/b']);
     this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});  
   };
   getProductForProvince() {
-    /*console.log(this.selectedProvince);    
-    this.service.getProductProperties(this.selectedProvince).subscribe(product => {
-      product.forEach(product => {        
-      });
-      this.products = product;
-    }
-    );*/
+    console.log(this.selectedProvince);    
+    this.service.getProductProperties(this.selectedProvince).then(res=>{
+      this.products = res;     
+      console.log(this.products);
+            
+    })  
   }
   addToCart(product: any){
     console.log(product);

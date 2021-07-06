@@ -14,7 +14,7 @@ export class ProductService {
   private productsCollection: AngularFirestoreCollection<Product>;
   products: Array<Product>;
   name: String;
-  img: String;
+  img: string;
   path: string;
   results: any;
 
@@ -25,53 +25,39 @@ export class ProductService {
                 
               }
 
-  getProductProperties(province: string) { 
+  getProductProperties(province: string): Promise <any> { 
    
-   /* if(province){
-      this.productsCollection = this.afs.collection<Product>('product', ref=>{
-        return ref.where('productProvince', '==', province)
-      });  
+    if(province){
+      const Products = Parse.Object.extend('products');
+      const query = new Parse.Query(Products);
+      query.equalTo('province', province);
+      return query.find() 
     }else{
-      this.productsCollection = this.afs.collection<Product>('product');
+      const Products = Parse.Object.extend('products');
+      const query = new Parse.Query(Products);
+      return query.find();
     }       
-    this.products = this.productsCollection.valueChanges();
-    return this.products;*/
-  }
-
-  getAllProductProperties() {  
     
-      const products = Parse.Object.extend('products');
-      const query = new Parse.Query(products);
-      // You can also query by using a parameter of an object
-      // query.equalTo('objectId', 'xKue915KBG');
-      this.results = query.find();  
-
-      return this.results;
-      
-
-
-    //return this.http.get("https://parseapi.back4app.com/classes/products.json");       
-    // this.productsCollection = this.afs.collection<Product>('product');
-    // this.products = this.productsCollection.valueChanges();
-    // return this.products;
   }
+
+
  
-  public getStores(): Promise <any> {
+  public getAllProductProperties(): Promise <any> {
     const Products = Parse.Object.extend('products');
     const query = new Parse.Query(Products);
     return query.find()
   }
 
-  addProduct(product: Product){
-    
+  addProduct(product: Product, img: string){    
     (async () => {
       const myNewObject = new Parse.Object('products');
       myNewObject.set('name', product.productName);
-      myNewObject.set('price', product.productPrice.toString);
-      myNewObject.set('cost', product.productCost.toString);
-      myNewObject.set('amount', product.productAmount.toString);
+      myNewObject.set('price', product.productPrice);
+      myNewObject.set('cost', product.productCost);
+      myNewObject.set('amount', product.productAmount);
       myNewObject.set('province', product.productProvince);
       myNewObject.set('category', product.productCategory);
+      myNewObject.set('picture', new Parse.File("product.jpg", { uri: img }));     
       try {
         const result = await myNewObject.save();
         // Access the Parse Object attributes using the .GET method
@@ -79,7 +65,6 @@ export class ProductService {
       } catch (error) {
         console.error('Error while creating products: ', error);
       }
-    })();
-    
+    })();    
   }
 }

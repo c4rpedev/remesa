@@ -32,22 +32,26 @@ export class AddProductComponent implements OnInit {
   }
 
   photo(event: any) {
-    this.filePath = event.target.files[0];
+    this.filePath = event.files;
+    
     console.log("Path");
-    console.log(this.photosrc);
-    this.file = event.target.files[0];
+    console.log(this.filePath);
+    this.file = event[0];
 
       const reader = new FileReader();
+      
+
       reader.readAsDataURL(event.target.files[0]);
 
       reader.onload = event => {
         this.img = reader.result;
+        
       };
     
 }
 
   saveProduct(){
-    this.service.addProduct(this.product);
+    this.service.addProduct(this.product, this.img.toString());
     this.router.navigate(['/']);
   }
 

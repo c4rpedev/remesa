@@ -65,8 +65,8 @@
                   <div class="form-row row">
                     <div class="col">
                         <div class="form-group">
-                      <label for="email"><strong>Precio</strong></label>
-                      <input type="number" 
+                      <label for="price"><strong>Precio</strong></label>
+                      <input type="string" 
                              [(ngModel)]="product.productPrice" 
                              class="form-control"
                              [class.is-invalid]="productPrice.invalid && productPrice.touched"
@@ -79,8 +79,8 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                      <label for="email"><strong>Costo</strong></label>
-                      <input type="number" 
+                      <label for="cost"><strong>Costo</strong></label>
+                      <input type="string" 
                              [(ngModel)]="product.productCost" 
                              [class.is-invalid]="productCost.invalid && productCost.touched"
                              class="form-control" 
@@ -91,8 +91,8 @@
                     </div>
                     </div>
                     <div class="col">
-                      <div class="form-group"><label for="first_name"><strong>Cantidad</strong><br /></label>
-                        <input type="number" 
+                      <div class="form-group"><label for="amount"><strong>Cantidad</strong><br /></label>
+                        <input type="string" 
                                [(ngModel)]="product.productAmount" 
                                [class.is-invalid]="productAmount.invalid && productAmount.touched"
                                class="form-control" 
