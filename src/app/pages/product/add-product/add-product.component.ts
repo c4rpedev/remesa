@@ -46,9 +46,8 @@ export class AddProductComponent implements OnInit {
     
 }
 
-  saveProduct(form: NgForm){
-    
-    this.service.addProduct(this.product, this.filePath);
+  saveProduct(){
+    this.service.addProduct(this.product);
     this.router.navigate(['/']);
   }
 

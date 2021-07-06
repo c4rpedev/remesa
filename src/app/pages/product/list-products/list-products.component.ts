@@ -21,21 +21,32 @@ export class ListProductsComponent implements OnInit {
   provinces: any;
   selectedProvince: null;
   img: String;
+  
 
   constructor(private service: ProductService,
     private router: Router,
     private provinceService: GetProvincesService,
-    private afStorage: AngularFireStorage
+    
     ) {
       this.selectedProvince = null;
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.provinces = this.provinceService.getProvinces();    
-    this.service.getAllProductProperties().subscribe(product=>{
-      this.products = product;
+    this.provinces = this.provinceService.getProvinces();  
+    //this.products =  this.service.getAllProductProperties();
+    this.service.getStores().then(res=>{
+      this.products = res;
+      console.log(this.products[1].attributes.name);
     })
+ 
+    
+    
+    
+    
+    
+    
+    
   }
   
   btnClick() {
@@ -44,13 +55,13 @@ export class ListProductsComponent implements OnInit {
     this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});  
   };
   getProductForProvince() {
-    console.log(this.selectedProvince);    
+    /*console.log(this.selectedProvince);    
     this.service.getProductProperties(this.selectedProvince).subscribe(product => {
       product.forEach(product => {        
       });
       this.products = product;
     }
-    );
+    );*/
   }
   addToCart(product: any){
     console.log(product);

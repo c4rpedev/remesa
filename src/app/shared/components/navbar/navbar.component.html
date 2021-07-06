@@ -15,19 +15,19 @@
         <fa-icon [icon]="faBell"></fa-icon>
       </a>
     </div>
-    <div class="dropdown" style="float:right;">
+    <div class="dropdown" style="float:right;" >
       <div class="navbar__account dropbtn">
         <div class="navbar__avatar ">
           <a href="#">
-            <img class="rounded-circle" src="{{img}}" alt="">
+            <img class="rounded-circle"  alt="">
           </a>
         </div>
-        <div>
+        <div *ngIf="auth.user$ | async as user">
           <div class="user__name">
-            {{ (user | async)?.displayName }}
+            {{ user.name }}
           </div>
           <div class="user__role">
-            {{ (user | async)?.role }}
+            {{ user.name }}
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
         <a (click)="openSettings()">
           <span><i class="fa fa-user fa-2x"></i>Añadir usuario</span>
         </a>
-        <a (click)="logout()">
+        <a (click)="auth.logout({ returnTo: document.location.origin })">
           <span><i class="fa fa-sign-out fa-2x"></i>Salir</span>
         </a>
       </div>

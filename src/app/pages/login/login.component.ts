@@ -4,9 +4,10 @@ import { User } from 'src/app/core/models/user';
 
 
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/services/auth.service'
+//import { AuthService } from '../../core/services/auth.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/auth';
+
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,11 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   firebaseErrorMessage: string;
 
-  constructor( private auth: AuthService, private authService: AuthService, private router: Router, private afAuth: AngularFireAuth) { 
+  constructor(  
+               
+               private router: Router, 
+               
+               public auth: AuthService) { 
     this.isProgressVisible = false;
 
     this.loginForm = new FormGroup({
@@ -32,9 +37,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.authService.userLoggedIn) {                       // if the user's logged in, navigate them to the dashboard (NOTE: don't use afAuth.currentUser -- it's never null)
-      this.router.navigate(['/']);
-    }
+    // if (this.authService.userLoggedIn) {                       // if the user's logged in, navigate them to the dashboard (NOTE: don't use afAuth.currentUser -- it's never null)
+    //   this.router.navigate(['/']);
+    // }
     
   }
 
@@ -52,17 +57,17 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid)
         return;
 
-    this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
-        this.isProgressVisible = false;                     // no matter what, when the auth service returns, we hide the progress indicator
-        if (result == null) {                               // null is success, false means there was an error
-            console.log('logging in...');
-            this.router.navigate(['/']);                // when the user is logged in, navigate them to dashboard
-        }
-        else if (result.isValid == false) {
-            console.log('login error', result);
-            this.firebaseErrorMessage = result.message;
-        }
-    });
+    // this.authService.loginUser(this.loginForm.value.email, this.loginForm.value.password).then((result) => {
+    //     this.isProgressVisible = false;                     // no matter what, when the auth service returns, we hide the progress indicator
+    //     if (result == null) {                               // null is success, false means there was an error
+    //         console.log('logging in...');
+    //         this.router.navigate(['/']);                // when the user is logged in, navigate them to dashboard
+    //     }
+    //     else if (result.isValid == false) {
+    //         console.log('login error', result);
+    //         this.firebaseErrorMessage = result.message;
+    //     }
+    // });
 }
 
 }

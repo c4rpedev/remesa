@@ -26,8 +26,12 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from "@angular/fire/storage";
 import { environment } from '../environments/environment';
+import * as Parse from 'parse'
 
+import { AuthModule } from '@auth0/auth0-angular';
 
+Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
+(Parse as any).serverURL = environment.serverURL;
 
 @NgModule({
   declarations: [
@@ -53,11 +57,16 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     ProductModule,
     FormsModule,
-    AngularFireModule.initializeApp(environment.firebase), 
+     
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,
-    ReactiveFormsModule    
+    ReactiveFormsModule,
+    
+    AuthModule.forRoot({
+      domain: 'buttymanager.us.auth0.com',
+      clientId: 'HqCeBy0WHL7qHa7MSQWFUWB6QcohLYzT'
+    }),
   ],
   providers: [
     UserService,

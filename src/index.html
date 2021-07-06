@@ -7,9 +7,28 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">  
- 
+  
+	
+
+<script type="text/javascript" src="https://npmcdn.com/parse/dist/parse.min.js">
+  Parse.initialize("dRDCjU3raMLjkSVsZGAomqgWdBvioiBGnllFPJ69", "sh2t2um39n0stRBBF1nWVfIR7mN73srcN8205Jpi"); 
+  Parse.serverURL = "https://parseapi.back4app.com/";
+  
+  var user = new Parse.User();
+    user.save({
+      username: document.getElementById("username").value,
+      email: document.getElementById("email").value,
+      password: document.getElementById("password").value
+    }).then(function(response) {
+      alert('New object create with success! ObjectId: ' + response.id + ', '+ user.get('username'));
+    }).catch(function(error) {
+      alert('Error: ' + error.message);
+  });
+</script>
+
 </head>
 <body class="bg-gradient-primary animated fadeIn slow">
+  
   <app-root></app-root>  
   
 

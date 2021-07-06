@@ -6,26 +6,28 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { AngularFireStorage } from '@angular/fire/storage';
-
+import * as Parse from 'parse'
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private productsCollection: AngularFirestoreCollection<Product>;
-  products: Observable<Product[]>;
+  products: Array<Product>;
+  name: String;
   img: String;
   path: string;
+  results: any;
+
   constructor(private http:HttpClient, 
               private router: Router,   
-              private afAuth: AngularFireAuth, 
-              private afs: AngularFirestore,
-              private afStorage: AngularFireStorage) { 
+              
+              ) { 
                 
               }
 
   getProductProperties(province: string) { 
-  
-    if(province){
+   
+   /* if(province){
       this.productsCollection = this.afs.collection<Product>('product', ref=>{
         return ref.where('productProvince', '==', province)
       });  
@@ -33,40 +35,51 @@ export class ProductService {
       this.productsCollection = this.afs.collection<Product>('product');
     }       
     this.products = this.productsCollection.valueChanges();
-    return this.products;
+    return this.products;*/
   }
 
-  getAllProductProperties() {         
-    this.productsCollection = this.afs.collection<Product>('product');
-    this.products = this.productsCollection.valueChanges();
-    return this.products;
+  getAllProductProperties() {  
+    
+      const products = Parse.Object.extend('products');
+      const query = new Parse.Query(products);
+      // You can also query by using a parameter of an object
+      // query.equalTo('objectId', 'xKue915KBG');
+      this.results = query.find();  
+
+      return this.results;
+      
+
+
+    //return this.http.get("https://parseapi.back4app.com/classes/products.json");       
+    // this.productsCollection = this.afs.collection<Product>('product');
+    // this.products = this.productsCollection.valueChanges();
+    // return this.products;
   }
  
- 
+  public getStores(): Promise <any> {
+    const Products = Parse.Object.extend('products');
+    const query = new Parse.Query(Products);
+    return query.find()
+  }
 
-
-  addProduct(product: any, filePath: String){
-    this.path = 'products/product'+Math.random()+filePath;
-    console.log("Path");
-    console.log(this.path);
+  addProduct(product: Product){
     
-    this.afStorage.upload (this.path, filePath).then(rst => {
-      rst.ref.getDownloadURL().then(url => {
-        
-        this.afs.doc('/product/' + product.productId)                        // on a successful signup, create a document in 'users' collection with the new user's info
-                .set({                  
-                  productName: product.productName,                
-                  productPrice: product.productPrice,
-                  productCost: product.productCost,
-                  productAmount: product.productAmount,
-                  productProvince: product.productProvince,                  
-                  productDescription: product.productDescription,
-                  productPhoto: url
-                  
-                });
-      })
-    });  
-    
+    (async () => {
+      const myNewObject = new Parse.Object('products');
+      myNewObject.set('name', product.productName);
+      myNewObject.set('price', product.productPrice.toString);
+      myNewObject.set('cost', product.productCost.toString);
+      myNewObject.set('amount', product.productAmount.toString);
+      myNewObject.set('province', product.productProvince);
+      myNewObject.set('category', product.productCategory);
+      try {
+        const result = await myNewObject.save();
+        // Access the Parse Object attributes using the .GET method
+        console.log('products created', result);
+      } catch (error) {
+        console.error('Error while creating products: ', error);
+      }
+    })();
     
   }
 }

@@ -1,12 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, Inject  } from '@angular/core';
 import { IUser } from 'src/app/core/interfaces/iuser.interface';
 import { faEnvelope, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import { UserCountService } from 'src/app/core/services/user-count.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
 import { Observable } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/storage';
+
+import { AuthService } from '@auth0/auth0-angular';
+import { DOCUMENT } from '@angular/common';
 
 
 @Component({
@@ -23,15 +24,16 @@ export class NavbarComponent implements OnInit {
   
   user: Observable<any>;              // Example: store the user's info here (Cloud Firestore: collection is 'users', docId is the user's email, lower case)
 
-    constructor(private afAuth: AngularFireAuth, 
-                private firestore: AngularFirestore, 
+    constructor( 
                 private router: Router,
-                private afStorage: AngularFireStorage) {
+                
+                public auth: AuthService,
+                @Inject(DOCUMENT) public document: Document) {
         this.user = null;
     }
     
   ngOnInit(): void {
-    this.afAuth.authState.subscribe(user => {
+    /*this.afAuth.authState.subscribe(user => {
       console.log('Dashboard: user', user);
       if (user) {
           let emailLower = user.email.toLowerCase();
@@ -40,12 +42,12 @@ export class NavbarComponent implements OnInit {
               this.img = imgUrl;
           });
       }
-    });
+    });*/
    }
   
  
   logout(): void {
-    this.afAuth.signOut();
+    //this.afAuth.signOut();
   }
   openSettings(){
     this.router.navigateByUrl('/edit-profile');
