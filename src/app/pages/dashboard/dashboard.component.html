@@ -1,4 +1,4 @@
-<div class="dashboard__main">
+<div *ngIf="(afAuth.user | async)" class="dashboard__main">
   <nav>
     <app-navbar>
     </app-navbar>
@@ -10,8 +10,8 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-<!-- <div *ngIf="!(afAuth.user | async)">
+<div *ngIf="!(afAuth.user | async)">
   <div class="login">
     <app-login></app-login>
   </div>
-</div>    -->
+</div>   
