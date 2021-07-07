@@ -3,20 +3,27 @@
         <div class="col-sm-12">
             <div class="title-box text-center pt-5">
                 <h3 class="title-a">
-                    Editar Usuario
+                    Añadir Usuario
                 </h3>
                 <p class="subtitle-a">
-                   Modifique los campos y guarde los cambios
+                   Rellene los campos y guarde los cambios
                 </p>
                 <div class="line-mf"></div>
             </div>
         </div>
     </div>
+    <form [formGroup]="signupForm" (ngSubmit)="signup()">
     <div class="row mb-3">
         <div class="col-lg-4">
             <div class="card mb-3 shadow">
-                <div class="card-body text-center "><img class="rounded-circle mb-3 mt-4" src="assets/images/logos-agencias/mercadito.png"  width="160" height="160" />
-                    <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Cambiar Foto</button></div>
+                <div class="card-body text-center "><img class="rounded-circle mb-3 mt-4" src='{{img}}'  width="160" height="160" />
+                    <input type="file" 
+                    name="photo"
+                    formControlName="photo" 
+                    accept="image/*"
+                    (change)="photo($event)" 
+                    class="form-control mb-4"  >
+                   
                 </div>
             </div>
             
@@ -25,12 +32,8 @@
            
             <div class="row">
                 <div class="col">
-                    <div class="card shadow mb-3">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Configuración de usuario</p>
-                        </div>
-                        <div class="card-body">
-                            <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <div class="card shadow mb-3">                        
+                        <div class="card-body">                            
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
@@ -59,6 +62,7 @@
                                                    placeholder="Contraseña"></div>
                                     </div>
                                 </div>
+                                
                                 <div class="form-row row">
                                     <div class="col-md-4">
                                         <div class="form-group">
@@ -73,62 +77,51 @@
                                         <div class="form-group">
                                             <label for="first_name"><strong>Rol</strong><br /></label>
                                             <select class="form-control" formControlName="role" placeholder="Selecciona un rol">                                                
-                                                <option value="1">Administrador</option>
-                                                <option value="2">Agencia</option>
-                                                <option value="3">Sucursal</option>
-                                                <option value="4">Facturador</option>
-                                                <option value="5">Económico</option>   
+                                                <option value="Administrador">Administrador</option>
+                                                <option value="Agencia">Agencia</option>
+                                                <option value="Sucursal">Sucursal</option>
+                                                <option value="Facturador">Facturador</option>
+                                                <option value="Económico">Económico</option>   
                                               </select></div>
                                        
                                     </div>
                                    
                                 </div>
+                                <div class="form-group">
+                                    <label for="address"><strong>Dirección</strong></label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           formControlName="address" 
+                                           placeholder="Dirección" 
+                                           name="address" /></div>
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="city"><strong>Teléfono</strong><br /></label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           formControlName="phone" 
+                                           placeholder="Teléfono" 
+                                           name="phone" /></div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="country"><strong>País</strong></label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           formControlName="country" 
+                                           placeholder="País" 
+                                           name="country" /></div>
+                            </div>
+                        </div>
                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button></div>
-                            </form>
+                            
                         </div>
                     </div>
-                    <div class="card shadow">
-                        <div class="card-header py-3">
-                            <p class="text-primary m-0 font-weight-bold">Otros Datos</p>
-                        </div>
-                        <div class="card-body">
-                            <form>
-                                <div class="form-group">
-                                            <label for="address"><strong>Dirección</strong></label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   formControlName="address" 
-                                                   placeholder="Dirección" 
-                                                   name="address" /></div>
-                                <div class="form-row">
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="city"><strong>Teléfono</strong><br /></label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   formControlName="phone" 
-                                                   placeholder="Teléfono" 
-                                                   name="phone" /></div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label for="country"><strong>País</strong></label>
-                                            <input type="text" 
-                                                   class="form-control" 
-                                                   formControlName="country" 
-                                                   placeholder="País" 
-                                                   name="country" /></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <button class="btn btn-primary btn-sm" type="submit">Guardar Cambios</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+                   
                 </div>
             </div>
         </div>
     </div>
-    
+</form>
 </div>

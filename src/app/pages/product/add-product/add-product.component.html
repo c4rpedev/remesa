@@ -15,10 +15,15 @@
   <div class="row mb-3">
     <div class="col-lg-4">
       <div class="card mb-3 shadow">
-        <div class="card-body text-center ">
-            <img class="mb-3 mt-4" src="assets/images/empty.png"/>
-          <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Subir Foto</button></div>
-        </div>
+        <div class="card-body text-center "><img class="mb-3 mt-4" src='{{img}}'  width="160" height="160" />
+          <input type="file" 
+          name="photo"          
+          accept="image/*"
+          [(ngModel)]="photosrc" 
+          (change)="photo($event)" 
+          class="form-control mb-4"  >
+         
+      </div>
       </div>
 
     </div>
@@ -103,16 +108,33 @@
 
                   <div class="col">
                     <div class="form-group"><label for="last_name"><strong>Provincia</strong><br /></label>
-                      <select [(ngModel)]="selectedProvince"  
+                      <select  [(ngModel)]="product.productProvince"  
                               class="form-select" 
                               name="selectProvince"
                               [class.is-invalid]="selectProvince.invalid && selectProvince.touched"
                               #selectProvince="ngModel"
                               required
                               >
+                        
                         <option *ngFor="let p of provinces">
                           {{p.name}}
                         </option>
+                      </select></div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group"><label for="last_name"><strong>Tipo</strong><br /></label>
+                      <select   
+                              class="form-select" 
+                              name="type"                              
+                              required
+                              >
+                        <option value="2">
+                           Producto
+                        </option>
+                        <option value="1">
+                          Combo
+                        </option>
+                        
                       </select></div>
                   </div>
                 </div>
@@ -122,7 +144,7 @@
                               name="description" 
                               placeholder="Escriba una descripción ..."
                               class="form-control"></textarea></div>
-                <button class="btn btn-primary btn-sm mt-4" type="submit">Guardar Cambios</button>
+                <button class="button mt-4" type="submit">Guardar Cambios</button>
               </form>
             </div>
           </div>

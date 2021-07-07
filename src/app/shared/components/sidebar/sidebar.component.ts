@@ -7,9 +7,29 @@ import { faChartLine } from '@fortawesome/free-solid-svg-icons';
 })
 export class SidebarComponent implements OnInit {
   faChartLine = faChartLine;
+  isOpened: String;
+  public screenWidth: any;
+  public screenHeight: any;
   
-  constructor() { }
+  constructor() { 
+    
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+      this.screenWidth = window.innerWidth;
+      this.screenHeight = window.innerHeight;
+   }
+
+  openMenu(){
+    if(this.screenWidth<768){
+      if(this.isOpened == "block"){
+        this.isOpened = "none"
+      }else{
+        this.isOpened = "block"
+      }
+    }
+    
+    
+  }
 
 }

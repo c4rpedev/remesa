@@ -6,6 +6,7 @@ import { Project } from 'src/app/core/models/project.interface';
 import { Observable } from 'rxjs';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { NgForm } from '@angular/forms';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
 
 
 
@@ -16,32 +17,48 @@ import { NgForm } from '@angular/forms';
 })
 export class ListProductsComponent implements OnInit {
   products: any;
+  productsCart: Array<any> = [];
   provinces: any;
-  selectedProvince: string = 'Seleccione una provincia';
+  selectedProvince: null;
+  img: String;
 
   constructor(private service: ProductService,
     private router: Router,
-    private provinceService: GetProvincesService) {
-    
+    private provinceService: GetProvincesService,
+    private afStorage: AngularFireStorage
+    ) {
+      this.selectedProvince = null;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.provinces = this.provinceService.getProvinces();
-    this.provinces.unshift({
-      name:'Seleccione una provincia',
-      value: 0 
+    this.provinces = this.provinceService.getProvinces();    
+    this.service.getAllProductProperties().subscribe(product=>{
+      this.products = product;
     })
   }
+  
   btnClick() {
-    this.router.navigateByUrl('add-order');
+    
+        this.router.navigate(['/b']);
+    this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});  
   };
   getProductForProvince() {
-    console.log(this.selectedProvince);
-    
+    console.log(this.selectedProvince);    
     this.service.getProductProperties(this.selectedProvince).subscribe(product => {
+      product.forEach(product => {        
+      });
       this.products = product;
     }
     );
   }
+  addToCart(product: any){
+    console.log(product);
+    this.productsCart.push(product);
+    console.log(this.productsCart);
+  }
+
+ 
+ 
 
 }

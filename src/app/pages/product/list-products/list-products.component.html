@@ -1,5 +1,5 @@
 <!-- ======= Portfolio Section ======= -->
-<section id="work" class="portfolio-mf sect-pt4 pb-5 route">
+<section id="work" class="container portfolio-mf sect-pt4 pb-5 route">
   
         <div class="row">
             <div class="col-sm-12">
@@ -17,19 +17,19 @@
         
         <div class="btn-toolbar product__toolbar"  role="toolbar" aria-label="Toolbar with button groups">      
           
+          
+          <div class="btn-group " role="group" >
+            <button type="button"  (click)="btnClick()">Crear combo</button>           
+          </div>
           <div class="province-select">
            
             <select [(ngModel)]="selectedProvince"  (ngModelChange)="getProductForProvince()" class="form-select" id="selectProvince" >
+              <option [ngValue]="null">Seleccione una provincia</option>
               <option *ngFor="let p of provinces">
                 {{p.name}}
              </option>
-            </select>
-            
+            </select>            
           </div>
-          <div class="btn-group " role="group" >
-            <button type="button"  (click)="btnClick()">Realizar Pedido</button>           
-          </div>
-         
         </div>
         <div class="row">
           <div *ngIf="!products" class="container text-center mt-5">
@@ -41,7 +41,7 @@
             <div
             class="col-sm-3 mb-2"
             *ngFor="
-              let product of products"      >
+              let product of products">
             <div class="item">
               <div class="mb-r">
                 <!--Card-->
@@ -50,10 +50,10 @@
                   <a >
                     <div >
                       <img
-                        [src]="product.productImageUrl"
+                      src={{product.productPhoto}}
                         class="img-fluid"
                         alt=""
-                       
+                        
                       />
                       <a>
                         <div
@@ -75,7 +75,7 @@
                         <a
                           
                           routerLinkActive="router-link-active"
-                          >{{ product.productCategory }}</a
+                          >{{ product.productProvince }}</a
                         >
                       </strong>
                     </p>
@@ -85,11 +85,11 @@
                     <div class="card-footer">
                       <span class="left">$ {{ product.productPrice }}</span>
                       <span class="right">
-                        <a
+                        <a class="add__product"
                           placement="top"
                           mdbTooltip="Add to Wishlist"
                           container="body"
-                          
+                          (click)="addToCart(product)"
                         >
                           <i class="fa fa-plus-circle"></i>
                         </a>

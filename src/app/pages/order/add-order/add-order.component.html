@@ -55,18 +55,13 @@
         <th></th>
         <th></th>
       </tr>
-      <tr>
-        <td><img class="border"   src="assets/images/products/product_1.jpg" alt=""></td>
-        <td>Combo Cárnico</td>
-        <td>$55.00</td>
+      <tr *ngFor="let product of products">
+        <td><img class="border"   src="{{product.productPhoto}}" alt=""></td>
+        <td>{{product.productName}}</td>
+        <td>${{product.productPrice}}</td>
         <td><a href=""><i class="fa fa-trash"></i></a></td>
       </tr>
-      <tr>
-        <td><img class="border" src="assets/images/products/product_2.jpg" alt=""></td>
-        <td>Combo Ahumados</td>
-        <td>$65.00</td>
-        <td><a href=""><i class="fa fa-trash"></i></a></td>
-      </tr>
+     
       <tr>
         <td></td>
         <td>Subtotal</td>
