@@ -50,8 +50,19 @@ export class ListProductsComponent implements OnInit {
   }
   
   addOrder() {    
-    this.router.navigate(['/b']);
-    this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});  
+    if(this.productsCart.length > 0){
+      this.router.navigate(['/b']);
+    this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});
+    }else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seleccione al menos 1 productos para crear un pedido.',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+      
   };
   editProduct(product: any, productsA: any) {    
     this.productsEdit.push(product);
@@ -60,8 +71,19 @@ export class ListProductsComponent implements OnInit {
     this.router.navigateByUrl('/edit-product', { state: {product: this.productsEdit, productA: this.productsAttr}});  
   };
   createCombo() {    
-    this.router.navigate(['/b']);
-    this.router.navigateByUrl('/create-combo', { state: {product: this.productsCart}});  
+    if(this.productsCart.length > 1){
+      this.router.navigate(['/b']);
+      this.router.navigateByUrl('/create-combo', { state: {product: this.productsCart}}); 
+    }else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Seleccione al menos 2 productos para crear un combo.',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+     
   };
   getProductForProvince() {
     this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
