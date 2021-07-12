@@ -86,4 +86,7 @@
         display: none;
     }
   }
+  @media print{
+    .doNotPrint{display:none !important;}
+  }
   

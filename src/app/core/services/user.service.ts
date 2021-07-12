@@ -1,24 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { IUser } from '../interfaces/iuser.interface';
-import { Observable } from 'rxjs';
-import { Project } from 'src/app/core/models/project.interface';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  
+    user: string;
 
-constructor(private http:HttpClient) { 
-  
-}
-  // -- Get User Properties from mock data -- // 
-  getUserProperties(): Observable<IUser[]> {  
-    return this.http.get<IUser[]>('assets/mock-data/user.json');
+  constructor(private auth: AuthService) {
+    this.auth.user$.subscribe(user=>{
+      this.user = user.nickname;
+    })
   }
-  getProjectProperties(): Observable<Project[]> {  
-    return this.http.get<Project[]>('assets/mock-data/projects.json');
+
+  get getUser(){
+    return this.user;
   }
-   
+
 }

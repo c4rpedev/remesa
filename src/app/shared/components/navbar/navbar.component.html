@@ -1,4 +1,4 @@
-<div class="navbar navbar-dark bg-dar shadow">
+<div class="navbar navbar-dark bg-dar shadow doNotPrint">
   <div class="nav_icon" onclick="toggleSidebar()">
     <i class="fa fa-bars" aria-hidden="true"></i>
   </div>
@@ -16,15 +16,17 @@
       </a>
     </div>
     <div class="dropdown" style="float:right;" >
-      <div class="navbar__account dropbtn">
+      <div class="navbar__account dropbtn" *ngIf="auth.user$ | async as user">
         <div class="navbar__avatar ">
           <a href="#">
-            <img class="rounded-circle"  alt="">
+            
+            <img class="rounded-circle" src="{{user.picture}}" alt="">
           </a>
         </div>
-        <div *ngIf="auth.user$ | async as user">
+        <div >
           <div class="user__name">
-            {{ user.name }}
+            {{ user.nickname }}
+            
           </div>
           <div class="user__role">
             {{ user.name }}
@@ -32,9 +34,9 @@
         </div>
       </div>
       <div class="dropdown-content dropdown__content animated fadeIn">
-        <a (click)="openSettings()">
+        <!-- <a (click)="openSettings()">
           <span><i class="fa fa-user fa-2x"></i>Añadir usuario</span>
-        </a>
+        </a> -->
         <a (click)="auth.logout({ returnTo: document.location.origin })">
           <span><i class="fa fa-sign-out fa-2x"></i>Salir</span>
         </a>

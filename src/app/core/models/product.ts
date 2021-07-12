@@ -5,9 +5,11 @@ export class Product {
   productCategory: string;
   productPrice: string;
   productCost: string;
+  productUM: string;
   productAmount: string;
   productDescription: string;
   productImageUrl: string;
   productProvince: string;   
   productSeller: string;
+  products: Product[];
 }

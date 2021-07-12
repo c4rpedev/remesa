@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '@auth0/auth0-angular';
+import { from } from 'rxjs';
 import { Product } from 'src/app/core/models/product';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { ProductService } from 'src/app/core/services/product.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-product',
@@ -19,17 +23,66 @@ export class AddProductComponent implements OnInit {
   photosrc: String;
   selectedProvince: null;
   file: File;
+  user: string;
+
+  editField: string;
+  comboProducts: Product = new Product();
+  productList: Array<any> = [
+    { id: '', name: '', age: '', companyName: '', country: '', city: '' },
+  
+  ];
+
+  awaitingPersonList: Array<any> = [
+    { id: 6, name: 'George Vega', age: 28, companyName: 'Classical', country: 'Russia', city: 'Moscow' },
+   
+  ];
+
+  name = 'Paste it';
+  val:any;
+   displayedColumns: string[] ;
+  dataSource: any[] = [];
+
+  data(event:ClipboardEvent) {
+    
+    
+    let clipboardData = event.clipboardData;
+    let pastedText = clipboardData.getData('text');
+    let row_data = pastedText.split('\n');
+    
+    
+    this.displayedColumns = [ "Nombre", "UM", "Cantidad" ];
+    //delete row_data[0];
+    // Create table dataSource
+    let data:any=[];
+
+    row_data.forEach(row_data=>{
+        let row:any={};
+      this.displayedColumns.forEach((a, index)=>{row[a]= row_data.split('\t')[index]});
+      data.push(row);
+    })
+    this.dataSource = data;
+    console.log(this.dataSource);
+    
+    }
+  
   constructor(private service: ProductService,
               private provinceService: GetProvincesService,
-              private router: Router) { 
+              private router: Router,
+              public auth: AuthService,    
+                @Inject(DOCUMENT) public document: Document) { 
                 this.selectedProvince = null;
+                
               }
 
   ngOnInit(): void {
     
     this.provinces = this.provinceService.getProvinces();  
-   
+    this.auth.user$.subscribe(user =>{
+      this.user = user.nickname;
+    })
   }
+
+  
 
   photo(event: any) {
     this.filePath = event.files;
@@ -50,9 +103,50 @@ export class AddProductComponent implements OnInit {
     
 }
 
-  saveProduct(){
-    this.service.addProduct(this.product, this.img.toString());
-    this.router.navigate(['/']);
+  saveProduct(form: NgForm){
+    if(form.valid){
+      this.service.addProduct(this.product, this.img.toString(), this.dataSource, this.user);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Producto añadido',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.router.navigate(['/']);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Complete todos los campos obligatorios!',        
+      })
+    } 
+    
   }
+
+  //---Editable Table -- //
+ 
+
+    updateList(id: number, property: string, event: any) {
+      const editField = event.target.textContent;
+      this.productList[id][property] = editField;
+    }
+
+    remove(id: any) {
+      this.awaitingPersonList.push(this.productList[id]);
+      this.productList.splice(id, 1);
+    }
+
+    add() {     
+        const person = this.awaitingPersonList[0];
+        this.productList.push(this.productList);
+        console.log(this.productList);
+        
+        this.awaitingPersonList.splice(0, 1);      
+    }
+
+    changeValue(id: number, property: string, event: any) {
+      this.editField = event.target.textContent;
+    }
 
 }

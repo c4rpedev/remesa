@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class GetProvincesService {
-  provinces = [       
+  provinces = [   
+    { name: "Occidente", value: 1 },
+    { name: "Oriente", value: 1 },    
     { name: "Pinar del Río", value: 1 },
     { name: "Artemisa", value: 2 },
     { name: "La Habana", value: 3 },

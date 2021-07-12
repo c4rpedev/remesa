@@ -17,22 +17,54 @@
     <div class="col-md-8 ml-2">
       <div class="d-flex card ">
       
-          <form action="" method="">
+          <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
+            <label>
+              <span class="fname">Id <span class="required">*</span></span>
+              <input type="text" 
+                      class="form-control" 
+                      [(ngModel)]="complain.complainId" 
+                      [class.is-invalid]="complainId.invalid && complainId.touched"
+                      required 
+                      placeholder="Id de queja"
+                      name="complainId"
+                      #complainId = "ngModel">
+            </label>
             <label>
               <span class="fname">Cliente <span class="required">*</span></span>
-              <input type="text" name="fname">
+              <input type="text" 
+                      class="form-control" 
+                      [(ngModel)]="complain.complainClient" 
+                      [class.is-invalid]="complainClient.invalid && complainClient.touched"
+                      required 
+                      placeholder="Nombre del Cliente"
+                      name="complainClient"
+                      #complainClient = "ngModel">
             </label>
            
            
             <label>
               <span class="fname">Id de Pedido <span class="required">*</span></span>
-              <input type="text" name="fname">
+              <input type="text" 
+                      class="form-control" 
+                      [(ngModel)]="complain.complainOrder" 
+                      [class.is-invalid]="complainOrder.invalid && complainOrder.touched"
+                      required 
+                      placeholder="Id del Pedido"
+                      name="complainOrder"
+                      #complainOrder = "ngModel">
             </label>
             <label>
               <span>Motivo <span class="required">*</span></span>
-              <textarea class="form-control"></textarea>
+              <textarea  [(ngModel)]="complain.complainMotive" 
+              [class.is-invalid]="complainMotive.invalid && complainMotive.touched"
+              required 
+              
+              name="complainMotive"
+              #complainMotive = "ngModel">
+
+              </textarea>
             </label>
-            <div class="mb-3"><button class="btn btn-primary btn-sm" type="button">Añadir</button></div>
+            <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Añadir</button></div>
           
             
             

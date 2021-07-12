@@ -1,7 +1,7 @@
 <!-- ======= Portfolio Section ======= -->
-<section id="work" class="container portfolio-mf sect-pt4 pb-5 route">
+<section id="work" class="container portfolio-mf sect-pt4 pb-5 route" >
   
-        <div class="row">
+        <div class="row" *ngIf="who!='order'">
             <div class="col-sm-12">
                 <div class="title-box text-center pt-5">
                     <h3 class="title-a">
@@ -14,12 +14,28 @@
                 </div>
             </div>
         </div>
+        <div class="row" *ngIf="who=='order'">
+          <div class="col-sm-12">
+              <div class="title-box text-center pt-5">
+                  <h3 class="title-a">
+                      Realizar pedido
+                  </h3>
+                  <p class="subtitle-a">
+                      Seleccione productos para su pedido
+                  </p>
+                  <div class="line-mf"></div>
+              </div>
+          </div>
+      </div>
         
         <div class="btn-toolbar product__toolbar"  role="toolbar" aria-label="Toolbar with button groups">      
           
           
+          <div class="btn-group " role="group" *ngIf="who=='order'">
+            <button type="button"  (click)="addOrder()">Realizar Pedido</button>           
+          </div>
           <div class="btn-group " role="group" >
-            <button type="button"  (click)="btnClick()">Crear combo</button>           
+            <button type="button"  (click)="createCombo()" *ngIf="who!='order'">Crear combo</button>           
           </div>
           <div class="province-select">
            
@@ -85,15 +101,23 @@
                     <div class="card-footer">
                       <span class="left">$ {{ product.attributes.price }}</span>
                       <span class="right">
-                        <a class="add__product"
+                        <a class="add__product"                       
                           placement="top"
                           mdbTooltip="Add to Wishlist"
                           container="body"
-                          (click)="addToCart(product)"
+                          (click)="editProduct(product, product.attributes)"
+                          *ngIf="(user == product.attributes.productAgency) || user == 'buttymanager'"
+                        >
+                          <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="add__product"                       
+                          placement="top"
+                          mdbTooltip="Add to Wishlist"
+                          container="body"
+                          (click)="addToCart(product.attributes)"                          
                         >
                           <i class="fa fa-plus-circle"></i>
                         </a>
-                       
                         <!-- <a
                           placement="top"
                           mdbTooltip="Remove Product"

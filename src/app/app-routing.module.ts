@@ -12,22 +12,42 @@ import { AddProductComponent } from './pages/product/add-product/add-product.com
 import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { AuthGuard } from './core/services/auth.guard';
+import { EditProductComponent } from './pages/product/edit-product/edit-product.component';
+import { CreateComboComponent } from './pages/product/create-combo/create-combo.component';
+import { PrintViewComponent } from './pages/print-view/print-view.component';
+import { EditComplainComponent } from './pages/complain/edit-complain/edit-complain.component';
+import { ListComplainComponent } from './pages/complain/list-complain/list-complain.component';
 
 const routes: Routes = [
-  { path: '', component: ListProductsComponent},
+ 
+  //-- Product --//
+  { path: '', component: ListOrdersComponent},
+  { path: 'list-product', component: ListProductsComponent},
   { path: 'add-product', component: AddProductComponent},
+  { path: 'edit-product', component: EditProductComponent},
+  { path: 'create-combo', component: CreateComboComponent},
+  //-- Order --//
   { path: 'orders', component: ListOrdersComponent},
-  { path: 'reports', component: ReportComponent},
   { path: 'add-order', component: AddOrderComponent},
   { path: 'edit-order', component: EditOrderComponent},
-  { path: 'edit-profile', component: EditProfileComponent},
+
+  //-- Print --//
+  { path: 'print-view', component: PrintViewComponent},
+
+  //-- Complains --//
   { path: 'add-complain', component: AddComplainComponent},
+  { path: 'edit-complain', component: EditComplainComponent},
+  { path: 'list-complain', component: ListComplainComponent},
+
+  { path: 'reports', component: ReportComponent},  
+  { path: 'edit-profile', component: EditProfileComponent},
+  
   { path: 'login', component: LoginComponent},
   { path: 'registro', component: RegistroComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

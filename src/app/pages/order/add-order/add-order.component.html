@@ -13,41 +13,98 @@
     </div>
 </div>
 <div class="d-flex card">
-  <form action="" method="">
+  <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
+    <label>
+      <span class="fname">ID <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderId" 
+      [class.is-invalid]="orderId.invalid && orderId.touched"
+      required 
+      placeholder="Identificador de Pedido"
+      name="orderId"
+      #orderId = "ngModel">
+    </label>
     <label>
       <span class="fname">Cliente <span class="required">*</span></span>
-      <input type="text" name="fname">
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderClientName" 
+      [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
+      required 
+      placeholder="Nombre del Cliente"
+      name="orderClientName"
+      #orderClientName = "ngModel">
     </label>
     <label>
       <span class="lname">Recibe<span class="required">*</span></span>
-      <input type="text" name="lname">
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderRecieverName" 
+      [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
+      required 
+      placeholder="Nombre del que Recibe"
+      name="orderRecieverName"
+      #orderRecieverName = "ngModel">
     </label>
    
     <label>
       <span>Provincia <span class="required">*</span></span>
-      <select name="selection">
-        <option value="select">Seleccione la provincia...</option>
-        <option value="AFG">Afghanistan</option>
-        
-      </select>
+      <select  [(ngModel)]="order.orderProvince"  
+      class="form-select" 
+      name="orderProvince"
+      [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
+      #orderProvince="ngModel"
+      required
+      >
+
+<option *ngFor="let p of provinces">
+  {{p.name}}
+</option>
+</select>
+                        
+                       
+                    
     </label>
     <label>
       <span>Municipio <span class="required">*</span></span>
-      <input type="text" name="city"> 
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderMunicipio" 
+      [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
+      required 
+      placeholder="Municipio"
+      name="orderMunicipio"
+      #orderMunicipio = "ngModel">
     </label>
     <label>
       <span>Dirección <span class="required">*</span></span>
-      <input type="text" name="houseadd" placeholder="Número de la casa, calle y entre calles" required>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderAddress" 
+      [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
+      required 
+      placeholder="Número de la casa, calle y entre calles"
+      name="orderAddress"
+      #orderAddress = "ngModel">
+      
     </label>
     
     
     
     <label>
       <span>Teléfono <span class="required">*</span></span>
-      <input type="tel" name="city"> 
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderPhone" 
+      [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
+      required 
+      placeholder="Número de teléfono"
+      name="orderPhone"
+      #orderPhone = "ngModel">
     </label>
    
-  </form>
+
   <div class="Yorder">
     <table>
       <tr>
@@ -56,21 +113,23 @@
         <th></th>
       </tr>
       <tr *ngFor="let product of products">
-        <td><img class="border"   src="{{product.productPhoto}}" alt=""></td>
-        <td>{{product.productName}}</td>
-        <td>${{product.productPrice}}</td>
+        <td><img class="border"   src="{{product.picture._url}}" alt=""></td>
+        <td>{{product.name}}</td>
+        <td>${{product.price}}</td>
         <td><a href=""><i class="fa fa-trash"></i></a></td>
       </tr>
      
       <tr>
         <td></td>
         <td>Subtotal</td>
-        <td>$120.00</td>
+        <td>${{total}}</td>
       </tr>
      
     </table><br>
     
-    <button type="button">Completar Pedido</button>
-  </div><!-- Yorder -->
+    <button type="submit" >Completar Pedido</button>
+  
+  </div>
+</form>
  </div>
 </div>

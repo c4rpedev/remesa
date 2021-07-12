@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/core/models/user';;
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service'
+import { AuthServices } from '../../../core/services/auth.service'
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { UtilService } from 'src/app/core/services/util.service';
@@ -34,7 +34,7 @@ export class EditProfileComponent implements OnInit {
     photosrc: String;
   file: File;
 
-  constructor( private authService: AuthService, 
+  constructor( private authService: AuthServices, 
                private router: Router, 
                private afAuth: AngularFireAuth, 
                private utilService: UtilService,
@@ -107,7 +107,7 @@ export class EditProfileComponent implements OnInit {
     }
  
 
-    signup() {
+    /*signup() {
         if (this.signupForm.invalid)                            // if there's an error in the form, don't submit it
             return;
         this.isProgressVisible = true;
@@ -120,6 +120,6 @@ export class EditProfileComponent implements OnInit {
         }).catch(() => {
             this.isProgressVisible = false;
         });
-    }
+    }*/
 
 }

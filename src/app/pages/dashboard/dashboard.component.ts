@@ -1,10 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IUser } from 'src/app/core/interfaces/iuser.interface';
-import { UserCountService } from 'src/app/core/services/user-count.service';
-import { UserService } from 'src/app/core/services/user.service';
-
-
-import { Observable } from 'rxjs';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -14,23 +8,17 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 
 export class DashboardComponent implements OnInit {
-  notFound = false;
-  user!: IUser;
-  count: number;
-  user_count: number;
-  card_empty = false;
+  user: string;
 
 
-  constructor(private service: UserService, 
-              private count_service: UserCountService, 
-               
-              
-              public auth: AuthService) { 
-    this.count = 0;
-    this.user_count = 0;  
+  constructor( public auth: AuthService) { 
+    
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(user =>{
+      this.user = user.nickname;
+    })
     
     console.log("Auth user"+this.auth.user$);
     

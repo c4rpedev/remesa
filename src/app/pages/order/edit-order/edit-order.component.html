@@ -1,81 +1,215 @@
 <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-          <div class="title-box text-center pt-5">
-              <h3 class="title-a">
-                  Editar pedido
-              </h3>
-              <p class="subtitle-a">
-                  Modifique los datos ingresados
-              </p>
-              <div class="line-mf"></div>
-          </div>
-      </div>
-  </div>
-  <div class="d-flex card">
-    <form action="" method="">
-      <label>
-        <span class="fname">Cliente <span class="required">*</span></span>
-        <input type="text" name="fname">
-      </label>
-      <label>
-        <span class="lname">Recibe<span class="required">*</span></span>
-        <input type="text" name="lname">
-      </label>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="title-box text-center pt-5">
+            <h3 class="title-a">
+                Editar Pedido
+            </h3>
+            <p class="subtitle-a">
+                Actualice todos los datos del pedido
+            </p>
+            <div class="line-mf"></div>
+        </div>
+    </div>
+</div>
+<div class="d-flex card">
+  <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
+    <label>
+      <span class="fname">ID <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderId" 
+      [class.is-invalid]="orderId.invalid && orderId.touched"
+      required 
+      placeholder="Identificador de Pedido"
+      name="orderId"
+      #orderId = "ngModel">
+    </label>
+    <label>
+      <span class="fname">Agencia <span class="required">*</span></span>
+      <input type="text" 
+      disabled
+      class="form-control" 
+      [(ngModel)]="order.orderAgency" 
+      [class.is-invalid]="orderAgency.invalid && orderAgency.touched"
+      required 
+      placeholder="Agencia"
+      name="orderAgency"
+      #orderAgency = "ngModel">
+    </label>
+    <label>
+      <span class="fname">Cliente <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderClientName" 
+      [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
+      required 
+      placeholder="Nombre del Cliente"
+      name="orderClientName"
+      #orderClientName = "ngModel">
+    </label>
+    <label>
+      <span class="lname">Recibe<span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderRecieverName" 
+      [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
+      required 
+      placeholder="Nombre del que Recibe"
+      name="orderRecieverName"
+      #orderRecieverName = "ngModel">
+    </label>
+   
+    <label>
+      <span>Provincia <span class="required">*</span></span>
+      <input  [(ngModel)]="order.orderProvince"  
+                              disabled
+                              name="selectProvince"
+                              [class.is-invalid]="selectProvince.invalid && selectProvince.touched"
+                              #selectProvince="ngModel"
+                              required
+                              >
+                        
+                       
+                    
+    </label>
+    <label>
+      <span>Municipio <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderMunicipio" 
+      [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
+      required 
+      placeholder="Municipio"
+      name="orderMunicipio"
+      #orderMunicipio = "ngModel">
+    </label>
+    <label>
+      <span>Dirección <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderAddress" 
+      [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
+      required 
+      placeholder="Número de la casa, calle y entre calles"
+      name="orderAddress"
+      #orderAddress = "ngModel">
+      
+    </label>
+    
+    
+    
+    <label>
+      <span>Teléfono <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderPhone" 
+      [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
+      required 
+      placeholder="Número de teléfono"
+      name="orderPhone"
+      #orderPhone = "ngModel">
+    </label>
+    <label>
+      <span>Sucursal <span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderSucursal" 
+      [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
+      
+      placeholder="Sucursal"
+      name="orderSucursal"
+      #orderSucursal = "ngModel">
+    </label>
+    <label>
+      <span>Estado <span class="required">*</span></span>
+      <select 
+      [(ngModel)]="order.state" 
+      [class.is-invalid]="state.invalid && state.touched"
+      required 
+      placeholder="Número de teléfono"
+      name="state"
+      #state = "ngModel"
+      >
+<option value="Nuevo">
+   Nuevo
+</option>
+<option value="Revisado">
+  Revisado
+</option>
+<option value="En Proceso">
+  En Proceso
+</option>
+<option value="Finalizado">
+  Finalizado
+</option>
+
+</select>
      
-      <label>
-        <span>Provincia <span class="required">*</span></span>
-        <select name="selection">
-          <option value="select">Seleccione la provincia...</option>
-          <option value="AFG">Afghanistan</option>
-         
-        </select>
-      </label>
-      <label>
-        <span>Municipio <span class="required">*</span></span>
-        <input type="text" name="city"> 
-      </label>
-      <label>
-        <span>Dirección <span class="required">*</span></span>
-        <input type="text" name="houseadd" placeholder="Número de la casa, calle y entre calles" required>
-      </label>
-      
-      
-      
-      <label>
-        <span>Teléfono <span class="required">*</span></span>
-        <input type="tel" name="city"> 
-      </label>
-     
-    </form>
-    <div class="Yorder">
-      <table>
-        <tr>
-          <th colspan="2">Productos</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr>
-          <td><img class="border"   src="assets/images/products/product_1.jpg" alt=""></td>
-          <td>Combo Cárnico</td>
-          <td>$55.00</td>
-          <td><a href=""><i class="fa fa-trash"></i></a></td>
-        </tr>
-        <tr>
-          <td><img class="border" src="assets/images/products/product_2.jpg" alt=""></td>
-          <td>Combo Ahumados</td>
-          <td>$65.00</td>
-          <td><a href=""><i class="fa fa-trash"></i></a></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>Subtotal</td>
-          <td>$120.00</td>
-        </tr>
+    </label>
+   
+
+ <div class="row">
+   
+ 
+  <div class="col-lg-6">
+    
+    <div class="card mb-3 shadow">
+      <h3 class="text-center mt-2">
+        <b>
+          Subir Albaran
+        </b>
+        </h3>
+      <div class="card-body text-center "><img class="mb-3" src='{{img}}'  width="160" height="160" />
+        <input type="file" 
+        name="photo"          
+        accept="image/*"
+        class="form-control mb-4"  
+         [(ngModel)]="photosrc" 
+        (change)="photo($event)" >
+        
        
-      </table><br>
-      
-      <button type="button">Editar Pedido</button>
-    </div><!-- Yorder -->
-   </div>
+    </div>
+    </div>
+
   </div>
+
+  <div class="col-lg-6">
+    <table>
+      <tr>
+        <th colspan="2">Productos</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let product of products">
+        <td><img class="border"   src="{{product.picture._url}}" alt=""></td>
+        <td>{{product.name}}</td>
+        <td>${{product.price}}</td>
+        
+      </tr>
+     
+      <tr>
+        <td></td>
+        <td>Subtotal</td>
+        <td>${{total}}</td>
+      </tr>
+     
+    </table>
+   </div>
+ </div>
+    
+    <div class="row col-lg-12">
+      <div class="col-lg-6">
+        <button type="submit" >Actualizar Pedido</button>
+      </div>
+      <div class="col-lg-6">
+        <button type="submit" class="print__factura" (click)="print()">Imprimir Factura</button>
+      </div>
+  
+    </div>
+    
+  
+  
+</form>
+ </div>
+</div>

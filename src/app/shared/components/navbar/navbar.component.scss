@@ -155,3 +155,7 @@
       font-size: 39px;       
     }    
   }
+
+  @media print{
+    .doNotPrint{display:none !important;}
+  }
