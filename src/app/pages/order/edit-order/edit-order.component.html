@@ -15,7 +15,7 @@
 <div class="d-flex card">
   <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
     <label>
-      <span class="fname">ID <span class="required">*</span></span>
+      <span class="fname">ID </span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderId" 
@@ -26,7 +26,7 @@
       #orderId = "ngModel">
     </label>
     <label>
-      <span class="fname">Agencia <span class="required">*</span></span>
+      <span class="fname">Agencia </span>
       <input type="text" 
       disabled
       class="form-control" 
@@ -38,7 +38,7 @@
       #orderAgency = "ngModel">
     </label>
     <label>
-      <span class="fname">Cliente <span class="required">*</span></span>
+      <span class="fname">Cliente </span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderClientName" 
@@ -49,7 +49,7 @@
       #orderClientName = "ngModel">
     </label>
     <label>
-      <span class="lname">Recibe<span class="required">*</span></span>
+      <span class="lname">Recibe</span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderRecieverName" 
@@ -61,7 +61,7 @@
     </label>
    
     <label>
-      <span>Provincia <span class="required">*</span></span>
+      <span>Provincia ></span>
       <input  [(ngModel)]="order.orderProvince"  
                               disabled
                               name="selectProvince"
@@ -74,7 +74,7 @@
                     
     </label>
     <label>
-      <span>Municipio <span class="required">*</span></span>
+      <span>Municipio </span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderMunicipio" 
@@ -85,7 +85,7 @@
       #orderMunicipio = "ngModel">
     </label>
     <label>
-      <span>Dirección <span class="required">*</span></span>
+      <span>Dirección </span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderAddress" 
@@ -97,7 +97,7 @@
       
     </label>
     <label>
-      <span>Referencia<span class="required">*</span></span>
+      <span>Referencia</span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderReference" 
@@ -111,7 +111,18 @@
     
     
     <label>
-      <span>Teléfono <span class="required">*</span></span>
+      <span>Teléfono Móvil </span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderMobile" 
+      [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
+      required 
+      placeholder="Número de teléfono"
+      name="orderMobile"
+      #orderMobile = "ngModel">
+    </label>
+    <label>
+      <span>Teléfono Fijo</span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderPhone" 
@@ -122,7 +133,7 @@
       #orderPhone = "ngModel">
     </label>
     <label>
-      <span>Sucursal <span class="required">*</span></span>
+      <span>Sucursal</span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderSucursal" 
@@ -133,7 +144,7 @@
       #orderSucursal = "ngModel">
     </label>
     <label>
-      <span>Estado <span class="required">*</span></span>
+      <span>Estado </span>
       <select 
       [(ngModel)]="order.state" 
       [class.is-invalid]="state.invalid && state.touched"
@@ -200,9 +211,9 @@
       </tr>
      
       <tr>
-        <td>Coste de Transportación</td>
-        <td>Total</td>
-        <td>${{total}}</td>
+        
+        <td><b>Coste Total + Transportación</b>:</td>
+        <td>${{order.orderPrice}}</td>
       </tr>
      
     </table>

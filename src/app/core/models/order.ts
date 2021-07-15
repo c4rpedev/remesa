@@ -12,6 +12,7 @@ export class Order {
     orderPhone: string;
     orderMobile: string;
     orderSucursal: string;
+    orderPrice: number;
     productArray: Product[];  
     state: string;
   }

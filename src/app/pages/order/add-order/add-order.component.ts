@@ -52,21 +52,37 @@ export class AddOrderComponent implements OnInit {
      this.products = history.state.product;
      this.order.orderProvince = this.products[0].province; 
      
-     this.changeProvince();  
+     this.initProvince();  
      this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
       this.getTransportCost()
      }) 
+  }
+  initProvince(){
+    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+      this.municipios = res[0].attributes['municipios'];  
+      console.log(this.municipios);
+    })
   }
   changeProvince(){
     this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       console.log(this.municipios);
     })
+    this.transporteArrayM.transporte.forEach((element:any) => {
+      if(element.municipio == this.order.orderProvince){
+       this.transportCost = +element.precio;
+       console.log('adsf');
+       console.log(this.transportCost);
+       
+       this.total = this.total + this.transportCost;   
+       
+             
+      }       
+    });
   }
   getTransportCost(){
-    console.log(this.user);
-    
+    console.log(this.user);    
     this.transportService.getTransportForAgency(this.user).then(res=>{
       this.transporteArray = res;  
       console.log(this.transporteArray);
@@ -76,6 +92,8 @@ export class AddOrderComponent implements OnInit {
          if(element.municipio == this.order.orderProvince){
           this.transportCost = +element.precio;
           console.log(this.transportCost);          
+         }else{
+           this.transportCost = 0;
          }       
        });
        this.products.forEach(element => { 
@@ -90,7 +108,9 @@ export class AddOrderComponent implements OnInit {
   }
   onSubmit(form: NgForm){
     if(form.valid){
-      this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB;      this.orderService.createOrder(this.order, this.products, this.user);
+      this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
+      this.order.orderPrice = this.total;     
+      this.orderService.createOrder(this.order, this.products, this.user);
       Swal.fire({
         position: 'top-end',
         icon: 'success',

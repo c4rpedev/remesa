@@ -30,8 +30,7 @@ export class EditOrderComponent implements OnInit {
     private orderService: OrderService
   ) { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
     this.order = history.state.order;
     this.orderId = history.state.orderId;
      this.products = this.order.productArray;
@@ -43,8 +42,7 @@ export class EditOrderComponent implements OnInit {
      this.products.forEach(element => {
        this.subtotal = +element.price;
        this.total = this.total + this.subtotal
-       console.log(this.total);
-       
+       console.log(this.total);       
        
      });
     
