@@ -17,7 +17,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class ListProductsComponent implements OnInit {
   who:string;
-  products: Array<any> = [];
+  products: Array<any>;
   productsEdit: Array<any> = [];
   productsAttr: Array<any> = [];
   productsCart: Array<any> = [];
@@ -40,11 +40,11 @@ export class ListProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(user =>{
-      this.user = user.nickname;           
+     this.auth.user$.subscribe(user =>{
+       this.user = user.nickname;           
       this.who= history.state.who;       
       this.provinces = this.provinceService.getProvinces();  
-      this.getProductForProvince();  
+      //this.getProductForProvince();  
     })
 
   }
@@ -86,8 +86,11 @@ export class ListProductsComponent implements OnInit {
      
   };
   getProductForProvince() {
+    console.log(this.selectedProvince);    
     this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
       this.products = res; 
+      console.log(this.products);
+      
     })  
   }
   addToCart(product: any){

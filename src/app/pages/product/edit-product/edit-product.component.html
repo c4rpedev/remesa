@@ -35,21 +35,8 @@
               <div class="card-body">
                 <form (ngSubmit)="saveProduct( f )" #f="ngForm">
                   <div class="form-row row">
-                    <div class="col-md-4">
-                      <div class="form-group" >
-                        <label for="productId"><strong>Id</strong></label>
-                       
-                        <input type="text" 
-                               class="form-control" 
-                               [(ngModel)]="product.productId" 
-                               [class.is-invalid]="productId.invalid && productId.touched"
-                               required 
-                               placeholder="Id"
-                               name="productId"
-                               #productId = "ngModel" />
-                      </div>
-                    </div>
-                    <div class="col-md-8">
+                   
+                    <div class="col-md-12">
                       <div class="form-group">
                         <label for="username"><strong>Nombre</strong></label>
                         <input type="text" 

@@ -14,8 +14,8 @@
 </div>
 <div class="d-flex card">
   <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
-    <label>
-      <span class="fname">ID <span class="required">*</span></span>
+   
+      <label class="fname"><strong>ID</strong>  </label>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderId" 
@@ -24,9 +24,9 @@
       placeholder="Identificador de Pedido"
       name="orderId"
       #orderId = "ngModel">
-    </label>
-    <label>
-      <span class="fname">Cliente <span class="required">*</span></span>
+    
+ 
+      <label class="fname"><strong>Cliente</strong> </label>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderClientName" 
@@ -35,9 +35,9 @@
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
-    </label>
-    <label>
-      <span class="lname">Recibe<span class="required">*</span></span>
+    
+    
+      <label class="lname"> <strong>Recibe</strong> </label>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderRecieverName" 
@@ -46,16 +46,17 @@
       placeholder="Nombre del que Recibe"
       name="orderRecieverName"
       #orderRecieverName = "ngModel">
-    </label>
+ 
    
-    <label>
-      <span>Provincia <span class="required">*</span></span>
+    
+      <label> <strong>Provincia</strong>  </label>
       <select  [(ngModel)]="order.orderProvince"  
+      (ngModelChange)="changeProvince()"
       class="form-select" 
       name="orderProvince"
       [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
       #orderProvince="ngModel"
-      required
+      
       >
 
 <option *ngFor="let p of provinces">
@@ -65,46 +66,100 @@
                         
                        
                     
-    </label>
-    <label>
-      <span>Municipio <span class="required">*</span></span>
-      <input type="text" 
-      class="form-control" 
-      [(ngModel)]="order.orderMunicipio" 
+   
+ 
+      <label> <strong>Municipio</strong>  </label>
+      <select type="text" 
+      class="form-select"
+      [(ngModel)]="order.orderMunicipio"       
       [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
       required 
       placeholder="Municipio"
       name="orderMunicipio"
       #orderMunicipio = "ngModel">
-    </label>
-    <label>
-      <span>Dirección <span class="required">*</span></span>
-      <input type="text" 
-      class="form-control" 
-      [(ngModel)]="order.orderAddress" 
-      [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
-      required 
-      placeholder="Número de la casa, calle y entre calles"
-      name="orderAddress"
-      #orderAddress = "ngModel">
       
-    </label>
-    
-    
-    
-    <label>
-      <span>Teléfono <span class="required">*</span></span>
+<option *ngFor="let m of municipios">
+  {{m.municipio}}
+</option>
+</select>
+           
+  
+  
+      <label><strong>Dirección</strong>  </label>
+      <div class="row">
+        <div class="col-md-4">
+          <input type="text" 
+        class="form-control" 
+        [(ngModel)]="streetNumber" 
+        [class.is-invalid]="streetNumberV.invalid && streetNumberV.touched"
+        required 
+        placeholder="Número de la casa"
+        name="streetNumber"
+        #streetNumberV = "ngModel">
+        </div>
+        <div class="col-md-4">
+          <input type="text" 
+        class="form-control" 
+        [(ngModel)]="street" 
+        [class.is-invalid]="streetV.invalid && streetV.touched"
+        required 
+        placeholder="Calle principal"
+        name="street"
+        #streetV = "ngModel">
+        </div>
+        <div class="col-md-4">
+          <input type="text" 
+        class="form-control" 
+        [(ngModel)]="streetB" 
+        [class.is-invalid]="streetBV.invalid && streetBV.touched"
+        required 
+        placeholder="Entre calles"
+        name="streetB"
+        #streetBV = "ngModel">
+        </div>        
+      </div>
+     
+ 
+   
+      <label> <strong>Referencia</strong> </label>
       <input type="text" 
       class="form-control" 
-      [(ngModel)]="order.orderPhone" 
-      [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
+      [(ngModel)]="order.orderReference" 
+      [class.is-invalid]="orderReference.invalid && orderReference.touched"
       required 
-      placeholder="Número de teléfono"
-      name="orderPhone"
-      #orderPhone = "ngModel">
-    </label>
-   
-
+      placeholder="Ingrese un lugar de referencia"
+      name="orderReference"
+      #orderReference = "ngModel">      
+  
+    
+ 
+      <div class="col-md-12">
+        <div class="row">
+          <label> <strong>Teléfonos</strong>  </label>
+        <div class="col-md-6"> <input type="text" 
+          class="form-control" 
+          [(ngModel)]="order.orderMobile" 
+          [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
+          required 
+          placeholder="Teléfono Móvil"
+          [pattern]="mobNumberPattern" 
+          name="orderMobile"
+          #orderMobile = "ngModel">
+          <small *ngIf="orderMobile.invalid && orderMobile.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe comenzar con 5 y tener 8 caracteres)</small>
+        </div>
+        <div class="col-md-6"> <input type="text" 
+          class="form-control" 
+          [(ngModel)]="order.orderPhone" 
+          [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
+          required 
+          placeholder="Teléfono Fijo"
+          [pattern]="fixNumberPattern" 
+          name="orderPhone"
+          #orderPhone = "ngModel">
+          <small *ngIf="orderPhone.invalid && orderPhone.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe tener 8 caracteres)</small>
+          </div>
+        </div>
+      </div>
   <div class="Yorder">
     <table>
       <tr>
@@ -116,20 +171,18 @@
         <td><img class="border"   src="{{product.picture._url}}" alt=""></td>
         <td>{{product.name}}</td>
         <td>${{product.price}}</td>
-        <td><a href=""><i class="fa fa-trash"></i></a></td>
+       
       </tr>
      
       <tr>
-        <td></td>
-        <td>Subtotal</td>
+        <td> <b>Coste de Transportación:</b> ${{transportCost}}</td>
+        <td><b>Total: </b></td>
         <td>${{total}}</td>
       </tr>
      
-    </table><br>
-    
-    <button type="submit" >Completar Pedido</button>
-  
-  </div>
+      </table><br>    
+      <button type="submit" >Completar Pedido</button>  
+    </div>
 </form>
  </div>
 </div>

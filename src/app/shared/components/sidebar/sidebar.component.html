@@ -8,14 +8,14 @@
     <button type="button" class="btn btn-outline-light open__sidebar" (click)="openMenu()"><i class="fa fa-list"></i></button>
   </div>
  
-    
+    <!-- <div class="links__container" [ngStyle]="{'display': isOpened}" *ngIf="auth.user$ | async as user"> -->
     <div class="links" [routerLink]="['/orders']" (click)="openMenu()">
       <div class="icon">
         <i class="fa fa-table"></i>
       </div>
       <span>Pedidos</span>
     </div>
-    <div class="links__container" [ngStyle]="{'display': isOpened}" *ngIf="auth.user$ | async as user">
+    
       <div class="links" [routerLink]="['/list-product']" (click)="openMenu()">
         <div class="icon">
           <i class="fa fa-shopping-cart"></i>
@@ -40,6 +40,18 @@
       </div>
       <span>Quejas</span>
     </div>
+    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()">
+      <div class="icon">
+        <i class="fa fa-globe"></i>
+      </div>
+      <span>Municipios</span>
+    </div>
+    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()">
+      <div class="icon">
+        <i class="fa fa-truck"></i>
+      </div>
+      <span>Transporte</span>
+    </div>
   </div>
 
-</div>
+<!-- </div> -->

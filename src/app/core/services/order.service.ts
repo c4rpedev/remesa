@@ -19,6 +19,7 @@ export class OrderService {
       myNewObject.set('orderMunicipio', order.orderMunicipio);
       myNewObject.set('orderAddress', order.orderAddress);
       myNewObject.set('orderPhone', order.orderPhone);
+      myNewObject.set('orderMobile', order.orderMobile);
       myNewObject.set('productArray', products);
       myNewObject.set('orderAgency', user);
       try {

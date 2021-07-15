@@ -17,6 +17,8 @@ import { CreateComboComponent } from './pages/product/create-combo/create-combo.
 import { PrintViewComponent } from './pages/print-view/print-view.component';
 import { EditComplainComponent } from './pages/complain/edit-complain/edit-complain.component';
 import { ListComplainComponent } from './pages/complain/list-complain/list-complain.component';
+import { EditProvinceComponent } from './pages/province/edit-province/edit-province.component';
+import { EditTransportComponent } from './pages/transport/edit-transport/edit-transport.component';
 
 const routes: Routes = [
  
@@ -39,11 +41,21 @@ const routes: Routes = [
   { path: 'edit-complain', component: EditComplainComponent},
   { path: 'list-complain', component: ListComplainComponent},
 
-  { path: 'reports', component: ReportComponent},  
-  { path: 'edit-profile', component: EditProfileComponent},
-  
+  //-- User Related --//
+  { path: 'edit-profile', component: EditProfileComponent},  
   { path: 'login', component: LoginComponent},
-  { path: 'registro', component: RegistroComponent}
+  { path: 'registro', component: RegistroComponent},
+
+  //-- Reports --//
+  { path: 'reports', component: ReportComponent},  
+
+  //-- Province --//
+  { path: 'edit-province', component: EditProvinceComponent},
+
+   //-- Transport --//
+   { path: 'edit-transport', component: EditTransportComponent}
+
+
 ];
 
 @NgModule({

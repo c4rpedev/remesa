@@ -49,13 +49,13 @@ h2{
 }
 label, table{
   display: block;
-  margin: 15px;
+ 
 }
 label>span{
   float: left;
-  width: 25%;
+  
   margin-top: 12px;
-  padding-right: 10px;
+  
 }
 input[type="text"], input[type="tel"], input[type="email"], select
 {
@@ -133,4 +133,10 @@ button{
 button:hover{
   cursor: pointer;
   background: #428a7d;
+}
+input {
+  width: -moz-available !important;
+}
+select{
+  width: -moz-available !important;
 }

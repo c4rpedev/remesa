@@ -8,7 +8,9 @@ export class Order {
     orderProvince: string;
     orderMunicipio: string;
     orderAddress: string;
+    orderReference: string;
     orderPhone: string;
+    orderMobile: string;
     orderSucursal: string;
     productArray: Product[];  
     state: string;

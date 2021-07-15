@@ -11,6 +11,8 @@ import { AuthService } from '@auth0/auth0-angular';
 
 import { DOCUMENT } from '@angular/common';
 import { AuthServices } from 'src/app/core/services/auth.service';
+import { MunicipioService } from 'src/app/core/services/municipio.service';
+import { TransportService } from 'src/app/core/services/transport.service';
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
@@ -22,42 +24,73 @@ export class AddOrderComponent implements OnInit {
   subtotal: number;
   total:number = 0;
   provinces: any [] = [];
+  municipios: any [] = [];
   user: string;
+  mobNumberPattern = "^5+[0-9]{7}$"; 
+  fixNumberPattern = "^[0-9]{8}$"; 
+  transportCost : number;
+  streetNumber: string;
+  street: string;
+  streetB: string;
+ 
+  transporteArray: any;
+  transporteArrayM: any;
   constructor(
     private router: Router,
     private location:Location,
     private provinceService: GetProvincesService,
     private orderService: OrderService,
-    
+    private municipioService: MunicipioService,
+    private transportService: TransportService,
     public auth: AuthService,    
                 @Inject(DOCUMENT) public document: Document
   ) { }
 
   ngOnInit(): void {
     
-    
     this.provinces = this.provinceService.getProvinces(); 
      this.products = history.state.product;
-     this.order.orderProvince = this.products[0].province;
-     console.log('Products');
+     this.order.orderProvince = this.products[0].province; 
      
-     console.log(this.products[0].province);
-     this.products.forEach(element => {
-       this.subtotal = +element.price;
-       this.total = this.total + this.subtotal
-       console.log(this.total);
-       
-       
-     });
+     this.changeProvince();  
      this.auth.user$.subscribe(user =>{
-       this.user = user.nickname;
-     })
-    
+      this.user = user.nickname;
+      this.getTransportCost()
+     }) 
   }
-
+  changeProvince(){
+    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+      this.municipios = res[0].attributes['municipios'];  
+      console.log(this.municipios);
+    })
+  }
+  getTransportCost(){
+    console.log(this.user);
+    
+    this.transportService.getTransportForAgency(this.user).then(res=>{
+      this.transporteArray = res;  
+      console.log(this.transporteArray);
+      this.transporteArrayM=this.transporteArray[0].attributes;
+      console.log(this.transporteArrayM.transporte);      
+       this.transporteArrayM.transporte.forEach((element:any) => {
+         if(element.municipio == this.order.orderProvince){
+          this.transportCost = +element.precio;
+          console.log(this.transportCost);          
+         }       
+       });
+       this.products.forEach(element => { 
+        console.log('tas');        
+        console.log(this.transportCost);          
+        this.subtotal = +element.price;
+        this.total = this.total + this.subtotal 
+        console.log(this.total);      
+      });
+      this.total = this.total + this.transportCost;
+    })
+  }
   onSubmit(form: NgForm){
     if(form.valid){
-      this.orderService.createOrder(this.order, this.products, this.user);
+      this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB;      this.orderService.createOrder(this.order, this.products, this.user);
       Swal.fire({
         position: 'top-end',
         icon: 'success',

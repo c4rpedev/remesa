@@ -21,13 +21,19 @@ export class ProductService {
                 
               }
 
-  getProductProperties(province: string, agency: string): Promise <any> {    
+  getProductProperties(province: string, agency: string): Promise <any> {   
+    console.log(province);
+     
     if(province){
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
-      query.equalTo('province', province);
-      query.equalTo('productAgency', agency);
-      return query.find() 
+      const query2 = new Parse.Query(Products);
+      const query3 = new Parse.Query(Products);
+      query3.equalTo('province', province);
+      query.equalTo('productAgency', agency );      
+      const composedQuery = Parse.Query.or(query, query2);
+      const composedQueryF = Parse.Query.and(composedQuery, query3);
+      return composedQueryF.find();
     }else{
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
@@ -49,7 +55,7 @@ export class ProductService {
   addProduct(product: Product, img: string, products: any[], user: string){    
     (async () => {
       const myNewObject = new Parse.Object('products');
-      myNewObject.set('productId', product.productId);
+      // myNewObject.set('productId', product.productId);
       myNewObject.set('name', product.productName);
       myNewObject.set('price', product.productPrice);
       myNewObject.set('cost', product.productCost);
@@ -77,7 +83,7 @@ export class ProductService {
       try {
         // here you put the objectId that you want to update
         const myNewObject = await query.get(id);
-        myNewObject.set('productId', product.productId);
+        // myNewObject.set('productId', product.productId);
       myNewObject.set('name', product.productName);
       myNewObject.set('price', product.productPrice);
       myNewObject.set('cost', product.productCost);

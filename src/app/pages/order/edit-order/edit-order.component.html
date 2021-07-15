@@ -96,6 +96,17 @@
       #orderAddress = "ngModel">
       
     </label>
+    <label>
+      <span>Referencia<span class="required">*</span></span>
+      <input type="text" 
+      class="form-control" 
+      [(ngModel)]="order.orderReference" 
+      [class.is-invalid]="orderReference.invalid && orderReference.touched"
+      required 
+      placeholder="Ingrese una referencia"
+      name="orderReference"
+      #orderReference = "ngModel">      
+    </label>
     
     
     
@@ -189,8 +200,8 @@
       </tr>
      
       <tr>
-        <td></td>
-        <td>Subtotal</td>
+        <td>Coste de Transportación</td>
+        <td>Total</td>
         <td>${{total}}</td>
       </tr>
      

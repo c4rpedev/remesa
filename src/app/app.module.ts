@@ -24,6 +24,8 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { PrintViewComponent } from './pages/print-view/print-view.component';
 import { EditComplainComponent } from './pages/complain/edit-complain/edit-complain.component';
 import { ListComplainComponent } from './pages/complain/list-complain/list-complain.component';
+import { EditProvinceComponent } from './pages/province/edit-province/edit-province.component';
+import { EditTransportComponent } from './pages/transport/edit-transport/edit-transport.component';
 
 
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
@@ -46,6 +48,8 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     PrintViewComponent,
     EditComplainComponent,
     ListComplainComponent,
+    EditProvinceComponent,
+    EditTransportComponent,
       
   ],
   imports: [
