@@ -36,6 +36,7 @@ export class EditProvinceComponent implements OnInit  {
       this.municipios = res;  
       console.log(this.municipios);
       this.municipiosR=this.municipios[0].attributes['municipios'];
+      this.quantities().clear();
       this.municipiosR.forEach(element => {
         console.log(element);
         

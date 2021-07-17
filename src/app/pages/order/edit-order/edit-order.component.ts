@@ -15,6 +15,8 @@ import { NgForm } from '@angular/forms';
 export class EditOrderComponent implements OnInit {  
   order: Order = new Order();
   orderId: string;
+  user: string;
+  admin: boolean;
   products: Array<any> = [{}];
   subtotal: number;
   total:number = 0;
@@ -25,16 +27,17 @@ export class EditOrderComponent implements OnInit {
   file: File;
   constructor(
     private router: Router,
-    private location:Location,
-    private provinceService: GetProvincesService,
+    
     private orderService: OrderService
   ) { }
 
   ngOnInit(): void {    
     this.order = history.state.order;
     this.orderId = history.state.orderId;
+    this.user = history.state.user;
+    this.admin = history.state.admin;
      this.products = this.order.productArray;
-     this.order.orderProvince = this.products[0].province;
+     //this.order.orderProvince = this.products[0].province;
      console.log('Products');
      console.log(history.state.orderId);
      
@@ -47,7 +50,7 @@ export class EditOrderComponent implements OnInit {
      });
     
   }
-
+ 
   photo(event: any) {
     this.filePath = event.files;
     

@@ -21,6 +21,7 @@ export class OrderService {
       myNewObject.set('orderPhone', order.orderPhone);
       myNewObject.set('orderMobile', order.orderMobile);
       myNewObject.set('orderPrice', order.orderPrice);
+      myNewObject.set('orderReference', order.orderReference);
       myNewObject.set('productArray', products);
       myNewObject.set('orderAgency', user);
       try {
@@ -90,7 +91,7 @@ export class OrderService {
   }
 
   getOrder(agency: string): Promise <any> {    
-    if(agency && agency != 'buttymanager'){   
+    if(agency && agency != 'buttymanager' && agency != 'buttycomercial' && agency != 'buttyoperaciones' && agency != 'buttyekonomico'){   
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);    
       query.equalTo('orderAgency', agency);

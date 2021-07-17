@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
 import { ComplainService } from 'src/app/core/services/complain.service';
+import { UserService } from 'src/app/core/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +13,12 @@ import Swal from 'sweetalert2';
 export class ListComplainComponent implements OnInit {
   complains: any;
   user: string;
-
+  admin: boolean;
   constructor(
     private router: Router,
     private auth: AuthService,
-    private complainService: ComplainService
+    private complainService: ComplainService,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +29,11 @@ export class ListComplainComponent implements OnInit {
         console.log(this.complains);
         
       }) 
+      this.isAdmin();
     }) 
+  }
+  isAdmin(){    
+    this.admin = this.userService.isAdmin(this.user);
   }
 
   addComplain() {    
@@ -37,8 +43,9 @@ export class ListComplainComponent implements OnInit {
 
   editComplain(complain: any, complainId: String){
     this.router.navigate(['/b']);
-    this.router.navigateByUrl('/edit-complain', { state: {complain: complain, complainId: complainId}});  
+    this.router.navigateByUrl('/edit-complain', { state: {complain: complain, complainId: complainId, user: this.user}});  
   }
+ 
 
   deleteComplain(complain: any){
     Swal.fire({

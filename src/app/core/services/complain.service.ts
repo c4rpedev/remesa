@@ -30,8 +30,8 @@ export class ComplainService {
     })();
   }
 
-  getComplain(agency: string): Promise <any> {    
-    if(agency && agency != 'buttymanager'){   
+  getComplain(agency: string): Promise <any> {  
+    if(agency && agency != 'buttymanager' && agency != 'buttycomercial' && agency != 'buttyoperaciones' && agency != 'buttyekonomico'){   
       const Complains = Parse.Object.extend('complains');
       const query = new Parse.Query(Complains);    
       query.equalTo('complainAgency', agency);

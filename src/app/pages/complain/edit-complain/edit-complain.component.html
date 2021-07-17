@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12" *ngIf="admin">
           <div class="title-box text-center pt-5">
               <h3 class="title-a">
                   Quejas
@@ -25,6 +25,7 @@
                       [(ngModel)]="complain.complainId" 
                       [class.is-invalid]="complainId.invalid && complainId.touched"
                       required 
+                      [disabled]="!admin"
                       placeholder="Id de queja"
                       name="complainId"
                       #complainId = "ngModel">
@@ -36,6 +37,7 @@
                       [(ngModel)]="complain.complainClient" 
                       [class.is-invalid]="complainClient.invalid && complainClient.touched"
                       required 
+                      [disabled]="!admin"
                       placeholder="Nombre del Cliente"
                       name="complainClient"
                       #complainClient = "ngModel">
@@ -49,6 +51,7 @@
                       [(ngModel)]="complain.complainOrder" 
                       [class.is-invalid]="complainOrder.invalid && complainOrder.touched"
                       required 
+                      [disabled]="!admin"
                       placeholder="Id del Pedido"
                       name="complainOrder"
                       #complainOrder = "ngModel">
@@ -57,7 +60,8 @@
               <span>Motivo <span class="required">*</span></span>
               <textarea  [(ngModel)]="complain.complainMotive" 
               [class.is-invalid]="complainMotive.invalid && complainMotive.touched"
-              required               
+              required     
+              [disabled]="!admin"          
               name="complainMotive"
               #complainMotive = "ngModel">
               </textarea>
@@ -68,7 +72,7 @@
       [(ngModel)]="complain.complainState" 
       [class.is-invalid]="complainState.invalid && complainState.touched"
       required 
-      
+      [disabled]="!admin"
       name="complainState"
       #complainState = "ngModel"
       >
@@ -87,7 +91,7 @@
 
 </select>             
               </label>
-            <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Actualizar</button></div>
+            <div class="mb-3" *ngIf="admin"><button class="btn btn-primary btn-sm" type="submit">Actualizar</button></div>
           </form>
          </div>
     </div>

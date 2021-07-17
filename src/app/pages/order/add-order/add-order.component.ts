@@ -67,8 +67,8 @@ export class AddOrderComponent implements OnInit {
   changeProvince(){
     this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
-      console.log(this.municipios);
-    })
+      this.order.orderMunicipio = this.municipios[0]['municipio'];
+          })
     this.transporteArrayM.transporte.forEach((element:any) => {
       if(element.municipio == this.order.orderProvince){
        this.transportCost = +element.precio;
@@ -107,7 +107,11 @@ export class AddOrderComponent implements OnInit {
     })
   }
   onSubmit(form: NgForm){
+    console.log(form);
+    
     if(form.valid){
+      console.log(this.order.orderProvince);
+      
       this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);

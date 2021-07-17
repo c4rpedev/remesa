@@ -71,7 +71,7 @@ input[type="text"], input[type="tel"], input[type="email"], select
   padding: 5px 10px;
   margin-bottom: 10px;
   border: 1px solid #dadada;
-  color: #888;
+  color: rgb(0, 0, 0);
 }
 select{
   width: 72%;
@@ -147,4 +147,9 @@ button:hover{
 .card-body {
   flex: 1 1 auto;
   padding: 0rem 1rem;
+}
+span{
+  font-weight: normal;
+font-size: 16px;
+color: black;
 }

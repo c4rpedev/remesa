@@ -22,23 +22,25 @@ export class ProductService {
               }
 
   getProductProperties(province: string, agency: string): Promise <any> {   
-    console.log(province);
+    console.log(agency);
      
-    if(province){
+    if(province ){
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
+      query.containedIn("productAgency",
+      [agency, null]); 
       query3.equalTo('province', province);
-      query.equalTo('productAgency', agency );      
-      const composedQuery = Parse.Query.or(query, query2);
-      const composedQueryF = Parse.Query.and(composedQuery, query3);
+          
+      //const composedQuery = Parse.Query.or(query, query2);
+      const composedQueryF = Parse.Query.and(query, query3);
       return composedQueryF.find();
     }else{
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
-      query.containedIn("productAgency",
-                  [agency, null]);
+      query.equalTo("productAgency", 'uj'
+                  );
       return query.find();
     }           
   }

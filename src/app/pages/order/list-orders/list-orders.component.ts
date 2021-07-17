@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 import { AuthServices } from 'src/app/core/services/auth.service';
+import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: 'app-list-orders',
   templateUrl: './list-orders.component.html',
@@ -13,9 +14,10 @@ import { AuthServices } from 'src/app/core/services/auth.service';
 export class ListOrdersComponent implements OnInit {
   orders: any;
   user: string;
+  admin: boolean;
 
   constructor(private orderService: OrderService,
-              private au: AuthServices,
+              private userService: UserService,
               private router: Router,
               public auth: AuthService,
                 @Inject(DOCUMENT) public document: Document) {
@@ -27,8 +29,14 @@ export class ListOrdersComponent implements OnInit {
       this.user = user.nickname;   
       this.orderService.getOrder(this.user).then(res=>{
         this.orders = res;  
+        this.isAdmin();
       }) 
     }) 
+  }
+
+  isAdmin(){
+    this.admin = this.userService.isAdmin(this.user);
+
   }
 
   addOrder() {    
@@ -65,7 +73,7 @@ export class ListOrdersComponent implements OnInit {
     //this.productsEdit.push(product);
    // this.productsAttr.push(productsA);
     this.router.navigate(['/b']);
-    this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId}});  
+    this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin}});  
   }
 
 }

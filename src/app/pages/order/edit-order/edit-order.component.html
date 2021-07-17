@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" *ngIf="admin">
         <div class="title-box text-center pt-5">
             <h3 class="title-a">
                 Editar Pedido
@@ -21,6 +21,7 @@
       [(ngModel)]="order.orderId" 
       [class.is-invalid]="orderId.invalid && orderId.touched"
       required 
+      [disabled]="!admin"
       placeholder="Identificador de Pedido"
       name="orderId"
       #orderId = "ngModel">
@@ -33,6 +34,7 @@
       [(ngModel)]="order.orderAgency" 
       [class.is-invalid]="orderAgency.invalid && orderAgency.touched"
       required 
+      
       placeholder="Agencia"
       name="orderAgency"
       #orderAgency = "ngModel">
@@ -44,6 +46,7 @@
       [(ngModel)]="order.orderClientName" 
       [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
       required 
+      [disabled]="!admin"
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
@@ -55,23 +58,24 @@
       [(ngModel)]="order.orderRecieverName" 
       [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
       required 
+      [disabled]="!admin"
       placeholder="Nombre del que Recibe"
       name="orderRecieverName"
       #orderRecieverName = "ngModel">
     </label>
    
     <label>
-      <span>Provincia ></span>
-      <input  [(ngModel)]="order.orderProvince"  
-                              disabled
-                              name="selectProvince"
-                              [class.is-invalid]="selectProvince.invalid && selectProvince.touched"
-                              #selectProvince="ngModel"
-                              required
-                              >
-                        
-                       
-                    
+      <span>Provincia </span>
+      <input  
+      type="text" 
+      [(ngModel)]="order.orderProvince" 
+      class="form-control"  
+      disabled
+      name="selectProvince"
+      [class.is-invalid]="selectProvince.invalid && selectProvince.touched"
+      #selectProvince="ngModel"
+      required
+      >      
     </label>
     <label>
       <span>Municipio </span>
@@ -80,6 +84,7 @@
       [(ngModel)]="order.orderMunicipio" 
       [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
       required 
+      [disabled]="!admin"
       placeholder="Municipio"
       name="orderMunicipio"
       #orderMunicipio = "ngModel">
@@ -91,6 +96,7 @@
       [(ngModel)]="order.orderAddress" 
       [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
       required 
+      [disabled]="!admin"
       placeholder="Número de la casa, calle y entre calles"
       name="orderAddress"
       #orderAddress = "ngModel">
@@ -103,6 +109,7 @@
       [(ngModel)]="order.orderReference" 
       [class.is-invalid]="orderReference.invalid && orderReference.touched"
       required 
+      [disabled]="!admin"
       placeholder="Ingrese una referencia"
       name="orderReference"
       #orderReference = "ngModel">      
@@ -117,6 +124,7 @@
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
       required 
+      [disabled]="!admin"
       placeholder="Número de teléfono"
       name="orderMobile"
       #orderMobile = "ngModel">
@@ -128,11 +136,12 @@
       [(ngModel)]="order.orderPhone" 
       [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
       required 
+      [disabled]="!admin"
       placeholder="Número de teléfono"
       name="orderPhone"
       #orderPhone = "ngModel">
     </label>
-    <label>
+    <label *ngIf="admin">
       <span>Sucursal</span>
       <input type="text" 
       class="form-control" 
@@ -149,6 +158,7 @@
       [(ngModel)]="order.state" 
       [class.is-invalid]="state.invalid && state.touched"
       required 
+      [disabled]="!admin"
       placeholder="Número de teléfono"
       name="state"
       #state = "ngModel"
@@ -176,7 +186,7 @@
  
   <div class="col-lg-6">
     
-    <div class="card mb-3 shadow">
+    <div class="card mb-3 shadow" *ngIf="admin">
       <h3 class="text-center mt-2">
         <b>
           Subir Albaran
@@ -220,7 +230,7 @@
    </div>
  </div>
     
-    <div class="row col-lg-12">
+    <div class="row col-lg-12" *ngIf="admin">
       <div class="col-lg-6">
         <button type="submit" >Actualizar Pedido</button>
       </div>

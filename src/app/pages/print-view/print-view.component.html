@@ -17,15 +17,23 @@
 
     <div class="print__middle mt-5">
         <b>Dirección de Envio: </b>
-        {{orders.orderProvince}} <br>
-        {{orders.orderMunicipio}} <br>
-        {{orders.orderAddress}} <br>
-        <b> {{orders.orderPhone}}</b>
+        <div>
+        {{orders.orderProvince}}, 
+        {{orders.orderMunicipio}},
+        #{{orders.orderAddress}} 
+        </div>
+        
+       <div>
+       <b>Teléfono Móvil :</b> {{orders.orderPhone}} 
+       </div> 
+       <div>
+        <b>Teléfono Fijo :</b> {{orders.orderMobile}}
+       </div>
     </div>
 
     <div class="print__p mt-5">
         <p>
-            Yo {{orders.orderRecieverName}} he recibido de manos del mensajero todos los productos que lista la Factura, estando de acuerdo con su calidad y cantidad ( pesaje), y ante la duda el mensajero me facilita una pesa digital para su comprobación sin apuro y siendo explicativo y amable, pareciéndome adecuado el actuar, porte, aspecto y presentación del mensajero y los productos entregados. Por ello entiendo que una vez firmada esta, pierdo todo derecho a reclamar tanto yo como el emisor de la misma. Ante apuros, mal actuar del mensajero o dudas, contacte con nuestro teléfono de atención a Clientes: <b>59769857</b>. Gracias.  
+            Yo <b>{{orders.orderRecieverName}}</b> he recibido de manos del mensajero todos los productos que lista la Factura, estando de acuerdo con su calidad y cantidad ( pesaje), y ante la duda el mensajero me facilita una pesa digital para su comprobación sin apuro y siendo explicativo y amable, pareciéndome adecuado el actuar, porte, aspecto y presentación del mensajero y los productos entregados. Por ello entiendo que una vez firmada esta, pierdo todo derecho a reclamar tanto yo como el emisor de la misma. Ante apuros, mal actuar del mensajero o dudas, contacte con nuestro teléfono de atención a Clientes: <b>59769857</b>. Gracias.  
         </p>
     </div>
     <div class="product__name">

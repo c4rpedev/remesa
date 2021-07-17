@@ -8,7 +8,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  
+  user: string;
   isOpened: String;
   public screenWidth: any;
   public screenHeight: any;
@@ -19,6 +19,11 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.auth.user$.subscribe(user =>{
+      this.user = user.nickname;
+      
+     }) 
+
       this.screenWidth = window.innerWidth;
       this.screenHeight = window.innerHeight;
    }

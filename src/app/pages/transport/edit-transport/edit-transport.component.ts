@@ -55,7 +55,8 @@ export class EditTransportComponent implements OnInit {
       this.transporteArray = res;  
       console.log(this.transporteArray);
       this.transporteArrayM=this.transporteArray[0].attributes;
-      console.log(this.transporteArrayM.transporte);      
+      console.log(this.transporteArrayM.transporte);  
+      this.quantities().clear();
        this.transporteArrayM.transporte.forEach((element:any) => {
         console.log(element);        
         this.quantities().push(this.fb.group(element));  

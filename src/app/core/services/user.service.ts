@@ -17,4 +17,15 @@ export class UserService {
     return this.user;
   }
 
+  isAdmin(user: string): boolean{
+    console.log('isAdmin');
+    console.log(user);
+    
+    if(user == 'buttymanager' || user == 'buttycomercial'  || user == 'buttyoperaciones' || user == 'buttyekonomico'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
 }

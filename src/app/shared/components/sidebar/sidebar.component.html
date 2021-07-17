@@ -22,7 +22,7 @@
         </div>
         <span>Productos</span>
       </div>
-      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()">
+      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
         <div class="icon">
           <i class="fa fa-plus-square"></i>
         </div>
@@ -40,13 +40,13 @@
       </div>
       <span>Quejas</span>
     </div>
-    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()">
+    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
       <div class="icon">
         <i class="fa fa-globe"></i>
       </div>
       <span>Municipios</span>
     </div>
-    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()">
+    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
       <div class="icon">
         <i class="fa fa-truck"></i>
       </div>
