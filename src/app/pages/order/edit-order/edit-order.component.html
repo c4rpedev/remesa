@@ -118,7 +118,7 @@
     
     
     <label>
-      <span>Teléfono Móvil </span>
+      <span>Teléfono Móvil</span>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderMobile" 
@@ -175,30 +175,48 @@
 <option value="Finalizado">
   Finalizado
 </option>
-
+<option value="Cancelado">
+  Cancelado
+</option>
 </select>
-     
     </label>
-   
-
  <div class="row">
    
+     <label *ngIf="order.state == 'Cancelado'">
+        <span>Motivos de cancelación</span>
+        <textarea [(ngModel)]="order.orderCancelMotive" 
+                  name="orderCancelMotive" 
+                  [disabled]="!admin"
+                  placeholder="Describa el motivo de la cancelación ..."
+                  class="form-control"></textarea>
+     </label>
+  
  
-  <div class="col-lg-6">
-    
-    <div class="card mb-3 shadow" *ngIf="admin">
-      <h3 class="text-center mt-2">
+  <div class="col-lg-6">    
+    <div class="card mb-3 shadow" *ngIf="admin || order.state == 'Finalizado' || sucursal">
+      <h3 class="text-center mt-2" *ngIf="admin || sucursal">
         <b>
           Subir Albaran
         </b>
         </h3>
-      <div class="card-body text-center "><img class="mb-3" src='{{img}}'  width="160" height="160" />
-        <input type="file" 
-        name="photo"          
-        accept="image/*"
-        class="form-control mb-4"  
-         [(ngModel)]="photosrc" 
-        (change)="photo($event)" >
+        <h3 class="text-center mt-2" *ngIf="!admin || !sucursal">
+          <b>
+            Albaran
+          </b>
+          </h3>
+      <div class="card-body text-center ">
+        <a [href]='img' target="_blank">
+          <img class="mb-3" src='{{img}}'  width="160" height="160" />
+        </a>
+        <div  *ngIf="admin || sucursal">
+          <input type="file" 
+          name="photo"          
+          accept="image/*"
+          class="form-control mb-4"  
+           [(ngModel)]="photosrc" 
+          (change)="photo($event)" >
+        </div>
+       
         
        
     </div>
@@ -230,7 +248,7 @@
    </div>
  </div>
     
-    <div class="row col-lg-12" *ngIf="admin">
+    <div class="row col-lg-12" *ngIf="admin || sucursal">
       <div class="col-lg-6">
         <button type="submit" >Actualizar Pedido</button>
       </div>

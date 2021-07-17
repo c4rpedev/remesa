@@ -7,6 +7,7 @@ import { from } from 'rxjs';
 import { Product } from 'src/app/core/models/product';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { ProductService } from 'src/app/core/services/product.service';
+import { TransportService } from 'src/app/core/services/transport.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -24,7 +25,7 @@ export class AddProductComponent implements OnInit {
   selectedProvince: null;
   file: File;
   user: string;
-
+  transporte: any [] = [];
   editField: string;
   comboProducts: Product = new Product();
   productList: Array<any> = [
@@ -43,18 +44,13 @@ export class AddProductComponent implements OnInit {
   dataSource: any[] = [];
 
   data(event:ClipboardEvent) {
-    
-    
     let clipboardData = event.clipboardData;
     let pastedText = clipboardData.getData('text');
     let row_data = pastedText.split('\n');
-    
-    
     this.displayedColumns = [ "Nombre", "UM", "Cantidad" ];
     //delete row_data[0];
     // Create table dataSource
     let data:any=[];
-
     row_data.forEach(row_data=>{
         let row:any={};
       this.displayedColumns.forEach((a, index)=>{row[a]= row_data.split('\t')[index]});
@@ -62,24 +58,25 @@ export class AddProductComponent implements OnInit {
     })
     this.dataSource = data;
     console.log(this.dataSource);
-    
     }
   
   constructor(private service: ProductService,
               private provinceService: GetProvincesService,
               private router: Router,
+              private transportService: TransportService,
               public auth: AuthService,    
                 @Inject(DOCUMENT) public document: Document) { 
                 this.selectedProvince = null;
-                
               }
 
   ngOnInit(): void {
-    
     this.provinces = this.provinceService.getProvinces();  
     this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
     })
+    this.transportService.getTransport().then(res =>{
+      this.transporte = res;           
+    });
   }
 
   

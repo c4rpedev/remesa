@@ -47,6 +47,7 @@ export class OrderService {
         myNewObject.set('orderAddress', order.orderAddress);
         myNewObject.set('orderPhone', order.orderPhone);
         myNewObject.set('orderSucursal', order.orderSucursal);
+        myNewObject.set('orderCancelMotive', order.orderCancelMotive);
         myNewObject.set('orderAlbaran', new Parse.File("albaran.jpg", { uri: img })); 
         myNewObject.set('state', order.state);
         try {
@@ -95,6 +96,20 @@ export class OrderService {
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);    
       query.equalTo('orderAgency', agency);
+      return query.find() 
+    }else{
+      const Orders = Parse.Object.extend('order');
+      const query = new Parse.Query(Orders);
+      return query.find()
+    }   
+
+    
+  }
+  getOrderSucursal(sucursal: string): Promise <any> {    
+    if(sucursal && sucursal != 'buttymanager' && sucursal != 'buttycomercial' && sucursal != 'buttyoperaciones' && sucursal != 'buttyekonomico'){   
+      const Orders = Parse.Object.extend('order');
+      const query = new Parse.Query(Orders);    
+      query.equalTo('orderSucursal', sucursal);
       return query.find() 
     }else{
       const Orders = Parse.Object.extend('order');

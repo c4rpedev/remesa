@@ -15,6 +15,7 @@ export class ListOrdersComponent implements OnInit {
   orders: any;
   user: string;
   admin: boolean;
+  sucursal: boolean;
 
   constructor(private orderService: OrderService,
               private userService: UserService,
@@ -27,17 +28,27 @@ export class ListOrdersComponent implements OnInit {
   ngOnInit(): void {        
     this.auth.user$.subscribe(user =>{
       this.user = user.nickname;   
-      this.orderService.getOrder(this.user).then(res=>{
-        this.orders = res;  
-        this.isAdmin();
-      }) 
+      if(this.userService.isSucursal(this.user)){
+        this.orderService.getOrderSucursal(this.user).then(res=>{
+          this.orders = res;  
+           this.sucursal = this.userService.isSucursal(this.user);       
+        }) 
+      }else{
+        this.orderService.getOrder(this.user).then(res=>{
+          this.orders = res;  
+          this.isAdmin();          
+        }) 
+      }
+      
     }) 
+    
+    
   }
 
   isAdmin(){
     this.admin = this.userService.isAdmin(this.user);
-
   }
+
 
   addOrder() {    
     this.router.navigate(['/b']);
@@ -73,7 +84,7 @@ export class ListOrdersComponent implements OnInit {
     //this.productsEdit.push(product);
    // this.productsAttr.push(productsA);
     this.router.navigate(['/b']);
-    this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin}});  
+    this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin, sucursal: this.sucursal}});  
   }
 
 }

@@ -98,13 +98,10 @@ export class EditProductComponent implements OnInit {
     this.product.productDescription = this.products[0].description;
     this.img = this.products[0].picture._url;
     console.log('Product');
-    
     console.log(this.products);
     console.log('Product ID');
     console.log(this.productsA);
     this.data(this.event);
-    
-    
     this.provinces = this.provinceService.getProvinces();  
    
   }
@@ -117,20 +114,12 @@ export class EditProductComponent implements OnInit {
     console.log("Path");
     console.log(this.filePath);
     this.file = event[0];
-
       const reader = new FileReader();
-      
-
       reader.readAsDataURL(event.target.files[0]);
-
       reader.onload = event => {
-        
         this.img = reader.result;
-        
-        
       };
-    
-}
+    }
 
   saveProduct(form: NgForm){
     if(form.valid){

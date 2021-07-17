@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   constructor(  
                
                private router: Router, 
-               
+              // private smsService: sms
                public auth: AuthService) { 
     this.isProgressVisible = false;
 

@@ -17,6 +17,7 @@ export class EditOrderComponent implements OnInit {
   orderId: string;
   user: string;
   admin: boolean;
+  sucursal: boolean;
   products: Array<any> = [{}];
   subtotal: number;
   total:number = 0;
@@ -33,10 +34,12 @@ export class EditOrderComponent implements OnInit {
 
   ngOnInit(): void {    
     this.order = history.state.order;
+    this.img=  history.state.order.orderAlbaran._url;    
     this.orderId = history.state.orderId;
     this.user = history.state.user;
     this.admin = history.state.admin;
-     this.products = this.order.productArray;
+    this.sucursal = history.state.sucursal;
+    this.products = this.order.productArray;
      //this.order.orderProvince = this.products[0].province;
      console.log('Products');
      console.log(history.state.orderId);
@@ -52,22 +55,15 @@ export class EditOrderComponent implements OnInit {
   }
  
   photo(event: any) {
-    this.filePath = event.files;
-    
+    this.filePath = event.files;    
     console.log("Path");
     console.log(this.filePath);
     this.file = event[0];
-
-      const reader = new FileReader();
-      
-
+      const reader = new FileReader();   
       reader.readAsDataURL(event.target.files[0]);
-
       reader.onload = event => {
-        this.img = reader.result;
-        
-      };
-    
+        this.img = reader.result;  
+      };    
 }
   onSubmit(form: NgForm){
     if(form.valid){

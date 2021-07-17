@@ -32,15 +32,20 @@
             {{ user.name }}
           </div>
         </div>
+        <div class="sign__out">
+          <a  (click)="auth.logout({ returnTo: document.location.origin })">
+            <i class="fa fa-sign-out fa-2x" alt="Salir"></i>
+          </a>
+        </div>
       </div>
-      <div class="dropdown-content dropdown__content animated fadeIn">
-        <!-- <a (click)="openSettings()">
+      <!-- <div class="dropdown-content dropdown__content animated fadeIn">
+         <a (click)="openSettings()">
           <span><i class="fa fa-user fa-2x"></i>Añadir usuario</span>
-        </a> -->
+        </a>
         <a (click)="auth.logout({ returnTo: document.location.origin })">
           <span><i class="fa fa-sign-out fa-2x"></i>Salir</span>
         </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>

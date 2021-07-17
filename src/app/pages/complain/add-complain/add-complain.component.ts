@@ -13,7 +13,10 @@ import { Router } from '@angular/router';
 export class AddComplainComponent implements OnInit {
   complain: Complain = new Complain();
   user: string;
-
+  fileSrc: String;
+  filePath:String;
+  file: string | ArrayBuffer;
+  urls = new Array<string>();
 
   constructor(
     private userService: UserService,
@@ -26,11 +29,25 @@ export class AddComplainComponent implements OnInit {
     
   }
 
+  detectFiles(event: any) {
+    this.urls = [];
+    let files = event.target.files;
+    if (files) {
+      for (let file of files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.urls.push(e.target.result);
+        }
+        reader.readAsDataURL(file);        
+      }
+    } 
+  }
+
   onSubmit(form: NgForm){
     console.log(this.user);
     
     if(form.valid){
-      this.complainService.createComplain(this.complain, this.user)
+      this.complainService.createComplain(this.complain, this.user, this.urls)
       Swal.fire({
         position: 'top-end',
         icon: 'success',

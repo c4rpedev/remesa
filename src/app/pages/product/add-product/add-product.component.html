@@ -134,6 +134,23 @@
                       </select></div>
                   </div>
                   <div class="col">
+                    <div class="form-group"><label for="last_name"><strong>Agencia</strong><br /></label>
+                      <select  [(ngModel)]="product.productAgency"  
+                              class="form-select" 
+                              name="productAgency"
+                              [class.is-invalid]="productAgency.invalid && productAgency.touched"
+                              #productAgency="ngModel"
+                             
+                              >
+                              <option >
+                                Todas
+                              </option>
+                              <option *ngFor="let t of transporte">
+                                {{t.attributes.agencia}}
+                              </option>
+                      </select></div>
+                  </div>
+                  <div class="col">
                     <div class="form-group"><label for="last_name"><strong>Catergoría</strong><br /></label>
                       <select [(ngModel)]="product.productCategory"  
                               class="form-select" 

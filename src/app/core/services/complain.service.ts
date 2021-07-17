@@ -8,17 +8,25 @@ import { Complain } from '../models/complain';
   providedIn: 'root'
 })
 export class ComplainService {
-
+  num: number=0;
   constructor() { }
 
-  createComplain(complain: Complain, user: string){
+  createComplain(complain: Complain, user: string, files: string []){
+    
+    
     (async () => {
       const myNewObject = new Parse.Object('complains');
       myNewObject.set('complainAgency', user);
       myNewObject.set('complainClient', complain.complainClient);
       myNewObject.set('complainOrder', complain.complainOrder);
       myNewObject.set('complainMotive', complain.complainMotive);
-      myNewObject.set('complainId', complain.complainId);
+      myNewObject.set('complainId', complain.complainId);    
+      for (let file of files) {    
+        console.log(this.num+'sdgfd'+file);                 
+        myNewObject.set('complainPicture'+this.num, new Parse.File("evidence"+this.num+".jpg", { uri: file.toString() })); 
+        this.num++
+      }  
+      myNewObject.set('complainPicNum', this.num); 
       myNewObject.set('complainState', 'Nuevo');
       try {
         const result = await myNewObject.save();

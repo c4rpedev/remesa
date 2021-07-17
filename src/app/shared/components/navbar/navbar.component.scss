@@ -64,6 +64,11 @@
       text-align: start;
       display: flex;
       align-items: center;
+  }
+  .sign__out{
+    a{
+      color: #43667d;
+    }
   }  
   .user__name{
     color: black;
@@ -128,9 +133,9 @@
       margin: 20px 0px 20px 0px;
     }
     .navbar__right{
-      margin: 0px 26px;
+      margin: 0px 20px;
       padding-top: 10px;
-      margin: 5px 52px 0px 0px;
+     
     }
     .navbar__title {    
       font-size: 39px;       
@@ -147,9 +152,9 @@
       margin: 10px 20px 10px 20px;     
     }
     .navbar__right{
-      margin: 0px 26px;
+      margin: 0px 20px;
       padding-top: 0px;
-      margin: 0px 52px 0px 0px;
+      
     }
     .navbar__title {    
       font-size: 39px;       

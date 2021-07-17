@@ -65,7 +65,7 @@ export class ProductService {
       myNewObject.set('amount', product.productAmount);
       myNewObject.set('province', product.productProvince);
       myNewObject.set('category', product.productCategory);   
-      myNewObject.set('productAgency', user);    
+      myNewObject.set('productAgency', product.productAgency);    
       myNewObject.set('picture', new Parse.File("product.jpg", { uri: img }));   
       myNewObject.set('description', product.productDescription);  
       myNewObject.set('products', products); 

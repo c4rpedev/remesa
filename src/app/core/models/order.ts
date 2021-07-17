@@ -13,6 +13,8 @@ export class Order {
     orderMobile: string;
     orderSucursal: string;
     orderPrice: number;
+    orderAlbaran: File;
+    orderCancelMotive: string;
     productArray: Product[];  
     state: string;
   }

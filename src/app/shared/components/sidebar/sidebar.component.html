@@ -8,7 +8,7 @@
     <button type="button" class="btn btn-outline-light open__sidebar" (click)="openMenu()"><i class="fa fa-list"></i></button>
   </div>
  
-    <!-- <div class="links__container" [ngStyle]="{'display': isOpened}" *ngIf="auth.user$ | async as user"> -->
+    <div class="links__container" [ngStyle]="{'display': isOpened}" *ngIf="auth.user$ | async as user"> 
     <div class="links" [routerLink]="['/orders']" (click)="openMenu()">
       <div class="icon">
         <i class="fa fa-table"></i>
@@ -16,13 +16,13 @@
       <span>Pedidos</span>
     </div>
     
-      <div class="links" [routerLink]="['/list-product']" (click)="openMenu()">
+      <div class="links" [routerLink]="['/list-product']" (click)="openMenu()" *ngIf="!sucursal">
         <div class="icon">
           <i class="fa fa-shopping-cart"></i>
         </div>
         <span>Productos</span>
       </div>
-      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
+      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()" *ngIf="admin && !sucursal">
         <div class="icon">
           <i class="fa fa-plus-square"></i>
         </div>
@@ -34,19 +34,19 @@
       </div>
       <span>Reportes</span>
     </div> -->
-    <div class="links" [routerLink]="['/list-complain']" (click)="openMenu()">
+    <div class="links" [routerLink]="['/list-complain']" (click)="openMenu()" *ngIf="!sucursal">
       <div class="icon">
         <i class="fa fa-archive"></i>
       </div>
       <span>Quejas</span>
     </div>
-    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
+    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal">
       <div class="icon">
         <i class="fa fa-globe"></i>
       </div>
       <span>Municipios</span>
     </div>
-    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()" *ngIf="user == 'buttymanager'">
+    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()" *ngIf="admin && !sucursal">
       <div class="icon">
         <i class="fa fa-truck"></i>
       </div>
@@ -54,4 +54,4 @@
     </div>
   </div>
 
-<!-- </div> -->
+ </div> 

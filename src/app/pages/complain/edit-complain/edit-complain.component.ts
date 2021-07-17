@@ -13,9 +13,15 @@ import Swal from 'sweetalert2';
 })
 export class EditComplainComponent implements OnInit {
   complain: Complain = new Complain();
+  complainPic: any;
+  urlPic: {
+    [key: string]: string
+};
   complainId: string;
   user: string;
   admin: boolean;
+  index:number = 0;
+  urls = new Array<string>();
   constructor(
     private complainService: ComplainService,
     private router: Router,
@@ -24,11 +30,12 @@ export class EditComplainComponent implements OnInit {
 
   ngOnInit(): void {
     this.complain = history.state.complain;
+    this.complainPic = history.state.complain;
+    this.index = +this.complainPic.complainPicNum;
     this.complainId = history.state.complainId;
     this.user = history.state.user;  
-    this.admin = this.userService.isAdmin(this.user);
-    
-    
+    this.admin = this.userService.isAdmin(this.user);   
+    this.getComplainPictures();
   }
  
 
@@ -36,6 +43,16 @@ export class EditComplainComponent implements OnInit {
     console.log(this.admin);
     
     return this.admin;
+  }
+  getComplainPictures(){ 
+    console.log(this.index);
+    console.log(this.complainPic.complainPicture0._url);
+    for (let index = 0; index < this.index; index++) {     
+      
+     this.urls.push(this.complainPic['complainPicture'+index]._url) 
+     
+      
+    }
   }
   onSubmit(form: NgForm){
     if(form.valid){

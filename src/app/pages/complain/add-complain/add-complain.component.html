@@ -64,6 +64,21 @@
 
               </textarea>
             </label>
+            <div class="card mb-3 shadow" >
+              <h3 class="text-center mt-2">
+                <b>
+                  Subir Evidencias
+                </b>
+                </h3>
+              <div class="card-body text-center ">
+                <div>
+                  <img *ngFor="let url of urls" [src]="url" class="rounded mb-3" width="180">
+                </div>
+                <input type="file" multiple (change)="detectFiles($event)">
+                
+               
+            </div>
+            </div>
             <div class="mb-3"><button class="btn btn-primary btn-sm" type="submit">Añadir</button></div>
           
             

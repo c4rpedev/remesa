@@ -55,7 +55,8 @@ h2{
   color: red;
 }
 label, table{
-  display: block;
+  display: flex;
+  align-items: first baseline;
   margin: 15px;
 }
 label>span{
@@ -64,7 +65,7 @@ label>span{
   margin-top: 12px;
   padding-right: 10px;
 }
-input[type="text"], input[type="tel"], input[type="email"], select
+input[type="text"], input[type="tel"], input[type="email"], select, textarea
 {
   width: 70%;
   height: 30px;
@@ -73,12 +74,7 @@ input[type="text"], input[type="tel"], input[type="email"], select
   border: 1px solid #dadada;
   color: rgb(0, 0, 0);
 }
-select{
-  width: 72%;
-  height: 45px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-}
+
 .Yorder{
   margin-top: 15px;
   
@@ -152,4 +148,7 @@ span{
   font-weight: normal;
 font-size: 16px;
 color: black;
+}
+textarea{
+  height: 150px;
 }

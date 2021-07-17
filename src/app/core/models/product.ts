@@ -11,5 +11,6 @@ export class Product {
   productImageUrl: string;
   productProvince: string;   
   productSeller: string;
+  productAgency: string;
   products: Product[];
 }
