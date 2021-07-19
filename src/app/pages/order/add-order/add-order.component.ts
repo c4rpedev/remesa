@@ -23,6 +23,7 @@ export class AddOrderComponent implements OnInit {
   products: Array<any> = [{}];
   subtotal: number;
   total:number = 0;
+  totalAmount:number = 0;
   provinces: any [] = [];
   municipios: any [] = [];
   user: string;
@@ -64,43 +65,36 @@ export class AddOrderComponent implements OnInit {
       console.log(this.municipios);
     })
   }
-  changeProvince(){
+  changeProvince(){   
     this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       this.order.orderMunicipio = this.municipios[0]['municipio'];
           })
     this.transporteArrayM.transporte.forEach((element:any) => {
       if(element.municipio == this.order.orderProvince){
-       this.transportCost = +element.precio;
-       console.log('adsf');
-       console.log(this.transportCost);
-       
-       this.total = this.total + this.transportCost;   
-       
-             
+        this.transportCost = 0;
+       this.transportCost = +element.precio;       
+       this.total = this.totalAmount + this.transportCost;   
       }       
     });
   }
   getTransportCost(){
     console.log(this.user);    
     this.transportService.getTransportForAgency(this.user).then(res=>{
-      this.transporteArray = res;  
-      console.log(this.transporteArray);
-      this.transporteArrayM=this.transporteArray[0].attributes;
-      console.log(this.transporteArrayM.transporte);      
+      this.transporteArray = res;       
+      this.transporteArrayM=this.transporteArray[0].attributes;           
        this.transporteArrayM.transporte.forEach((element:any) => {
          if(element.municipio == this.order.orderProvince){
+           this.transportCost = 0;
           this.transportCost = +element.precio;
-          console.log(this.transportCost);          
          }else{
            this.transportCost = 0;
          }       
        });
        this.products.forEach(element => { 
-        console.log('tas');        
-        console.log(this.transportCost);          
         this.subtotal = +element.price;
         this.total = this.total + this.subtotal 
+        this.totalAmount = this.total;
         console.log(this.total);      
       });
       this.total = this.total + this.transportCost;

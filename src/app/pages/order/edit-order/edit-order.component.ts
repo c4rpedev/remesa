@@ -7,6 +7,7 @@ import { GetProvincesService } from 'src/app/core/services/get-provinces.service
 import { OrderService } from 'src/app/core/services/order.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import { SucursalService } from 'src/app/core/services/sucursal.service';
 @Component({
   selector: 'app-edit-order',
   templateUrl: './edit-order.component.html',
@@ -18,6 +19,7 @@ export class EditOrderComponent implements OnInit {
   user: string;
   admin: boolean;
   sucursal: boolean;
+  sucursalName: any [] = [];
   products: Array<any> = [{}];
   subtotal: number;
   total:number = 0;
@@ -28,7 +30,7 @@ export class EditOrderComponent implements OnInit {
   file: File;
   constructor(
     private router: Router,
-    
+    private sucursalService: SucursalService,
     private orderService: OrderService
   ) { }
 
@@ -39,6 +41,7 @@ export class EditOrderComponent implements OnInit {
     this.user = history.state.user;
     this.admin = history.state.admin;
     this.sucursal = history.state.sucursal;
+    
     this.products = this.order.productArray;
      //this.order.orderProvince = this.products[0].province;
      console.log('Products');
@@ -51,7 +54,14 @@ export class EditOrderComponent implements OnInit {
        console.log(this.total);       
        
      });
-    
+     this.sucursalService.getSucursal().then(res =>{
+      this.sucursalName = res;   
+      console.log('tests');
+        
+      console.log(this.sucursalName);
+      
+            
+    });
   }
  
   photo(event: any) {

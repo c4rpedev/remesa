@@ -143,14 +143,18 @@
     </label>
     <label *ngIf="admin">
       <span>Sucursal</span>
-      <input type="text" 
-      class="form-control" 
-      [(ngModel)]="order.orderSucursal" 
-      [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
+      <select  [(ngModel)]="order.orderSucursal"  
       
-      placeholder="Sucursal"
-      name="orderSucursal"
-      #orderSucursal = "ngModel">
+    class="form-select" 
+    name="orderSucursal"
+    [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
+    #orderSucursal="ngModel"                        
+    >
+    
+<option *ngFor="let s of sucursalName">
+{{s.attributes.name}}
+</option>
+</select>  
     </label>
     <label>
       <span>Estado </span>
