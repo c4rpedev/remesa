@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { AuthService } from '@auth0/auth0-angular';
+import { SmsService } from 'src/app/core/services/sms.service';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(  
                
                private router: Router, 
-              // private smsService: sms
+               private smsService: SmsService,
                public auth: AuthService) { 
     this.isProgressVisible = false;
 
@@ -68,6 +69,13 @@ export class LoginComponent implements OnInit {
     //         this.firebaseErrorMessage = result.message;
     //     }
     // });
+    
+}
+sendSms(){
+      this.smsService.sendSMS().subscribe(resp =>{
+        console.log(resp);
+        
+      })
 }
 
 }
