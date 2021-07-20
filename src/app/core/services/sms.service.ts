@@ -26,11 +26,29 @@ export class SmsService {
     
   }
 
+  // sendSMS(){
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Content-Length': this.data_string.length.toString()
+  //   });
+  //   return this.http.post(this.url, this.data_string, {headers});
+  // }
   sendSMS(){
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Content-Length': this.data_string.length.toString()
-    });
-    return this.http.post(this.url, this.data_string, {headers});
+    var url = "https://www.excellentsms.net/index.php/api/sms";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Content-Length", "141");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+          console.log(xhr.status);
+          console.log(xhr.responseText);
+      }};
+    var data = `{"api_key" : "Q4LqOEmZBg96CHlous1987OReA6Pvc35ULNzEx8514",
+    "numero" : "5358247617",
+    "sms" : "Esto es prueba5",
+    "remitente" : "1525445255544"}`;
+
+    xhr.send(data);
   }
 }

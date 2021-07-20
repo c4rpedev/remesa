@@ -72,10 +72,8 @@ export class LoginComponent implements OnInit {
     
 }
 sendSms(){
-      this.smsService.sendSMS().subscribe(resp =>{
-        console.log(resp);
-        
-      })
+      this.smsService.sendSMS();
+  
 }
 
 }
