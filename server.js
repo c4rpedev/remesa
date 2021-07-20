@@ -23,6 +23,7 @@ const corsOptions = {
         return callback(null, true);
     }
 }
+app.use(cors(corsOptions));
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/buttymanager'));
 
