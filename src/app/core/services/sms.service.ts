@@ -1,41 +1,55 @@
 import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import * as Parse from 'parse'
 @Injectable({
   providedIn: 'root'
 })
 export class SmsService {
+
   private url = 'https://www.excellentsms.net/index.php/api/sms';
-  api_key: string = '4GwYjaZygd6zPXINus1987clqdy7VrYoUpmk0f8790';  
+  api_key: string;  
   sms: string= "Esto es prueba8";
   remitente: string= '14040000000';
-
-  
+  data_string: string;
+  headers: any;
     
 
   constructor(private http: HttpClient) { 
     
     
   }
+  getApiKey(): Promise <any> {   
+      const Sms = Parse.Object.extend('sms');
+      const query = new Parse.Query(Sms);  
+      return query.find() 
+  }
+  sendSMS(number: string){
+    this.getApiKey().then(res=>{
+      this.api_key = res[0].attributes.apikey;
+      const data: any = {
+        api_key : this.api_key,
+        numero : 53+number,
+        sms : this.sms,
+        remitente : this.remitente
+      };
+        
+        this.data_string = JSON.stringify(data);
+        console.log(this.data_string);
+        console.log(this.data_string.length.toString());
+        
+        this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Content-Length': this.data_string.length.toString()
+      });
+      this.http.post(this.url, this.data_string, {headers: this.headers}).subscribe(resp =>{
+        console.log(res);
+        
+      });
+    })   
+  }
+  send(){
 
-  sendSMS(number: string): Observable<any>{
-   const data: any = {
-      api_key : this.api_key,
-      numero : 53+number,
-      sms : this.sms,
-      remitente : this.remitente
-    };
-      
-      const data_string: string = JSON.stringify(data);
-      console.log(data_string);
-      console.log(data_string.length.toString());
-      
-      const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Content-Length': data_string.length.toString()
-    });
-    return this.http.post(this.url, data_string, {headers: headers});
   }
   // sendSMS(){
   //   var url = "https://www.excellentsms.net/index.php/api/sms";

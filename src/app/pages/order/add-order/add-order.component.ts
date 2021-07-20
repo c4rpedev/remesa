@@ -102,10 +102,7 @@ export class AddOrderComponent implements OnInit {
     })
   }
   sendSms(number: string){
-    this.smsService.sendSMS(number).subscribe(resp=>{
-        console.log(resp);
-        
-    });
+    this.smsService.sendSMS(number);
   }
   onSubmit(form: NgForm){
     if(form.valid){      
