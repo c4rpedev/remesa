@@ -7,7 +7,7 @@ import * as Parse from 'parse'
 })
 export class SmsService {
 
-  private url = 'https://buttymanager.herokuapp.com/api';
+  private url = 'https://www.excellentsms.net/index.php/api/sms';
   api_key: string;  
   sms: string= "Esto es prueba8";
   remitente: string= '14040000000';
