@@ -7,7 +7,7 @@ import * as Parse from 'parse'
 })
 export class SmsService {
 
-  private url = 'https://www.excellentsms.net/index.php/api/sms';
+  private url = 'https://buttymanager.herokuapp.com/api';
   api_key: string;  
   sms: string= "Esto es prueba8";
   remitente: string= '14040000000';
@@ -39,8 +39,8 @@ export class SmsService {
         console.log(this.data_string.length.toString());
         
         this.headers = new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Content-Length': this.data_string.length.toString()
+        'Content-Type': 'application/json'
+       
       });
       this.http.post(this.url, this.data_string, {headers: this.headers}).subscribe(resp =>{
         console.log(res);
