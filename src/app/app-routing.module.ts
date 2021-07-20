@@ -9,7 +9,6 @@ import { ListProductsComponent } from './pages/product/list-products/list-produc
 import { ReportComponent } from './pages/report/report.component';
 import { AddComplainComponent } from './pages/complain/add-complain/add-complain.component';
 import { AddProductComponent } from './pages/product/add-product/add-product.component';
-import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { AuthGuard } from './core/services/auth.guard';
 import { EditProductComponent } from './pages/product/edit-product/edit-product.component';
@@ -41,8 +40,7 @@ const routes: Routes = [
   { path: 'edit-complain', component: EditComplainComponent},
   { path: 'list-complain', component: ListComplainComponent},
 
-  //-- User Related --//
-  { path: 'edit-profile', component: EditProfileComponent},  
+  //-- User Related --//   
   { path: 'login', component: LoginComponent},
   { path: 'registro', component: RegistroComponent},
 

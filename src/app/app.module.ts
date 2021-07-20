@@ -15,7 +15,6 @@ import { AddOrderComponent } from './pages/order/add-order/add-order.component';
 import { LoginComponent } from './pages/login/login.component';
 import { EditOrderComponent } from './pages/order/edit-order/edit-order.component';
 import { AddComplainComponent } from './pages/complain/add-complain/add-complain.component';
-import { EditProfileComponent } from './pages/profile/edit-profile/edit-profile.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
@@ -42,8 +41,7 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     AddOrderComponent,
     LoginComponent,
     EditOrderComponent,
-    AddComplainComponent,
-    EditProfileComponent,
+    AddComplainComponent,    
     RegistroComponent,
     PrintViewComponent,
     EditComplainComponent,
