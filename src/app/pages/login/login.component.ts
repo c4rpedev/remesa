@@ -24,8 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(  
                
-               private router: Router, 
-               private smsService: SmsService,
+               private router: Router,                
                public auth: AuthService) { 
     this.isProgressVisible = false;
 
@@ -71,9 +70,6 @@ export class LoginComponent implements OnInit {
     // });
     
 }
-sendSms(){
-      this.smsService.sendSMS();
-  
-}
+
 
 }

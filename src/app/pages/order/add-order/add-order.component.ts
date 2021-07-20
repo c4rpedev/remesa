@@ -13,6 +13,7 @@ import { DOCUMENT } from '@angular/common';
 import { AuthServices } from 'src/app/core/services/auth.service';
 import { MunicipioService } from 'src/app/core/services/municipio.service';
 import { TransportService } from 'src/app/core/services/transport.service';
+import { SmsService } from 'src/app/core/services/sms.service';
 @Component({
   selector: 'app-add-order',
   templateUrl: './add-order.component.html',
@@ -38,7 +39,7 @@ export class AddOrderComponent implements OnInit {
   transporteArrayM: any;
   constructor(
     private router: Router,
-    private location:Location,
+    private smsService: SmsService,
     private provinceService: GetProvincesService,
     private orderService: OrderService,
     private municipioService: MunicipioService,
@@ -100,12 +101,15 @@ export class AddOrderComponent implements OnInit {
       this.total = this.total + this.transportCost;
     })
   }
+  sendSms(number: string){
+    this.smsService.sendSMS(number).subscribe(resp=>{
+        console.log(resp);
+        
+    });
+  }
   onSubmit(form: NgForm){
-    console.log(form);
-    
-    if(form.valid){
-      console.log(this.order.orderProvince);
-      
+    if(form.valid){      
+      this.sendSms(this.order.orderMobile);
       this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);
