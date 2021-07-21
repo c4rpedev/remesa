@@ -25,6 +25,36 @@ export class ListProductsComponent implements OnInit {
   selectedProvince: null;
   img: String;
   user: string;
+  term: string;
+
+  
+  filterData = [
+    {
+      firstName: 'Celestine',
+      lastName: 'Schimmel',
+      address: '7687 Jadon Port'
+    },
+    {
+      firstName: 'Johan',
+      lastName: 'Ziemann PhD',
+      address: '156 Streich Ports'
+    },
+    {
+      firstName: 'Lizzie',
+      lastName: 'Schumm',
+      address: '5203 Jordon Center'
+    },
+    {
+      firstName: 'Gavin',
+      lastName: 'Leannon',
+      address: '91057 Davion Club'
+    },
+    {
+      firstName: 'Lucious',
+      lastName: 'Leuschke',
+      address: '16288 Reichel Harbor'
+    }
+  ]
 
   constructor(private service: ProductService,
     private router: Router,
@@ -86,12 +116,20 @@ export class ListProductsComponent implements OnInit {
      
   };
   getProductForProvince() {
-    console.log(this.selectedProvince);    
-    this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
-      this.products = res; 
-      console.log(this.products);
-      
-    })  
+    console.log(this.selectedProvince);  
+    if(this.user == 'buttymanager'){
+      this.service.getAllProductProperties().then(res=>{
+        this.products = res; 
+        console.log(this.products[0].attributes);        
+      }) 
+    }else{
+      this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
+        this.products = res; 
+        console.log(this.products);
+        
+      }) 
+    }  
+    
   }
   addToCart(product: any){
     Swal.fire({

@@ -26,7 +26,7 @@ import { ListComplainComponent } from './pages/complain/list-complain/list-compl
 import { EditProvinceComponent } from './pages/province/edit-province/edit-province.component';
 import { EditTransportComponent } from './pages/transport/edit-transport/edit-transport.component';
 import { ModalModule } from './_modal';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
 (Parse as any).serverURL = environment.serverURL;
 
@@ -60,7 +60,8 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     ProductModule,
     FormsModule,    
     ReactiveFormsModule,
-    ModalModule,    
+    ModalModule, 
+    Ng2SearchPipeModule,   
     AuthModule.forRoot({
       domain: 'buttymanager.us.auth0.com',
       clientId: 'HqCeBy0WHL7qHa7MSQWFUWB6QcohLYzT'

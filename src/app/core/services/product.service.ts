@@ -47,10 +47,10 @@ export class ProductService {
 
 
  
-  public getAllProductProperties(agency: string): Promise <any> {
+  public getAllProductProperties(): Promise <any> {
     const Products = Parse.Object.extend('products');
     const query = new Parse.Query(Products);
-    query.equalTo('productAgency', agency);
+   
     return query.find()
   }
 

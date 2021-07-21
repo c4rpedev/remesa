@@ -37,6 +37,12 @@
           <div class="btn-group " role="group" >
             <button type="button"  (click)="createCombo()" *ngIf="who!='order'">Crear combo</button>           
           </div>
+          <div class="input-group" *ngIf="selectedProvince">
+            <span class="input-group-text" id="basic-addon1"> <i class="fa fa-search"></i> </span>
+            <input type="text" class="form-control" placeholder="Busca por nombre" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="term">
+          </div>
+          
+    
           <div class="province-select">
            
             <select [(ngModel)]="selectedProvince"  (ngModelChange)="getProductForProvince()" class="form-select" id="selectProvince" >
@@ -56,8 +62,8 @@
             </div> 
             <div
             class="col-sm-3 mb-2"
-            *ngFor="
-              let product of products">
+            *ngFor="let product of products | myFilter:term:['name']; let i = index">
+            
             <div class="item">
               <div class="mb-r">
                 <!--Card-->
