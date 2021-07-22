@@ -26,19 +26,16 @@ export class ReportComponent implements AfterViewInit {
   pivotGridDataSource: any;
 
   constructor(private orderService: OrderService) {
-    this.customizeTooltip = this.customizeTooltip.bind(this);
+    // this.customizeTooltip = this.customizeTooltip.bind(this);
 
     
   }
 
   ngAfterViewInit() {
-    this.orderService.getOrderSucursal('buttymanager').then(res=>{
-      
+    this.orderService.getOrderSucursal('buttymanager').then(res=>{      
       for (let order of res) {
         console.log('Order');
         this.orders.push(order.attributes);
-        
-        
       }
       this.pivotGridDataSource = {
         fields: [{
@@ -78,8 +75,7 @@ export class ReportComponent implements AfterViewInit {
           area: "data"
         }],
         store: this.orders
-      }
-                 
+      }                 
     }); 
     this.pivotGrid.instance.bindChart(this.chart.instance, {
       dataFieldsDisplayMode: "splitPanes",
@@ -93,9 +89,9 @@ export class ReportComponent implements AfterViewInit {
     }, 0);
   }
 
-  customizeTooltip(args:any) {
-    return {
-      html: args.seriesName + " | Total<div class='currency'>" + args.valueText + "</div>"
-    };
-  }
+  // customizeTooltip(args:any) {
+  //   return {
+  //     html: args.seriesName + " | Total<div class='currency'>" + args.valueText + "</div>"
+  //   };
+  // }
 }
