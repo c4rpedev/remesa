@@ -216,7 +216,7 @@
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* -moz-osx-font-smoothing: grayscale; */
 }
 .dx-svg-icon svg {
   pointer-events: none;
@@ -2945,7 +2945,7 @@
 }
 .dx-scrollable-native {
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  -ms-scroll-snap-type: proximity;
+  /* scroll-snap-type: proximity; */
 }
 .dx-scrollable-native > div > .dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-scrollbar,
 .dx-scrollable-native.dx-scrollable-wrapper > .dx-scrollable-container > .dx-scrollable-scrollbar {
@@ -3075,7 +3075,7 @@
 }
 .dx-scrollable-scroll {
   position: relative;
-  -webkit-transform: translate(0,0);
+  transform: translate(0,0);
   padding: 2px;
   background-color: transparent;
   opacity: 1;
@@ -3132,7 +3132,7 @@
   pointer-events: none;
 }
 .dx-scrollable-content {
-  -webkit-transform: none;
+  transform: none;
 }
 .dx-scrollable-scroll-content {
   width: 100%;
@@ -4053,7 +4053,7 @@
 }
 .dx-tabs.dx-navbar .dx-tab-text {
   display: block;
-  vertical-align: 50%;
+  /* vertical-align: 50%; */
 }
 .dx-nav-item {
   position: relative;
@@ -4228,9 +4228,9 @@
 .dx-texteditor {
   display: block;
 }
-.dx-texteditor input::-ms-clear {
+/* .dx-texteditor input::-ms-clear {
   display: none;
-}
+} */
 .dx-placeholder {
   position: absolute;
   top: 0;
@@ -4682,10 +4682,10 @@
 .dx-dropdowneditor-input-wrapper .dx-texteditor-input {
   text-overflow: ellipsis;
 }
-.dx-dropdowneditor-input-wrapper .dx-texteditor-input::-ms-clear {
+/* .dx-dropdowneditor-input-wrapper .dx-texteditor-input::-ms-clear {
   width: 0;
   height: 0;
-}
+} */
 .dx-dropdowneditor-field-template-wrapper {
   display: -webkit-box;
   display: -webkit-flex;
@@ -4918,7 +4918,7 @@
   color: transparent;
   display: inline-block;
   width: 0;
-  float: left;
+  /* float: left; */
 }
 .dx-list .dx-empty-message {
   overflow: hidden;
@@ -5058,7 +5058,7 @@
   overflow: hidden;
 }
 .dx-device-ios .dx-list-slide-menu-buttons-container {
-  -webkit-mask-image: -webkit-radial-gradient(white,black);
+  mask-image: -webkit-radial-gradient(white,black);
 }
 .dx-list-slide-menu-buttons {
   position: relative;
@@ -6201,7 +6201,7 @@
   background-repeat: no-repeat;
   -webkit-transform-origin: 50% 100%;
   transform-origin: 50% 100%;
-  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .dx-timeview {
   height: auto;
@@ -7007,7 +7007,7 @@
 .dx-menu-base .dx-menu-item .dx-menu-item-content .dx-menu-item-text {
   display: inline;
   vertical-align: middle;
-  overflow: ellipsis;
+  /* overflow: ellipsis; */
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -8295,7 +8295,7 @@
   overflow: hidden;
 }
 .dx-device-ios .dx-popover-arrow::after {
-  -webkit-transform: rotate(-45deg) translateZ(0);
+  transform: rotate(-45deg) translateZ(0);
 }
 .dx-popover-wrapper .dx-popup-title {
   margin: 0;
@@ -8915,7 +8915,7 @@
   color: transparent;
   display: inline-block;
   width: 0;
-  float: left;
+  /* float: left; */
 }
 .dx-lookup-arrow {
   pointer-events: none;
@@ -14590,7 +14590,7 @@ input.dx-hidden {
 .dx-pivotgrid .dx-column-header .dx-pivotgrid-toolbar,
 .dx-pivotgrid .dx-filter-header .dx-pivotgrid-toolbar {
   margin-right: 10px;
-  float: right;
+  /* float: right; */
   display: inline-block;
 }
 .dx-pivotgrid .dx-column-header .dx-pivotgrid-toolbar .dx-pivotgrid-field-chooser-button,
@@ -15358,10 +15358,10 @@ input.dx-hidden {
   left: 0;
   cursor: pointer;
 }
-.dx-fileuploader-button .dx-fileuploader-input::-ms-browse,
+/* .dx-fileuploader-button .dx-fileuploader-input::-ms-browse,
 .dx-fileuploader-button .dx-fileuploader-input::-webkit-file-upload-button {
   cursor: pointer;
-}
+} */
 .dx-fileuploader-content {
   display: table-row-group;
   vertical-align: middle;
@@ -16381,7 +16381,7 @@ input.dx-hidden {
   height: 100%;
   width: 100%;
   border-top: none;
-  float: left;
+  /* float: left; */
 }
 .dx-scheduler-work-space.dx-scheduler-timeline-month:not(.dx-scheduler-agenda) .dx-scheduler-date-table-cell {
   border-right: none;
