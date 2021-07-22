@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DxPivotGridModule, DxChartModule } from 'devextreme-angular';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
@@ -27,7 +28,7 @@ import { EditProvinceComponent } from './pages/province/edit-province/edit-provi
 import { EditTransportComponent } from './pages/transport/edit-transport/edit-transport.component';
 import { ModalModule } from './_modal';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-// import { DxButtonModule, DxPivotGridModule, DxChartModule } from 'devextreme-angular';
+
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
 (Parse as any).serverURL = environment.serverURL;
 
@@ -61,9 +62,8 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     ProductModule,
     FormsModule,    
     ReactiveFormsModule,
-    // DxButtonModule,
-    // DxPivotGridModule,
-    // DxChartModule,
+    DxPivotGridModule,
+    DxChartModule,
     ModalModule, 
     Ng2SearchPipeModule,   
     AuthModule.forRoot({
