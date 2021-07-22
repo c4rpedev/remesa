@@ -14,6 +14,7 @@ export class Order {
     orderSucursal: string;
     orderPrice: number;
     orderAlbaran: File;
+    orderDay: number;
     orderCancelMotive: string;
     productArray: Product[];  
     state: string;
