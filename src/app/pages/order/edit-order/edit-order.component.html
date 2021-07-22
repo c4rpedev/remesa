@@ -46,7 +46,7 @@
       [(ngModel)]="order.orderClientName" 
       [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
