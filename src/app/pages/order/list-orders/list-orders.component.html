@@ -40,7 +40,7 @@
   
   <tr *ngFor="let order of orders">
     <th scope="row">{{order.attributes.orderId}}</th>
-    <th >{{order.attributes.createdAt.getDate()}}/{{order.attributes.createdAt.getMonth()}}/{{order.attributes.createdAt.getFullYear()}}</th>
+    <th >{{order.attributes.createdAt.getDate()}}/{{order.attributes.createdAt.getMonth()+1}}/{{order.attributes.createdAt.getFullYear()}}</th>
     <td>{{order.attributes.orderAgency}}</td>
     <td>{{order.attributes.orderClientName}}</td>
     <td><p *ngFor="let product of order.attributes.productArray">{{product.name}}</p></td>
