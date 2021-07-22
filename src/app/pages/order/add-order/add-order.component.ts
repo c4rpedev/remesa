@@ -102,7 +102,7 @@ export class AddOrderComponent implements OnInit {
     })
   }
   sendSms(number: string){
-    this.smsService.sendSMS(number, this.order.orderClientName, this.order.orderRecieverName);
+    this.smsService.sendSMS(number, this.order.orderClientName, this.order.orderRecieverName, this.user);
   }
   onSubmit(form: NgForm){
     if(form.valid){   

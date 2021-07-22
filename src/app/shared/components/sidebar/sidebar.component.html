@@ -28,12 +28,12 @@
         </div>
         <span>Añadir Productos</span>
       </div>
-    <!-- <div class="links" [routerLink]="['/reports']"  (click)="openMenu()" *ngIf="user.name == 'buttymanager@gmail.com'">
+     <div class="links" [routerLink]="['/reports']"  (click)="openMenu()" *ngIf="admin">
       <div class="icon">
         <i class="fa fa-bar-chart"></i>
       </div>
       <span>Reportes</span>
-    </div> -->
+    </div> 
     <div class="links" [routerLink]="['/list-complain']" (click)="openMenu()" *ngIf="!sucursal">
       <div class="icon">
         <i class="fa fa-archive"></i>
