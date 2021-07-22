@@ -1,7 +1,7 @@
 import {  Component, ViewChild, AfterViewInit } from '@angular/core';
-// import { DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
-// import { Order } from 'src/app/core/models/order';
-// import { OrderService } from 'src/app/core/services/order.service';
+import { DxPivotGridComponent, DxChartComponent } from 'devextreme-angular';
+import { Order } from 'src/app/core/models/order';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-report',
@@ -10,10 +10,10 @@ import {  Component, ViewChild, AfterViewInit } from '@angular/core';
 })
 export class ReportComponent implements AfterViewInit {
 
-  // @ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
-  // @ViewChild(DxChartComponent, { static: false }) chart: DxChartComponent;
-  // orders= new Array<Order>();
-  // pivotGridDataSource: any;
+  @ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
+  @ViewChild(DxChartComponent, { static: false }) chart: DxChartComponent;
+  orders= new Array<Order>();
+  pivotGridDataSource: any;
 
   constructor() {
     // this.customizeTooltip = this.customizeTooltip.bind(this);
