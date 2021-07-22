@@ -45,6 +45,8 @@
     "@angular/compiler-cli": "~12.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
+    "devextreme": "21.1.4",
+    "devextreme-angular": "21.1.4",
     "cors": "^2.8.5",
     "enhanced-resolve": "^5.7.0",
     "fuzzy": "^0.1.3",
