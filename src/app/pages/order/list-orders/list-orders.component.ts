@@ -37,7 +37,7 @@ export class ListOrdersComponent implements OnInit {
         this.orderService.getOrder(this.user).then(res=>{
           this.orders = res;  
           this.isAdmin();     
-          this.checkState();     
+          //this.checkState();     
         }) 
       }
       
@@ -49,15 +49,15 @@ export class ListOrdersComponent implements OnInit {
   isAdmin(){
     this.admin = this.userService.isAdmin(this.user);
   }
-  checkState(){
-    for (let order of this.orders) {
-      console.log('Order');
-      let d1 = new Date();
-      var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
-      var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
-      console.log(diffDays);  
-    }
-  }
+  // checkState(){
+  //   for (let order of this.orders) {
+  //     console.log('Order');
+  //     let d1 = new Date();
+  //     var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
+  //     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
+  //     console.log(diffDays);  
+  //   }
+  // }
 
   addOrder() {    
     this.router.navigate(['/b']);
