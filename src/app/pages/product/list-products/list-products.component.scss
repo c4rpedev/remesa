@@ -162,5 +162,17 @@
       border-radius: 15px;
     }
   }
+  .mat-dialog-container{
+    padding: 0 !important;
+    border: black;   
+    border-style: solid;
+}
+.card-footer{
+  display: flex;
+  align-items: center;
+  span{
+    font-size: 19px;
+  }
+}
   
   

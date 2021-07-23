@@ -47,10 +47,10 @@ export class ProductService {
 
 
  
-  public getAllProductProperties(): Promise <any> {
+  public getAllProductProperties(province: string): Promise <any> {
     const Products = Parse.Object.extend('products');
     const query = new Parse.Query(Products);
-   
+    query.equalTo('province', province);
     return query.find()
   }
 
@@ -59,10 +59,10 @@ export class ProductService {
       const myNewObject = new Parse.Object('products');
       // myNewObject.set('productId', product.productId);
       myNewObject.set('name', product.productName);
-      myNewObject.set('price', product.productPrice);
+      myNewObject.set('price', +product.productPrice);
       myNewObject.set('cost', product.productCost);
       myNewObject.set('um', product.productUM);
-      myNewObject.set('amount', product.productAmount);
+      myNewObject.set('amount', +product.productAmount);
       myNewObject.set('province', product.productProvince);
       myNewObject.set('category', product.productCategory);   
       myNewObject.set('productAgency', product.productAgency);    

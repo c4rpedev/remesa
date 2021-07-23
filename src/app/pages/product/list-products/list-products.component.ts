@@ -7,7 +7,9 @@ import Swal from 'sweetalert2';
 import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 import { UserService } from 'src/app/core/services/user.service';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { EditProductComponent } from '../edit-product/edit-product.component';
+import { PreviewProductComponent } from '../preview-product/preview-product.component';
 
 
 @Component({
@@ -61,6 +63,7 @@ export class ListProductsComponent implements OnInit {
     private provinceService: GetProvincesService,
     private userService: UserService,
     public auth: AuthService,
+    public dialog: MatDialog,
     @Inject(DOCUMENT) public document: Document
    
     ) {
@@ -79,6 +82,20 @@ export class ListProductsComponent implements OnInit {
 
   }
   
+  openDialog(product: any): void {
+    const dialogRef = this.dialog.open(PreviewProductComponent, {
+      width: '600px',
+      data: {products: product}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+     
+    });
+  }
+
+
+
   addOrder() {    
     if(this.productsCart.length > 0){
       this.router.navigate(['/b']);
@@ -118,7 +135,7 @@ export class ListProductsComponent implements OnInit {
   getProductForProvince() {
     console.log(this.selectedProvince);  
     if(this.user == 'buttymanager'){
-      this.service.getAllProductProperties().then(res=>{
+      this.service.getAllProductProperties(this.selectedProvince).then(res=>{
         this.products = res; 
         console.log(this.products[0].attributes);        
       }) 

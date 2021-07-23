@@ -12,6 +12,7 @@ export class Order {
     orderPhone: string;
     orderMobile: string;
     orderSucursal: string;
+    orderNote: string;
     orderPrice: number;
     orderAlbaran: File;
     orderDay: number;

@@ -22,6 +22,7 @@ export class OrderService {
       myNewObject.set('orderMobile', order.orderMobile);
       myNewObject.set('orderPrice', order.orderPrice);
       myNewObject.set('orderReference', order.orderReference);
+      myNewObject.set('orderNote', order.orderNote);
       myNewObject.set('productArray', products);
       myNewObject.set('orderAgency', user);
       try {
@@ -45,8 +46,11 @@ export class OrderService {
         myNewObject.set('orderProvince', order.orderProvince);
         myNewObject.set('orderMunicipio', order.orderMunicipio);
         myNewObject.set('orderAddress', order.orderAddress);
+        myNewObject.set('orderReference', order.orderReference);
         myNewObject.set('orderPhone', order.orderPhone);
+        myNewObject.set('orderMobile', order.orderMobile);
         myNewObject.set('orderSucursal', order.orderSucursal);
+        myNewObject.set('orderNote', order.orderNote);
         myNewObject.set('orderCancelMotive', order.orderCancelMotive);
         myNewObject.set('orderAlbaran', new Parse.File("albaran.jpg", { uri: img })); 
         myNewObject.set('state', order.state);

@@ -18,6 +18,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CreateComboComponent } from './create-combo/create-combo.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { MatDialogModule } from "@angular/material/dialog";
+import { PreviewProductComponent } from './preview-product/preview-product.component';
 
 @NgModule({
   imports: [
@@ -25,7 +27,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     MatTableModule,
     Ng2SearchPipeModule,
-    
+    MatDialogModule
     //RouterModule.forChild(ProductRoutes),      
   ],
   declarations: [
@@ -34,7 +36,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AddProductComponent,
     EditProductComponent,
     CreateComboComponent,
-    MyFilterPipe  
+    MyFilterPipe,
+    PreviewProductComponent  
     
   ],
   exports: [],

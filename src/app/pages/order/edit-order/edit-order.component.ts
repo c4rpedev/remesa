@@ -74,6 +74,8 @@ export class EditOrderComponent implements OnInit {
 }
   onSubmit(form: NgForm){
     if(form.valid){
+      console.log(this.order.orderSucursal);
+      
       this.orderService.updateOrder(this.order, this.orderId, this.img.toString());
       Swal.fire({
         position: 'top-end',

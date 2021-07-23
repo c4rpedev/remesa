@@ -21,7 +21,7 @@
       [(ngModel)]="order.orderId" 
       [class.is-invalid]="orderId.invalid && orderId.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Identificador de Pedido"
       name="orderId"
       #orderId = "ngModel">
@@ -58,7 +58,7 @@
       [(ngModel)]="order.orderRecieverName" 
       [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Nombre del que Recibe"
       name="orderRecieverName"
       #orderRecieverName = "ngModel">
@@ -84,7 +84,7 @@
       [(ngModel)]="order.orderMunicipio" 
       [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Municipio"
       name="orderMunicipio"
       #orderMunicipio = "ngModel">
@@ -96,7 +96,7 @@
       [(ngModel)]="order.orderAddress" 
       [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Número de la casa, calle y entre calles"
       name="orderAddress"
       #orderAddress = "ngModel">
@@ -109,7 +109,7 @@
       [(ngModel)]="order.orderReference" 
       [class.is-invalid]="orderReference.invalid && orderReference.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Ingrese una referencia"
       name="orderReference"
       #orderReference = "ngModel">      
@@ -124,7 +124,7 @@
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Número de teléfono"
       name="orderMobile"
       #orderMobile = "ngModel">
@@ -136,13 +136,13 @@
       [(ngModel)]="order.orderPhone" 
       [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Número de teléfono"
       name="orderPhone"
       #orderPhone = "ngModel">
     </label>
-    <label *ngIf="admin">
-      <span>Sucursal</span>
+    <label *ngIf="admin && (user!='buttycomercial')">
+      <span>Sucursal</span>{{order.orderSucursal}}
       <select  [(ngModel)]="order.orderSucursal"  
       
     class="form-select" 
@@ -151,7 +151,7 @@
     #orderSucursal="ngModel"                        
     >
     
-<option *ngFor="let s of sucursalName">
+<option *ngFor="let s of sucursalName" value={{s.attributes.user}}>
 {{s.attributes.name}}
 </option>
 </select>  
@@ -162,7 +162,7 @@
       [(ngModel)]="order.state" 
       [class.is-invalid]="state.invalid && state.touched"
       required 
-      [disabled]="!admin"
+      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
       placeholder="Número de teléfono"
       name="state"
       #state = "ngModel"
@@ -238,14 +238,14 @@
       <tr *ngFor="let product of products">
         <td><img class="border"   src="{{product.picture._url}}" alt=""></td>
         <td>{{product.name}}</td>
-        <td>${{product.price}}</td>
+        <!-- <td>${{product.price}}</td> -->
         
       </tr>
      
       <tr>
         
-        <td><b>Coste Total + Transportación</b>:</td>
-        <td>${{order.orderPrice}}</td>
+        <!-- <td><b>Coste Total + Transportación</b>:</td>
+        <td>${{order.orderPrice}}</td> -->
       </tr>
      
     </table>
