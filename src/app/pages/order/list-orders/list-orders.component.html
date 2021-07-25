@@ -16,12 +16,12 @@
 </div>
 <div class="card">
   <div class="table-responsive">
-    <mat-form-field appearance="standard">
+    <!-- <mat-form-field appearance="standard">
       <mat-label>Filtro</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Pepe" #input>
-    </mat-form-field>
+    </mat-form-field> -->
     <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort  matSortDisableClear>
+      <table mat-table [dataSource]="dataSource" matSort  >
     
         <!-- Position Column -->
         <ng-container matColumnDef="id">

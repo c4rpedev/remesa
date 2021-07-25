@@ -131,7 +131,7 @@ export class ListProductsComponent implements OnInit {
     icon: 'success',
     title: 'Producto añadido',
     showConfirmButton: false,
-    timer: 100500
+    timer: 1500
   })
     console.log(product);
     this.productsCart.push(product);

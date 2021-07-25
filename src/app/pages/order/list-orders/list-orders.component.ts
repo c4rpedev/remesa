@@ -9,7 +9,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Order } from 'src/app/core/models/order';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 
@@ -55,16 +55,32 @@ export class ListOrdersComponent implements AfterViewInit  {
         this.orderService.getOrder(this.user).then(res=>{
           res.forEach((element:any) => {
             this.orders.push(element);
-            console.log(this.orders);
-            
-          });
-          
+            console.log(this.orders);            
+          });          
           this.dataSource = new MatTableDataSource<Order>(this.orders);
-
           console.log(this.dataSource);
           this.dataSource.paginator = this.paginator;
-
+          this.dataSource.sortingDataAccessor = (item:any, property:any) => {
+            switch (property) {
+              case 'date':  return item.attributes.createdAt;              
+              case 'id': return item.attributes.orderId;   
+              default: return item[property];
+            }
+          }
+          this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
           this.dataSource.sort = this.sort;
+          // this.dataSource.filterPredicate = (data:any, filter: string): boolean => {
+          //   return data.attributes.orderClientName.toLowerCase().includes(filter);
+          // };
+          
+
+     
+          console.log('Sort');
+          console.log(this.sort);
+          console.log(this.dataSource.sort);
+          
+          
+          
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
           this.isAdmin();     
           //this.checkState();     
@@ -77,12 +93,11 @@ export class ListOrdersComponent implements AfterViewInit  {
   }
 
   applyFilter(event: Event) {
-    console.log(event);
-    
-    const filterValue = (event.target as HTMLInputElement).value;
-    
-    this.dataSource.filter = filterValue.trim().toLowerCase();   
-    
+    console.log(event);  
+    console.log(this.dataSource._data._value);
+      
+    const filterValue = (event.target as HTMLInputElement).value;    
+    this.dataSource.filter = filterValue.trim().toLowerCase(); 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -105,6 +120,7 @@ export class ListOrdersComponent implements AfterViewInit  {
     this.router.navigate(['/b']);
     this.router.navigateByUrl('/list-product', { state: {who: "order"}});  
   };
+
   deleteOrder(order: any){
     Swal.fire({
       title: 'Estás seguro?',
@@ -116,8 +132,6 @@ export class ListOrdersComponent implements AfterViewInit  {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.isConfirmed) {
-      
-        
         this.orderService.deleteOrder(order.id);
         Swal.fire(
           'Borrado!',
@@ -129,11 +143,9 @@ export class ListOrdersComponent implements AfterViewInit  {
       }
     })
   }
+
   editOrder(order: any, orderId: String){  
-    console.log(orderId);
-        
-    //this.productsEdit.push(product);
-   // this.productsAttr.push(productsA);
+    console.log(orderId);     
     this.router.navigate(['/b']);
     this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin, sucursal: this.sucursal}});  
   }
