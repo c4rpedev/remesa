@@ -57,7 +57,8 @@ export class AddOrderComponent implements OnInit {
      this.initProvince();  
      this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
-      this.getTransportCost()
+      this.getTransportCost();
+      
      }) 
   }
   initProvince(){
@@ -66,7 +67,10 @@ export class AddOrderComponent implements OnInit {
       console.log(this.municipios);
     })
   }
+
   changeProvince(){   
+    
+    
     this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       this.order.orderMunicipio = this.municipios[0]['municipio'];
@@ -79,6 +83,7 @@ export class AddOrderComponent implements OnInit {
       }       
     });
   }
+
   getTransportCost(){
     console.log(this.user);    
     this.transportService.getTransportForAgency(this.user).then(res=>{
@@ -92,6 +97,7 @@ export class AddOrderComponent implements OnInit {
            this.transportCost = 0;
          }       
        });
+       
        this.products.forEach(element => { 
         this.subtotal = +element.price;
         this.total = this.total + this.subtotal 
@@ -99,6 +105,7 @@ export class AddOrderComponent implements OnInit {
         console.log(this.total);      
       });
       this.total = this.total + this.transportCost;
+      this.changeProvince();
     })
   }
   sendSms(number: string){

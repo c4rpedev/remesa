@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DxPivotGridModule, DxChartModule } from 'devextreme-angular';
@@ -55,6 +58,9 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
   ],
   imports: [
     MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatInputModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,   

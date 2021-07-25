@@ -30,33 +30,7 @@ export class ListProductsComponent implements OnInit {
   term: string;
 
   
-  filterData = [
-    {
-      firstName: 'Celestine',
-      lastName: 'Schimmel',
-      address: '7687 Jadon Port'
-    },
-    {
-      firstName: 'Johan',
-      lastName: 'Ziemann PhD',
-      address: '156 Streich Ports'
-    },
-    {
-      firstName: 'Lizzie',
-      lastName: 'Schumm',
-      address: '5203 Jordon Center'
-    },
-    {
-      firstName: 'Gavin',
-      lastName: 'Leannon',
-      address: '91057 Davion Club'
-    },
-    {
-      firstName: 'Lucious',
-      lastName: 'Leuschke',
-      address: '16288 Reichel Harbor'
-    }
-  ]
+  
 
   constructor(private service: ProductService,
     private router: Router,
@@ -111,12 +85,14 @@ export class ListProductsComponent implements OnInit {
     }
       
   };
+
   editProduct(product: any, productsA: any) {    
     this.productsEdit.push(product);
     this.productsAttr.push(productsA);
     this.router.navigate(['/b']);
     this.router.navigateByUrl('/edit-product', { state: {product: this.productsEdit, productA: this.productsAttr}});  
   };
+
   createCombo() {    
     if(this.productsCart.length > 1){
       this.router.navigate(['/b']);
@@ -132,6 +108,7 @@ export class ListProductsComponent implements OnInit {
     }
      
   };
+
   getProductForProvince() {
     console.log(this.selectedProvince);  
     if(this.user == 'buttymanager'){
@@ -146,22 +123,19 @@ export class ListProductsComponent implements OnInit {
         
       }) 
     }  
-    
   }
+
   addToCart(product: any){
     Swal.fire({
     position: 'top-end',
     icon: 'success',
     title: 'Producto añadido',
     showConfirmButton: false,
-    timer: 1500
+    timer: 100500
   })
     console.log(product);
     this.productsCart.push(product);
     console.log(this.productsCart);
   }
-
- 
- 
 
 }

@@ -1,9 +1,13 @@
-.table{
-    td{
-        p{
-            span{
-                color: white;
-            }
+.actions__row{
+    display: flex;
+    button{
+        margin-left: 5px;
+        span{
+            color: white;
         }
     }
+}
+td.mat-cell{
+    padding-right:10px;
+    
 }

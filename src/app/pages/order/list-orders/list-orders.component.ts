@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrderService } from 'src/app/core/services/order.service';
 import Swal from 'sweetalert2';
@@ -6,16 +6,33 @@ import { AuthService } from '@auth0/auth0-angular';
 import { DOCUMENT } from '@angular/common';
 import { AuthServices } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { Order } from 'src/app/core/models/order';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import {merge, Observable, of as observableOf} from 'rxjs';
+import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+
 @Component({
   selector: 'app-list-orders',
   templateUrl: './list-orders.component.html',
   styleUrls: ['./list-orders.component.scss']
 })
-export class ListOrdersComponent implements OnInit {
-  orders: any;
+export class ListOrdersComponent implements AfterViewInit  {
+  orders: Array<any> = [];
   user: string;
   admin: boolean;
   sucursal: boolean;
+
+  displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'adress', 'phone', 'state', 'accions'];
+  dataSource: any;
+
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private orderService: OrderService,
               private userService: UserService,
@@ -23,9 +40,10 @@ export class ListOrdersComponent implements OnInit {
               public auth: AuthService,
                 @Inject(DOCUMENT) public document: Document) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+                console.log("asdfasdf")
                }
 
-  ngOnInit(): void {        
+  ngAfterViewInit(): void {        
     this.auth.user$.subscribe(user =>{
       this.user = user.nickname;   
       if(this.userService.isSucursal(this.user)){
@@ -35,7 +53,19 @@ export class ListOrdersComponent implements OnInit {
         }) 
       }else{
         this.orderService.getOrder(this.user).then(res=>{
-          this.orders = res;  
+          res.forEach((element:any) => {
+            this.orders.push(element);
+            console.log(this.orders);
+            
+          });
+          
+          this.dataSource = new MatTableDataSource<Order>(this.orders);
+
+          console.log(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+
+          this.dataSource.sort = this.sort;
+          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
           this.isAdmin();     
           //this.checkState();     
         }) 
@@ -44,6 +74,18 @@ export class ListOrdersComponent implements OnInit {
     }) 
     
     
+  }
+
+  applyFilter(event: Event) {
+    console.log(event);
+    
+    const filterValue = (event.target as HTMLInputElement).value;
+    
+    this.dataSource.filter = filterValue.trim().toLowerCase();   
+    
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   isAdmin(){

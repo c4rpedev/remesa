@@ -20,7 +20,7 @@ export class AddProductComponent implements OnInit {
   provinces: any [] = [];
   filePath:String;
   img: string | ArrayBuffer =
-  "https://bulma.io/images/placeholders/480x480.png";
+  "https://parsefiles.back4app.com/vH5Y2pQQTnE8odu7xeMKMzviCtFuPHQAvQogW4GI/7b7b788e29df265cb59d20c2682aba24_product.jpg";
   photosrc: String;
   selectedProvince: null;
   file: File;
