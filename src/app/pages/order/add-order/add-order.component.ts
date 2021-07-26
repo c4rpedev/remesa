@@ -113,9 +113,9 @@ export class AddOrderComponent implements OnInit {
   }
   onSubmit(form: NgForm){
     if(form.valid){   
-      // if(!this.order.state){
-      //   this.sendSms(this.order.orderMobile);        
-      // }
+      if(!this.order.state){
+        this.sendSms(this.order.orderMobile);        
+      }
       
       this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
