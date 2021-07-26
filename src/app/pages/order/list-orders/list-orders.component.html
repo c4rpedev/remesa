@@ -20,9 +20,15 @@
       <mat-label>Filtro</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Pepe" #input>
     </mat-form-field> -->
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort  >
     
+
+    <div class="mat-elevation-z8">
+      <div class="order__spinner" *ngIf="loading">
+        <mat-spinner  ></mat-spinner>
+      </div>
+      
+      <table mat-table [dataSource]="dataSource" matSort >
+        
         <!-- Position Column -->
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>

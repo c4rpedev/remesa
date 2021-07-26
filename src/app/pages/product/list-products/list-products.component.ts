@@ -28,7 +28,7 @@ export class ListProductsComponent implements OnInit {
   img: String;
   user: string;
   term: string;
-
+  loading: boolean;
   
   
 
@@ -48,6 +48,7 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
      this.auth.user$.subscribe(user =>{
+      
        this.user = user.nickname;           
       this.who= history.state.who;       
       this.provinces = this.provinceService.getProvinces();  
@@ -112,13 +113,17 @@ export class ListProductsComponent implements OnInit {
   getProductForProvince() {
     console.log(this.selectedProvince);  
     if(this.user == 'buttymanager'){
+      this.loading = true;
       this.service.getAllProductProperties(this.selectedProvince).then(res=>{
         this.products = res; 
+        this.loading = false;
         console.log(this.products[0].attributes);        
       }) 
     }else{
+      this.loading = true;
       this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
         this.products = res; 
+        this.loading = false;
         console.log(this.products);
         
       }) 

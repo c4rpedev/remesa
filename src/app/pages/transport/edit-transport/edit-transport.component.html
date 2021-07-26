@@ -39,7 +39,9 @@
                                       
                       
                   <div class="container">          
-                      
+                    <div class="order__spinner" *ngIf="loading">
+                      <mat-spinner  ></mat-spinner>
+                    </div> 
                     <form [formGroup]="transportForm" (ngSubmit)="onSubmit()">  
                         
                       

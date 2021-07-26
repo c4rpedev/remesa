@@ -15,6 +15,7 @@ export class EditProvinceComponent implements OnInit  {
   selectedProvince: string ; 
   productForm: FormGroup;  
   municipios: any;
+  loading: boolean;
   municipiosR: Array<any> = [];
   constructor(private fb:FormBuilder, 
               private provinceService: GetProvincesService,
@@ -32,6 +33,7 @@ export class EditProvinceComponent implements OnInit  {
   }
 
   changeProvince(){
+    this.loading = true;
     this.municipioService.getMunicipio(this.selectedProvince).then(res=>{
       this.municipios = res;  
       console.log(this.municipios);
@@ -42,7 +44,7 @@ export class EditProvinceComponent implements OnInit  {
         
         this.quantities().push(this.fb.group(element));  
       });
-      
+      this.loading = false;
     })
   }
     

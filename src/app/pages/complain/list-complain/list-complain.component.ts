@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-complain.component.scss']
 })
 export class ListComplainComponent implements OnInit {
+  loading: boolean;
   complains: any;
   user: string;
   admin: boolean;
@@ -23,11 +24,12 @@ export class ListComplainComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.user$.subscribe(user =>{
+      this.loading = true;
       this.user = user.nickname;   
       this.complainService.getComplain(this.user).then(res=>{
         this.complains = res;  
         console.log(this.complains);
-        
+        this.loading = false;
       }) 
       this.isAdmin();
     }) 

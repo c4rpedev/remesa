@@ -20,14 +20,15 @@ import { CreateComboComponent } from './create-combo/create-combo.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { MatDialogModule } from "@angular/material/dialog";
 import { PreviewProductComponent } from './preview-product/preview-product.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MatTableModule,
     Ng2SearchPipeModule,
-    MatDialogModule
+    MatDialogModule,
+    MatProgressSpinnerModule
     //RouterModule.forChild(ProductRoutes),      
   ],
   declarations: [

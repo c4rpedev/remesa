@@ -9,7 +9,7 @@ import { TransportService } from 'src/app/core/services/transport.service';
   styleUrls: ['./edit-transport.component.scss']
 })
 export class EditTransportComponent implements OnInit {
- 
+  loading: boolean;
   transporte: any [] = [];
   agency: string;
   transportForm: FormGroup;  
@@ -51,6 +51,7 @@ export class EditTransportComponent implements OnInit {
   } 
 
   onChangeAgency(){
+    this.loading = true;
     this.transportService.getTransportForAgency(this.agency).then(res=>{
       this.transporteArray = res;  
       console.log(this.transporteArray);
@@ -61,7 +62,7 @@ export class EditTransportComponent implements OnInit {
         console.log(element);        
         this.quantities().push(this.fb.group(element));  
        });
-      
+       this.loading = false;
     })
   }
   keys() : Array<string> {

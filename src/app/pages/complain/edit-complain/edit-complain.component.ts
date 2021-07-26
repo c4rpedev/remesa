@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./edit-complain.component.scss']
 })
 export class EditComplainComponent implements OnInit {
+  loading: boolean;
   complain: Complain = new Complain();
   complainPic: any;
   urlPic: {
@@ -29,6 +30,7 @@ export class EditComplainComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loading = true;
     this.complain = history.state.complain;
     this.complainPic = history.state.complain;
     this.index = +this.complainPic.complainPicNum;
@@ -36,6 +38,7 @@ export class EditComplainComponent implements OnInit {
     this.user = history.state.user;  
     this.admin = this.userService.isAdmin(this.user);   
     this.getComplainPictures();
+    
   }
  
 
@@ -45,6 +48,7 @@ export class EditComplainComponent implements OnInit {
     return this.admin;
   }
   getComplainPictures(){ 
+    this.loading = false;
     console.log(this.index);
     console.log(this.complainPic.complainPicture0._url);
     for (let index = 0; index < this.index; index++) {     
@@ -53,6 +57,7 @@ export class EditComplainComponent implements OnInit {
      
       
     }
+    
   }
   onSubmit(form: NgForm){
     if(form.valid){

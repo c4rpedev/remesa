@@ -3,20 +3,24 @@
       <div class="col-sm-12" *ngIf="admin">
           <div class="title-box text-center pt-5">
               <h3 class="title-a">
-                  Quejas
+                  Editar queja
               </h3>
               <p class="subtitle-a">
-                  Ingrese la queja
+                  Modifique la queja
               </p>
               <div class="line-mf"></div>
           </div>
       </div>
   </div>
-  <div class="complain">
+  <div class="order__spinner" *ngIf="loading">
+    <mat-spinner  ></mat-spinner>
+  </div>
+  <div class="complain" >
+    
     <div class="col-md-2"></div>
     <div class="col-md-8 ml-2">
       <div class="d-flex card ">
-      
+        
           <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
             <label>
               <span class="fname">Id <span class="required">*</span></span>
