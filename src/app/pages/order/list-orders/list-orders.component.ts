@@ -18,12 +18,12 @@ import {catchError, map, startWith, switchMap} from 'rxjs/operators';
   templateUrl: './list-orders.component.html',
   styleUrls: ['./list-orders.component.scss']
 })
-export class ListOrdersComponent implements AfterViewInit  {
+export class ListOrdersComponent implements OnInit  {
   orders: Array<any> = [];
   user: string;
   admin: boolean;
   sucursal: boolean;
-
+  loading: boolean;
   displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'adress', 'phone', 'state', 'accions'];
   dataSource: any;
 
@@ -43,8 +43,9 @@ export class ListOrdersComponent implements AfterViewInit  {
                 console.log("asdfasdf")
                }
 
-  ngAfterViewInit(): void {        
+  ngOnInit(): void {        
     this.auth.user$.subscribe(user =>{
+      this.loading = true;
       this.user = user.nickname;   
       if(this.userService.isSucursal(this.user)){
         this.orderService.getOrderSucursal(this.user).then(res=>{
@@ -84,6 +85,7 @@ export class ListOrdersComponent implements AfterViewInit  {
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
           this.isAdmin();     
           //this.checkState();     
+          this.loading = false;
         }) 
       }
       
@@ -132,12 +134,14 @@ export class ListOrdersComponent implements AfterViewInit  {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.isConfirmed) {
+        console.log(order.id);
+        
         this.orderService.deleteOrder(order.id);
         Swal.fire(
           'Borrado!',
           'El producto ha sido eliminado.',
           'success'
-        )
+        )     
         this.router.navigate(['/b']);
         this.router.navigateByUrl('/list-order');  
       }
