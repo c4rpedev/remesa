@@ -115,8 +115,7 @@ export class AddOrderComponent implements OnInit {
     if(form.valid){   
       if(!this.order.state){
         this.sendSms(this.order.orderMobile);        
-      }
-      
+      }      
       this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);
