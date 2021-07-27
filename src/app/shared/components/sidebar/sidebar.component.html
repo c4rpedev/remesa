@@ -9,7 +9,7 @@
   </div>
  
     <div class="links__container" [ngStyle]="{'display': isOpened}" *ngIf="auth.user$ | async as user"> 
-    <div class="links" [routerLink]="['/orders']" (click)="openMenu()">
+    <div class="links" [routerLink]="['/orders']" (click)="openMenu()" >
       <div class="icon">
         <i class="fa fa-table"></i>
       </div>
@@ -22,13 +22,13 @@
         </div>
         <span>Productos</span>
       </div>
-      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()" *ngIf="admin && !sucursal">
+      <div class="links" [routerLink]="['/add-product']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
         <div class="icon">
           <i class="fa fa-plus-square"></i>
         </div>
         <span>Añadir Productos</span>
       </div>
-     <div class="links" [routerLink]="['/reports']"  (click)="openMenu()" *ngIf="admin">
+     <div class="links" [routerLink]="['/reports']"  (click)="openMenu()" *ngIf="admin && !isComercial()">
       <div class="icon">
         <i class="fa fa-bar-chart"></i>
       </div>
@@ -40,13 +40,13 @@
       </div>
       <span>Quejas</span>
     </div>
-    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal">
+    <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
       <div class="icon">
         <i class="fa fa-globe"></i>
       </div>
       <span>Municipios</span>
     </div>
-    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()" *ngIf="admin && !sucursal">
+    <div class="links" [routerLink]="['/edit-transport']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
       <div class="icon">
         <i class="fa fa-truck"></i>
       </div>

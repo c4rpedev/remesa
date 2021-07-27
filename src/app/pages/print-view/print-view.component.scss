@@ -2,6 +2,12 @@ img{
     width: 123px;
     padding: 20px;
 }
+tr.mat-row, tr.mat-footer-row {
+    height: 25px;
+}
+tr.mat-header-row {
+    height: 25px;
+}
 .print__header{
     display: flex;
     align-content: center;

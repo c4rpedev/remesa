@@ -49,8 +49,40 @@ export class ListOrdersComponent implements OnInit  {
       this.user = user.nickname;   
       if(this.userService.isSucursal(this.user)){
         this.orderService.getOrderSucursal(this.user).then(res=>{
-          this.orders = res;  
-           this.sucursal = this.userService.isSucursal(this.user);       
+          res.forEach((element:any) => {
+            this.orders.push(element);
+            console.log(this.orders);            
+          });          
+          this.dataSource = new MatTableDataSource<Order>(this.orders);
+          console.log(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sortingDataAccessor = (item:any, property:any) => {
+            switch (property) {
+              case 'date':  return item.attributes.createdAt;              
+              case 'id': return item.attributes.orderId;   
+              default: return item[property];
+            }
+          }
+          this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
+          this.dataSource.sort = this.sort;
+          // this.dataSource.filterPredicate = (data:any, filter: string): boolean => {
+          //   return data.attributes.orderClientName.toLowerCase().includes(filter);
+          // };
+          
+
+     
+          console.log('Sort');
+          console.log(this.sort);
+          console.log(this.dataSource.sort);
+          
+          
+          
+          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
+          this.isAdmin();     
+          //this.checkState();     
+          this.loading = false;
+           this.sucursal = this.userService.isSucursal(this.user);   
+
         }) 
       }else{
         this.orderService.getOrder(this.user).then(res=>{

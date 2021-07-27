@@ -4,7 +4,7 @@
             <img src="assets/images/buttymasterlogo.png" alt="">
             <h2>ButtyMaster</h2>
         </div>
-        <div class="header__right mt-5">
+        <div class="header__right mt-3">
             <b>ENTREGA</b><br>
             <div >
                 <b>FECHA: </b>{{dateS}} <b>ID: </b>{{orders.orderId}}
@@ -38,7 +38,7 @@
        </div>
     </div>
 
-    <div class="print__p mt-5">
+    <div class="print__p mt-3">
         <p>
             Yo <b>{{orders.orderRecieverName}}</b> he recibido de manos del mensajero todos los productos que lista la Factura, estando de acuerdo con su calidad y cantidad ( pesaje), y ante la duda el mensajero me facilita una pesa digital para su comprobación sin apuro y siendo explicativo y amable, pareciéndome adecuado el actuar, porte, aspecto y presentación del mensajero y los productos entregados. Por ello entiendo que una vez firmada esta, pierdo todo derecho a reclamar tanto yo como el emisor de la misma. Ante apuros, mal actuar del mensajero o dudas, contacte con nuestro teléfono de atención a Clientes: <b>59769857</b>. Gracias.  
         </p>
@@ -56,7 +56,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>  
     </div>
-    <div class="mt-5">
+    <div >
         <b>Nota:</b>
         <p>
             {{orders.orderNote}}

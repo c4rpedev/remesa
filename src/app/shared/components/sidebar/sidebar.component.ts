@@ -10,6 +10,7 @@ import { UserService } from 'src/app/core/services/user.service';
 })
 export class SidebarComponent implements OnInit {
   user: string;
+  
   isOpened: String;
   admin: boolean;
   sucursal: boolean;
@@ -44,6 +45,13 @@ export class SidebarComponent implements OnInit {
     }
     
     
+  }
+  isComercial(): boolean{
+    if(this.user == 'buttycomercial'){
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }
