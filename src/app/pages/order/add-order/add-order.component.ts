@@ -69,8 +69,6 @@ export class AddOrderComponent implements OnInit {
   }
 
   changeProvince(){   
-    
-    
     this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       this.order.orderMunicipio = this.municipios[0]['municipio'];

@@ -64,31 +64,22 @@ export class ListOrdersComponent implements OnInit  {
             }
           }
           this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
-          this.dataSource.sort = this.sort;
-          // this.dataSource.filterPredicate = (data:any, filter: string): boolean => {
-          //   return data.attributes.orderClientName.toLowerCase().includes(filter);
-          // };
-          
-
-     
-          console.log('Sort');
-          console.log(this.sort);
-          console.log(this.dataSource.sort);
-          
-          
-          
+          this.dataSource.sort = this.sort;         
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
-          this.isAdmin();     
-          //this.checkState();     
+          this.isAdmin();                
           this.loading = false;
            this.sucursal = this.userService.isSucursal(this.user);   
 
         }) 
       }else{
         this.orderService.getOrder(this.user).then(res=>{
-          res.forEach((element:any) => {
+          res.forEach((element:any) => {            
             this.orders.push(element);
-            console.log(this.orders);            
+            console.log('Order');
+            let d1 = new Date();
+            var diff = Math.abs(element.attributes.createdAt.getTime() - d1.getTime());
+            var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
+            console.log(diffDays);             
           });          
           this.dataSource = new MatTableDataSource<Order>(this.orders);
           console.log(this.dataSource);
@@ -101,22 +92,10 @@ export class ListOrdersComponent implements OnInit  {
             }
           }
           this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
-          this.dataSource.sort = this.sort;
-          // this.dataSource.filterPredicate = (data:any, filter: string): boolean => {
-          //   return data.attributes.orderClientName.toLowerCase().includes(filter);
-          // };
-          
-
-     
-          console.log('Sort');
-          console.log(this.sort);
-          console.log(this.dataSource.sort);
-          
-          
-          
+          this.dataSource.sort = this.sort;          
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
           this.isAdmin();     
-          //this.checkState();     
+          this.checkState();     
           this.loading = false;
         }) 
       }
@@ -140,15 +119,15 @@ export class ListOrdersComponent implements OnInit  {
   isAdmin(){
     this.admin = this.userService.isAdmin(this.user);
   }
-  // checkState(){
-  //   for (let order of this.orders) {
-  //     console.log('Order');
-  //     let d1 = new Date();
-  //     var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
-  //     var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
-  //     console.log(diffDays);  
-  //   }
-  // }
+  checkState(){
+    for (let order of this.orders) {
+      console.log('Order');
+      let d1 = new Date();
+      var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
+      var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
+      console.log(diffDays);  
+    }
+  }
 
   addOrder() {    
     this.router.navigate(['/b']);

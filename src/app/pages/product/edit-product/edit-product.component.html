@@ -134,6 +134,20 @@
                         </select></div>
                     </div>
                     <div class="col">
+                      <div class="form-group">
+                    <label for="price"><strong>Agencia</strong></label>
+                    <input type="string" 
+                           [(ngModel)]="product.productAgency" 
+                           class="form-control"
+                           [class.is-invalid]="productAgency.invalid && productAgency.touched"
+                           value="0"
+                           required
+                           placeholder="Todas"
+                           name="productAgency"
+                           #productAgency="ngModel" />
+                      </div>
+                  </div>
+                    <div class="col">
                       <div class="form-group"><label for="last_name"><strong>Catergoría</strong><br /></label>
                         <select [(ngModel)]="product.productCategory"  
                                 disabled

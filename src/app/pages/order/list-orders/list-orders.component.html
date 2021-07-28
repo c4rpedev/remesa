@@ -43,10 +43,13 @@
 
     
         <!-- Weight Column -->
-        <ng-container matColumnDef="agency">
-          <th mat-header-cell *matHeaderCellDef> Agencia </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderAgency}} </td>
-        </ng-container>
+      
+          <ng-container matColumnDef="agency">
+            <th mat-header-cell *matHeaderCellDef> Agencia </th>
+            <td mat-cell *matCellDef="let element"> {{element.attributes.orderAgency}} </td>
+          </ng-container>
+    
+      
     
         <!-- Symbol Column -->
         <ng-container matColumnDef="client">
@@ -68,8 +71,8 @@
           <td mat-cell *matCellDef="let element"> {{element.attributes.orderAddress}} </td>
         </ng-container>
         <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef> Teléfono </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderPhone}} </td>
+          <th mat-header-cell *matHeaderCellDef> Teléfonos </th>
+          <td mat-cell *matCellDef="let element"> {{element.attributes.orderMobile}} - {{element.attributes.orderPhone}}</td>
         </ng-container>
         <ng-container matColumnDef="state">
           <th mat-header-cell *matHeaderCellDef> Estado </th>

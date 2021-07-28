@@ -23,6 +23,21 @@ export class OrderService {
       myNewObject.set('orderPrice', order.orderPrice);
       myNewObject.set('orderReference', order.orderReference);
       myNewObject.set('orderNote', order.orderNote);
+      if(order.orderProvince == "Pinar del Río" || 
+      order.orderProvince == "Matanzas" || 
+      order.orderProvince == "Artemisa" || 
+      order.orderProvince == "Cienfuegos" || 
+      order.orderProvince == "Sancti Spíritus" || 
+      order.orderProvince == "La Habana" || 
+      order.orderProvince == "Ciego de Ávila" ||
+      order.orderProvince == "Villa Clara" || 
+      order.orderProvince == "Mayabeque" || 
+      order.orderProvince == "Camagüey" ||
+      order.orderProvince == "Isla de la Juventud"){
+        myNewObject.set('orderDays', 5);
+      }else{
+        myNewObject.set('orderDays', 7);
+      }
       myNewObject.set('productArray', products);
       myNewObject.set('orderAgency', user);
       try {

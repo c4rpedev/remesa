@@ -96,6 +96,7 @@ export class EditProductComponent implements OnInit {
     this.product.productProvince = this.products[0].province;
     this.product.productCategory = this.products[0].category;
     this.product.productDescription = this.products[0].description;
+    this.product.productAgency = this.products[0].productAgency;
     this.img = this.products[0].picture._url;
     console.log('Product');
     console.log(this.products);

@@ -139,10 +139,10 @@
         <div class="col-md-6"> <input type="text" 
           class="form-control" 
           [(ngModel)]="order.orderMobile" 
-          [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
-          required 
+          [class.is-invalid]="orderMobile.invalid && orderMobile.touched"          
           placeholder="Teléfono Móvil"
           [pattern]="mobNumberPattern" 
+          [required]="!order.orderPhone"
           name="orderMobile"
           #orderMobile = "ngModel">
           <small *ngIf="orderMobile.invalid && orderMobile.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe comenzar con 5 y tener 8 caracteres)</small>
@@ -150,10 +150,10 @@
         <div class="col-md-6"> <input type="text" 
           class="form-control" 
           [(ngModel)]="order.orderPhone" 
-          [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
-          required 
+          [class.is-invalid]="orderPhone.invalid && orderPhone.touched"           
           placeholder="Teléfono Fijo"
           [pattern]="fixNumberPattern" 
+          [required]="!order.orderMobile"
           name="orderPhone"
           #orderPhone = "ngModel">
           <small *ngIf="orderPhone.invalid && orderPhone.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe tener 8 caracteres)</small>
