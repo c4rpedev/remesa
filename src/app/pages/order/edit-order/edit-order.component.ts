@@ -8,6 +8,9 @@ import { OrderService } from 'src/app/core/services/order.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { SucursalService } from 'src/app/core/services/sucursal.service';
+
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { SendSmsComponent } from '../send-sms/send-sms.component';
 @Component({
   selector: 'app-edit-order',
   templateUrl: './edit-order.component.html',
@@ -31,7 +34,8 @@ export class EditOrderComponent implements OnInit {
   constructor(
     private router: Router,
     private sucursalService: SucursalService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {    
@@ -94,6 +98,13 @@ export class EditOrderComponent implements OnInit {
     }  
   }
 
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SendSmsComponent, {
+      width: '600px',
+      data: {}
+    });
+  }
+  
   print(){
     this.router.navigate(['/b']);
     this.router.navigateByUrl('/print-view', { state: {order: this.order}}); 

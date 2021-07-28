@@ -12,7 +12,15 @@
         </div>
     </div>
 </div>
+<div class="send__sms__container">
+  <div class="send__sms">
+    <button class="sms__button"  (click)="openDialog()"><i class="fa fa-mobile-phone fa-2x"></i>Enviar SMS a Cliente</button>
+  </div>
+</div>
+
+
 <div class="d-flex card">
+ 
   <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
     <label>
       <span class="fname">ID </span>
@@ -118,8 +126,10 @@
     
     
     <label>
-      <span>Teléfono Móvil</span>
-      <input type="text" 
+      
+        <span>Teléfono Móvil</span>
+     
+          <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
@@ -128,6 +138,14 @@
       placeholder="Número de teléfono"
       name="orderMobile"
       #orderMobile = "ngModel">
+      
+        
+        
+      
+    
+       
+       
+      
     </label>
     <label>
       <span>Teléfono Fijo</span>

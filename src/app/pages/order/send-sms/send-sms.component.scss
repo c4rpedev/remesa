@@ -19,20 +19,14 @@ body{
     max-width: 1140px;
   }
 }
-.d-flex{
-  display: flex;
-  flex-direction: row;
-  background: #fff;
-  border-radius: 15px;
-  padding: 25px;
-}
-a{
-    i{
-        color: #db3a3a;
-    }
-}
+
 form{
   flex: 4;
+}
+a{
+  i{
+      color: #db3a3a;
+  }
 }
 .Yorder{
   flex: 2;
@@ -55,8 +49,7 @@ h2{
   color: red;
 }
 label, table{
-  display: flex;
-  align-items: first baseline;
+  display: block;
   margin: 15px;
 }
 label>span{
@@ -65,16 +58,21 @@ label>span{
   margin-top: 12px;
   padding-right: 10px;
 }
-input[type="text"], input[type="tel"], input[type="email"], select, textarea
+input[type="text"], input[type="tel"], input[type="email"], select
 {
   width: 70%;
   height: 30px;
   padding: 5px 10px;
   margin-bottom: 10px;
   border: 1px solid #dadada;
-  color: rgb(0, 0, 0);
+  color: #888;
 }
-
+select{
+  width: 72%;
+  height: 45px;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
 .Yorder{
   margin-top: 15px;
   
@@ -84,9 +82,6 @@ input[type="text"], input[type="tel"], input[type="email"], select, textarea
 table{
   margin: 0;
   padding: 0;
-  display: flex;
-flex-direction: column;
-align-items: center;
 }
 th{
   border-bottom: 1px solid #dadada;
@@ -136,34 +131,11 @@ button:hover{
   cursor: pointer;
   background: #428a7d;
 }
+.complain{
+    display: flex;
+}
 
-.print__factura{
-  background: #b8405e !important;
-}
-.card-body {
-  flex: 1 1 auto;
-  padding: 0rem 1rem;
-}
-span{
-  font-weight: normal;
-font-size: 16px;
-color: black;
-}
 textarea{
-  height: 150px;
-}
-.send__sms{
-  width: max-content;
-}
-.send__sms__container{
   width: 100%;
-  display: flex;
-  justify-content: end;
-}
-.sms__button{
-  display: flex;
-  align-items: center;
-  i{
-    margin-right: 10px;
-  }
+  height: 100px;
 }
