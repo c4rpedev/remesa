@@ -101,7 +101,7 @@ export class EditOrderComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(SendSmsComponent, {
       width: '600px',
-      data: {}
+      data: {mobile: this.order.orderMobile}
     });
   }
   

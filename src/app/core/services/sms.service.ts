@@ -48,8 +48,29 @@ export class SmsService {
       });
     })   
   }
-  send(){
-
+  send(number: string, text: string){
+    this.getApiKey().then(res=>{
+      this.api_key = res[0].attributes.apikey;
+      const data: any = {
+        api_key : this.api_key,
+        numero : 53+number,
+        sms : text,
+        remitente : this.remitente
+      };
+        
+        this.data_string = JSON.stringify(data);
+        console.log(this.data_string);
+        console.log(this.data_string.length.toString());
+        
+        this.headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Target-Url': 'https://www.excellentsms.net/index.php/api/sms'       
+      });
+      this.http.post(this.url, this.data_string, {headers: this.headers}).subscribe(resp =>{
+        console.log(res);
+        
+      });
+    }) 
   }
   // sendSMS(){
   //   var url = "https://www.excellentsms.net/index.php/api/sms";
