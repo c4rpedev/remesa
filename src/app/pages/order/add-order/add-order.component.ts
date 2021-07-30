@@ -50,7 +50,7 @@ export class AddOrderComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.provinces = this.provinceService.getProvinces(); 
+     this.provinces = this.provinceService.getProvinces(); 
      this.products = history.state.product;
      this.order.orderProvince = this.products[0].province; 
      

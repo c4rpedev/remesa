@@ -12,6 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
+import { StatesService } from 'src/app/core/services/states.service';
 
 @Component({
   selector: 'app-list-orders',
@@ -26,7 +27,7 @@ export class ListOrdersComponent implements OnInit  {
   loading: boolean;
   displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'adress', 'phone', 'state', 'accions'];
   dataSource: any;
-
+  state: string = 'Selecciona un estado';
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
@@ -37,6 +38,7 @@ export class ListOrdersComponent implements OnInit  {
   constructor(private orderService: OrderService,
               private userService: UserService,
               private router: Router,
+              private stateService: StatesService,
               public auth: AuthService,
                 @Inject(DOCUMENT) public document: Document) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -66,6 +68,9 @@ export class ListOrdersComponent implements OnInit  {
           this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
           this.dataSource.sort = this.sort;         
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
+          this.dataSource.filterPredicate = (data: any, filter: string) => {          
+            return data.attributes['state'] == filter;     
+           }; 
           this.isAdmin();                
           this.loading = false;
            this.sucursal = this.userService.isSucursal(this.user);   
@@ -94,6 +99,9 @@ export class ListOrdersComponent implements OnInit  {
           this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
           this.dataSource.sort = this.sort;          
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
+          this.dataSource.filterPredicate = (data: any, filter: string) => {          
+            return data.attributes['state'] == filter;     
+           }; 
           this.isAdmin();     
           this.checkState();     
           this.loading = false;
@@ -105,12 +113,10 @@ export class ListOrdersComponent implements OnInit  {
     
   }
 
-  applyFilter(event: Event) {
-    console.log(event);  
-    console.log(this.dataSource._data._value);
-      
-    const filterValue = (event.target as HTMLInputElement).value;    
-    this.dataSource.filter = filterValue.trim().toLowerCase(); 
+  applyFilter(event: string) {
+    console.log(event);         
+    const filterValue = event;   
+    this.dataSource.filter = filterValue.trim(); 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
@@ -125,9 +131,22 @@ export class ListOrdersComponent implements OnInit  {
       let d1 = new Date();
       var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
       var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
-      console.log(diffDays);  
+      console.log(diffDays);       
+      console.log(this.stateService.getDeliveryTime(order.attributes.orderProvince));
+      var deliveryTime = this.stateService.getDeliveryTime(order.attributes.orderProvince);
+      if((diffDays - deliveryTime == 1) || diffDays == deliveryTime){
+        console.log('En termino');        
+      }else if(diffDays < deliveryTime){
+        console.log('En tiempo');
+      }else if(diffDays > deliveryTime){
+        console.log('Atrasado');
+        
+      }
+      
     }
   }
+
+
 
   addOrder() {    
     this.router.navigate(['/b']);

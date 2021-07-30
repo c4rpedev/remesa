@@ -79,7 +79,15 @@ export class ProductService {
     })();    
   }
 
-  updateProduct(id: string, product: Product, img: string, products: any[]){    
+  updateProduct(id: string, product: Product, img: string, products: any){   
+    console.log('ID');
+    console.log(id);
+    console.log('Product');
+    console.log(product);
+    console.log('Img');
+    console.log(img);
+    console.log('ProductsArray');
+    console.log(products);
     (async () => {
       const query = new Parse.Query('products');
       try {
@@ -94,12 +102,9 @@ export class ProductService {
       myNewObject.set('province', product.productProvince);
       myNewObject.set('category', product.productCategory);      
       myNewObject.set('picture', new Parse.File("product.jpg", { uri: img }));   
-      myNewObject.set('description', product.productDescription);
-      console.log('product');
-      console.log(products);
-      
-      
+      myNewObject.set('description', product.productDescription);      
       myNewObject.set('products', products); 
+      myNewObject.set('productAgency', product.productAgency); 
         try {
           const response = await myNewObject.save();
           // You can use the "get" method to get the value of an attribute
@@ -145,13 +150,12 @@ export class ProductService {
   }
   addCombo(product: Product, img: string, products: any[], agency: string){    
     (async () => {
-      const myNewObject = new Parse.Object('products');
-      myNewObject.set('productId', product.productId);
+      const myNewObject = new Parse.Object('products');      
       myNewObject.set('name', product.productName);
-      myNewObject.set('price', product.productPrice);
+      myNewObject.set('price', +product.productPrice);
       myNewObject.set('cost', product.productCost);
       myNewObject.set('um', 'u');
-      myNewObject.set('amount', '1');
+      myNewObject.set('amount', +'1');
       myNewObject.set('province', product.productProvince);
       myNewObject.set('category', 'Combo');      
       myNewObject.set('productAgency', agency);   

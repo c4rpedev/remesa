@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { Product } from 'src/app/core/models/product';
+import { ProductView } from 'src/app/core/models/product-view';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { ProductService } from 'src/app/core/services/product.service';
 import Swal from 'sweetalert2';
@@ -29,52 +30,10 @@ export class EditProductComponent implements OnInit {
    displayedColumns: string[] ;
   dataSource: any[] = [];
   event:ClipboardEvent;
-
-  data(event:ClipboardEvent) {   
-    
-    if(event){
-      let clipboardData = event.clipboardData;
-    let pastedText = clipboardData.getData('text');
-    let row_data = pastedText.split('\n');
-    
-    
-    this.displayedColumns = [ "Nombre", "UM", "Cantidad" ];
-    //delete row_data[0];
-    // Create table dataSource
-    let data:any=[];
-
-    row_data.forEach(row_data=>{
-        let row:any={};
-      this.displayedColumns.forEach((a, index)=>{row[a]= row_data.split('\t')[index]});
-      data.push(row);
-    })
-      this.dataSource = data;
-      console.log(this.dataSource);
-    }else{
-      let row_data = this.products[0].products;
-    
-    
-      this.displayedColumns = [ "Nombre", "UM", "Cantidad" ];
-      //delete row_data[0];
-      // Create table dataSource
-      let data:any=[];
-  
-     /* row_data.forEach((row_data:any)=>{
-          let row:any={};
-        this.displayedColumns.forEach((a, key)=>{
-          console.log(row_data[key]);
-          
-          row[a]= row_data[key]
-        });
-        data.push(row);
-      })*/
-      this.dataSource = row_data;
-      console.log(this.dataSource);
-      
-    }
-    
-   
-    }
+  row_data: Array<any> = [];
+  prod: any;
+  productview: ProductView = new ProductView;
+ 
   
 
   constructor(private service: ProductService,
@@ -104,10 +63,71 @@ export class EditProductComponent implements OnInit {
     console.log(this.productsA);
     this.data(this.event);
     this.provinces = this.provinceService.getProvinces();  
+    this.getProducts();
    
   }
 
- 
+  data(event: ClipboardEvent) {
+    if (event) {
+      let clipboardData = event.clipboardData;
+      let pastedText = clipboardData.getData('text');
+      let row_data = pastedText.split('\n');
+      this.displayedColumns = ["Nombre", "UM", "Cantidad"];
+      let data: any = [];
+      row_data.forEach(row_data => {
+        let row: any = {};
+        this.displayedColumns.forEach((a, index) => { row[a] = row_data.split('\t')[index] });
+        data.push(row);
+      })
+      this.dataSource = data;
+      console.log(this.dataSource);
+    } else {
+      let row_data = this.products[0].products;
+      this.displayedColumns = ["Nombre", "UM", "Cantidad"];
+      let data: any = [];
+      this.dataSource = row_data;
+      console.log(this.dataSource);
+    }
+  }
+
+  getProducts() {   
+    for (const product of this.products[0].products) {
+      console.log('product');
+      console.log(product);      
+      if(product.products.length == 0){
+        console.log('IFFF');
+        this.prod = <Object>product;
+        this.productview = {Nombre: this.prod.name,
+                            UM: this.prod.um,
+                            Cantidad: this.prod.amount};
+        console.log(this.productview);
+        
+        this.row_data.push(this.productview);
+        console.log(this.row_data);
+        
+        
+      }else{
+        console.log('ELSSS');
+        this.prod = <Object>product.products;  
+        for (const p of this.prod) {
+          this.row_data.push(p);
+        }
+        
+        console.log(this.row_data);        
+      
+        //this.row_data= product.products;
+      }
+    }
+
+    // let row_data = this.orders.productArray[0].products;
+    this.displayedColumns = [ "Nombre", "UM",  "Cantidad" ];
+    let data:any=[];
+    this.dataSource = this.row_data;
+    console.log('DATASOURCE');
+    console.log(this.dataSource);
+    
+    
+    }
 
   photo(event: any) {
     this.filePath = event.files;
@@ -123,7 +143,7 @@ export class EditProductComponent implements OnInit {
     }
 
   saveProduct(form: NgForm){
-    if(form.valid){
+    if(form.valid){     
       this.service.updateProduct(this.productsA[0].id, this.product, this.img.toString(), this.dataSource);
       Swal.fire({
         position: 'top-end',

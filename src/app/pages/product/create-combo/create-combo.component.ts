@@ -10,6 +10,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/core/models/product';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '@auth0/auth0-angular';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-add-order',
@@ -24,6 +25,7 @@ export class CreateComboComponent implements OnInit {
   total:number = 0;
   product: Product = new Product();
   user: string;
+  admin: boolean;
   filePath:String;
   img: string | ArrayBuffer =
   "https://bulma.io/images/placeholders/480x480.png";
@@ -31,7 +33,7 @@ export class CreateComboComponent implements OnInit {
   file: File;
   constructor(
     private router: Router,
-    private location:Location,
+    private userService: UserService,
     private provinceService: GetProvincesService,
     private orderService: OrderService,
     private service: ProductService,
@@ -41,6 +43,9 @@ export class CreateComboComponent implements OnInit {
   ngOnInit(): void {
     this.auth.user$.subscribe(user=>{
       this.user = user.nickname;
+      this.admin = this.userService.isAdmin(this.user);
+      console.log(this.admin);
+      
     })
     this.provinces = this.provinceService.getProvinces();  
      this.products = history.state.product;

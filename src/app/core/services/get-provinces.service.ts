@@ -24,9 +24,26 @@ export class GetProvincesService {
     { name: "Guantánamo", value: 15 },
     { name: "Isla de la Juventud", value: 16 }
   ]
+  occidente = [          
+    { name: "Pinar del Río", value: 1 },
+    { name: "Artemisa", value: 2 },
+    { name: "La Habana", value: 3 },
+    { name: "Mayabeque", value: 4 },
+    { name: "Matanzas", value: 5 },
+    { name: "Cienfuegos", value: 6 },
+    { name: "Villa Clara", value: 7 },
+    { name: "Sancti Spíritus", value: 8 },
+    { name: "Ciego de Ávila", value: 9 },
+    { name: "Camagüey", value: 10 },   
+    { name: "Isla de la Juventud", value: 16 }
+  ]
   constructor() { }
 
   getProvinces(){
     return this.provinces;
+  }
+
+  getOccidente(){
+    return this.occidente;
   }
 }

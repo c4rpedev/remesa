@@ -11,15 +11,38 @@
       </div>
   </div>
 </div>
-<div class="btn-group " role="group" *ngIf="!sucursal">
-  <button type="button" (click)="addOrder()" >Realizar Pedido</button>           
+<div class="list__filter__group" role="group" *ngIf="!sucursal">
+  <button type="button" (click)="addOrder()" >Realizar Pedido</button>   
+  <div>
+    Filtre por estado: 
+    <select name="state" (ngModelChange)="applyFilter($event)" [(ngModel)]="state" >
+      <option value="">
+        Todos
+      </option>
+      <option value="Nuevo">
+        Nuevo
+      </option>
+      <option value="Revisado">
+        Revisado
+      </option>
+      <option value="En Proceso">
+        En Proceso
+      </option>
+      <option value="Finalizado">
+        Finalizado
+      </option>
+      <option value="Cancelado">
+        Cancelado
+      </option>
+    </select>
+  </div>
+          
 </div>
 <div class="card">
   <div class="table-responsive">
-    <!-- <mat-form-field appearance="standard">
-      <mat-label>Filtro</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Pepe" #input>
-    </mat-form-field> -->
+  
+     
+  
     
 
     <div class="mat-elevation-z8">

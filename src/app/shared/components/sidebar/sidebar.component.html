@@ -38,7 +38,7 @@
       <div class="icon">
         <i class="fa fa-archive"></i>
       </div>
-      <span>Quejas</span>
+       <span>Quejas</span><i class="fa fa-exclamation-circle alert__color" *ngIf="complains"></i>
     </div>
     <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
       <div class="icon">
