@@ -50,8 +50,8 @@
    
     
       <label> <strong>Provincia</strong>  </label>
-      <select  [(ngModel)]="province"  
-      (ngModelChange)="changeProvince()"
+      <input  [(ngModel)]="order.orderProvince"  
+      
       class="form-select" 
       name="orderProvince"
       disabled
@@ -60,10 +60,6 @@
       
       >
 
-<option *ngFor="let p of provinces">
-  {{p.name}}
-</option>
-</select>
                         
                        
                     

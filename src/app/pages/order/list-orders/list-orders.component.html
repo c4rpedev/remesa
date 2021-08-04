@@ -12,17 +12,10 @@
   </div>
 </div>
 <div class="list__filter__group" role="group" *ngIf="!sucursal">
-  <button type="button" (click)="addOrder()" >Realizar Pedido</button>   
- 
-          
+  <button *ngIf="!admin && !sucursal" type="button" (click)="addOrder()" >Realizar Pedido</button>   
 </div>
 <div class="card">
   <div class="table-responsive">
-  
-     
-  
-    
-
     <div class="mat-elevation-z8">
      <div class="order__spinner" *ngIf="loading">
         <mat-spinner  ></mat-spinner>
@@ -412,7 +405,9 @@
                     <mat-option  value="Todos">Todos</mat-option>
                     <mat-option  value="Nuevo">Nuevo</mat-option>
                     <mat-option  value="Revisado">Revisado</mat-option>
-                    <mat-option  value="En Proceso">En Proceso</mat-option>
+                    <mat-option  value="En Tiempo">En Tiempo</mat-option>
+                    <mat-option  value="En Termino">En Termino</mat-option>
+                    <mat-option  value="Atrasado">Atrasado</mat-option>
                     <mat-option  value="Finalizado">Finalizado</mat-option>
                     <mat-option  value=Cancelado>Cancelado</mat-option>
                   </mat-select>
@@ -427,21 +422,27 @@
             </mat-menu>
     
           </th>
-          <td mat-cell *matCellDef="let element">  <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Nuevo'">
+          <td mat-cell *matCellDef="let element">  <div class="badge bg-info text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Nuevo'">
             {{element.attributes.state}}     
           </div>
-          <div class="badge bg-warning text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Revisado'">
+          <div class="badge bg-primary text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Revisado'">
             {{element.attributes.state}}     
           </div>
-          <div class="badge bg-primary text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Proceso'">
+          <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Tiempo'">
             {{element.attributes.state}}     
           </div>
-          <div class="badge bg-danger text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Finalizado'">
+          <div class="badge bg-dark text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Finalizado'">
             {{element.attributes.state}}     
           </div>
           <div class="badge bg-secondary text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Cancelado'">
             {{element.attributes.state}}     
-          </div>  </td>
+          </div> 
+          <div class="badge bg-warning text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Termino'">
+            {{element.attributes.state}}     
+          </div>
+          <div class="badge bg-danger text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Atrasado'">
+            {{element.attributes.state}}     
+          </div> </td>
         </ng-container>
 
           <!-- accions Column -->

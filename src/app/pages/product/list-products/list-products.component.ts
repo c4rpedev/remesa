@@ -11,6 +11,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import { PreviewProductComponent } from '../preview-product/preview-product.component';
 import { StatesService } from 'src/app/core/services/states.service';
+import { MunicipioService } from 'src/app/core/services/municipio.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ListProductsComponent implements OnInit {
   productsEdit: Array<any> = [];
   productsAttr: Array<any> = [];
   productsCart: Array<any> = [];
-  provinces: any;
+  provinces: any = [];
+  provincesP: any;
   selectedProvince: null;
   img: String;
   user: string;
@@ -37,7 +39,7 @@ export class ListProductsComponent implements OnInit {
     private router: Router,
     private provinceService: GetProvincesService,
     private userService: UserService,
-    
+    private municipioService: MunicipioService,
     public auth: AuthService,
     public dialog: MatDialog,
     @Inject(DOCUMENT) public document: Document
@@ -53,7 +55,7 @@ export class ListProductsComponent implements OnInit {
       
        this.user = user.nickname;           
       this.who= history.state.who;       
-      this.provinces = this.provinceService.getProvinces();  
+      this.getProvinces();
       //this.getProductForProvince();  
     })
 
@@ -111,10 +113,25 @@ export class ListProductsComponent implements OnInit {
     }
      
   };
+  getProvinces(){
+    this.provincesP = this.provinceService.getProvinces();  
+    for (const province of this.provincesP) {
+      this.municipioService.getMunicipio(province.name).then(res=>{
+        console.log(res[0].attributes['municipios'][0].municipio);        
+        if(res[0].attributes['municipios'][0].municipio != ''){
+          this.provinces.push(province);
+          console.log('PRovinces');
+          console.log(this.provinces);
+        }
+      })
+  
+    }
+   
+  }
 
   getProductForProvince() {
     console.log(this.selectedProvince);  
-    if(this.user == 'buttymanager'){
+    if(this.userService.isAdmin(this.user)){
       this.loading = true;
       this.service.getAllProductProperties(this.selectedProvince).then(res=>{
         this.products = res; 

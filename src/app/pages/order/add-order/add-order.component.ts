@@ -52,8 +52,8 @@ export class AddOrderComponent implements OnInit {
   ngOnInit(): void {    
      this.provinces = this.provinceService.getProvinces(); 
      this.products = history.state.product;
-     this.province =  history.state.province;
-     this.order.orderProvince = this.products[0].province;      
+    //  this.province =  history.state.province;
+     this.order.orderProvince = history.state.province;     
      this.initProvince();  
      this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
@@ -62,14 +62,14 @@ export class AddOrderComponent implements OnInit {
   }
 
   initProvince(){
-    this.municipioService.getMunicipio(this.province).then(res=>{
+    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       console.log(this.municipios);
     })
   }
 
   changeProvince(){   
-    this.municipioService.getMunicipio(this.province).then(res=>{
+    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       this.order.orderMunicipio = this.municipios[0]['municipio'];
           })
@@ -113,9 +113,9 @@ export class AddOrderComponent implements OnInit {
   
   onSubmit(form: NgForm){
     if(form.valid){   
-      // if(!this.order.state){
-      //   this.sendSms(this.order.orderMobile);        
-      // }      
+      if(!this.order.state){
+        this.sendSms(this.order.orderMobile);        
+      }      
       this.order.orderAddress = this.localidad+', '+this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);

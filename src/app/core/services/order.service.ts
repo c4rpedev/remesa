@@ -92,6 +92,31 @@ export class OrderService {
         }
     })();
   }
+
+  updateOrderState(orderId: string, state: string){
+    (async () => {
+      const query = new Parse.Query('order');
+      try {
+        // here you put the objectId that you want to update
+        const myNewObject = await query.get(orderId);
+      
+        myNewObject.set('state', state);
+        try {
+          const response = await myNewObject.save();
+          // You can use the "get" method to get the value of an attribute
+          // Ex: response.get("<ATTRIBUTE_NAME>")
+          // Access the Parse Object attributes using the .GET method
+         
+          console.log(response.get('state'));
+         
+        } catch (error) {
+          console.error('Error while updating order', error);
+          }
+        } catch (error) {
+          console.error('Error while retrieving object order', error);
+        }
+    })();
+  }
   deleteOrder(id: string){
     (async () => {
       const query = new Parse.Query('order');

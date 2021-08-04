@@ -16,9 +16,7 @@ export class ReportComponent implements AfterViewInit {
   pivotGridDataSource: any;
 
   constructor(private orderService: OrderService) {
-    // this.customizeTooltip = this.customizeTooltip.bind(this);
-
-    
+   
   }
 
   ngAfterViewInit() {
@@ -34,7 +32,13 @@ export class ReportComponent implements AfterViewInit {
           dataField: "orderAgency",
           area: "row",
           sortBySummaryField: "Total"
-        },{
+        }, {
+          caption: "Estado",
+          dataField: "state",
+          width: 150,
+          area: "row"
+        },
+        {
           caption: "Provincia",
           width: 120,
           dataField: "orderProvince",
@@ -44,7 +48,7 @@ export class ReportComponent implements AfterViewInit {
           dataField: "orderMunicipio",
           width: 150,
           area: "row"
-        }, {
+        },{
           dataField: "createdAt",
           dataType: "date",
           area: "column"

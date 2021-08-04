@@ -38,7 +38,7 @@
       <div class="icon">
         <i class="fa fa-archive"></i>
       </div>
-       <span>Quejas</span><b class="alert__color" *ngIf="complains">{{complainsCount}}</b>
+       <span>Quejas</span><span class="badge rounded-pill bg-secondary alert__color" *ngIf="complains">{{complainsCount}}</span>
     </div>
     <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
       <div class="icon">
