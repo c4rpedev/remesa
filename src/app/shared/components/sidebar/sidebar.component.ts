@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   isOpened: String;
   admin: boolean;
   sucursal: boolean;
+  complainsCount: number =0;
   public screenWidth: any;
   public screenHeight: any;
   
@@ -38,6 +39,7 @@ export class SidebarComponent implements OnInit {
        for (const complain of res) {      
          if(complain.attributes.complainState == 'Nuevo'){
            this.complains = true;
+           this.complainsCount++;
          }
        }
        

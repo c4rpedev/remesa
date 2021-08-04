@@ -13,29 +13,7 @@
 </div>
 <div class="list__filter__group" role="group" *ngIf="!sucursal">
   <button type="button" (click)="addOrder()" >Realizar Pedido</button>   
-  <div>
-    Filtre por estado: 
-    <select name="state" (ngModelChange)="applyFilter($event)" [(ngModel)]="state" >
-      <option value="">
-        Todos
-      </option>
-      <option value="Nuevo">
-        Nuevo
-      </option>
-      <option value="Revisado">
-        Revisado
-      </option>
-      <option value="En Proceso">
-        En Proceso
-      </option>
-      <option value="Finalizado">
-        Finalizado
-      </option>
-      <option value="Cancelado">
-        Cancelado
-      </option>
-    </select>
-  </div>
+ 
           
 </div>
 <div class="card">
@@ -46,60 +24,410 @@
     
 
     <div class="mat-elevation-z8">
-      <div class="order__spinner" *ngIf="loading">
+     <div class="order__spinner" *ngIf="loading">
         <mat-spinner  ></mat-spinner>
-      </div>
-      
-      <table mat-table [dataSource]="dataSource" matSort >
-        
+      </div>  
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+
         <!-- Position Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Id  <i class="fa fa-filter"></i>          
+    
+            </div>
+            <mat-menu #menu>             
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderId">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderId">
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderId">
+                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderId">{{order.attributes.orderId}}</mat-option>
+                  </mat-select> -->
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderId')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>    
+              </div>
+            </mat-menu>    
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.attributes.orderId}} </td>
         </ng-container>
     
         <!-- Name Column -->
         <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef  mat-sort-header disableClear> Fecha </th>
-          <td mat-cell *matCellDef="let element">{{element.attributes.createdAt | date}}</td>
-        </ng-container>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Fecha<i class="fa fa-filter"></i>  
+            </div>
+            <mat-menu #menu>   
+              <form class="date-block" [formGroup]="filterForm">        
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field hidden>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.createdAt">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="isnotequal">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field> 
+                <mat-form-field>
+                  <input matInput 
+                    [matDatepicker]="fromDate" 
+                    placeholder="Desde" 
+                    formControlName="fromDate">
+                  <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
+                  <mat-datepicker #fromDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <!-- <mat-form-field>
+                   <input matInput placeholder="Atributos" [(ngModel)]="searchValue.name"> 
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderId">
+                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderId">{{order.attributes.orderId}}</mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+              
+                <mat-form-field>
+                  <input matInput 
+                    [matDatepicker]="toDate" 
+                    placeholder="Hasta" 
+                    formControlName="toDate">
+                  <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
+                  <mat-datepicker #toDate></mat-datepicker>
+                </mat-form-field>
+              </div>    
 
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumnDate()">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+              </div>
+            </form>   
+            </mat-menu>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.attributes.createdAt | date}} </td>
+        </ng-container>
     
         <!-- Weight Column -->
-      
-          <ng-container matColumnDef="agency">
-            <th mat-header-cell *matHeaderCellDef> Agencia </th>
-            <td mat-cell *matCellDef="let element"> {{element.attributes.orderAgency}} </td>
-          </ng-container>
+        <ng-container matColumnDef="agency">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Agencia <i class="fa fa-filter"></i>  
+            </div>
+            <mat-menu #menu>             
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderAgency">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
     
-      
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <!-- <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderAgency"> -->
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderAgency">
+                    <mat-option *ngFor="let t of transporte" [value]="t.attributes.agencia">{{t.attributes.agencia}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderAgency')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    
+              </div>
+            </mat-menu>
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.attributes.orderAgency}} </td>
+        </ng-container>
     
         <!-- Symbol Column -->
         <ng-container matColumnDef="client">
-          <th mat-header-cell *matHeaderCellDef> Cliente </th>
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Cliente <i class="fa fa-filter"></i>       
+            </div>
+            <mat-menu #menu>              
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderClientName">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderClientName">
+                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderClientName">{{order.attributes.orderClientName}}</mat-option>
+                  </mat-select> -->
+                   <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderClientName"> 
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderClientName')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    
+              </div>
+            </mat-menu>
+          </th>
           <td mat-cell *matCellDef="let element"> {{element.attributes.orderClientName}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="products">
-          <th mat-header-cell *matHeaderCellDef> Productos </th>
-          <td mat-cell *matCellDef="let element"> <p *ngFor="let product of element.attributes.productArray">{{product.name}}</p> </td>
+          <!-- products -->
+          <ng-container matColumnDef="products">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header" [matMenuTriggerFor]="menu">
+                Productos   
+              </div>
+              <mat-menu #menu hidden>               
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderId">
+                      <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderId">
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <button mat-raised-button (click)="clearColumn('position')">Limpiar</button>
+                  <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+      
+                </div>
+              </mat-menu>
+      
+            </th>
+            <td mat-cell *matCellDef="let element">  <p *ngFor="let product of element.attributes.productArray">{{product.name}}</p> </td>
+          </ng-container>
+
+            <!-- reciver Column -->
+        <ng-container matColumnDef="reciver">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Recibe <i class="fa fa-filter"></i>             
+            </div>
+            <mat-menu #menu>             
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderRecieverName">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderRecieverName">
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchAtributos.orderRecieverName">
+                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderRecieverName">{{order.attributes.orderRecieverName}}</mat-option>
+                  </mat-select> -->
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderRecieverName')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    
+              </div>
+            </mat-menu>
+    
+          </th>
+          <td mat-cell *matCellDef="let element">{{element.attributes.orderRecieverName}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="reciver">
-          <th mat-header-cell *matHeaderCellDef> Recibe </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderRecieverName}} </td>
+          <!-- province Column -->
+          <ng-container matColumnDef="province">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header" [matMenuTriggerFor]="menu">
+                Provincia <i class="fa fa-filter"></i>  
+              </div>
+              <mat-menu #menu>               
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderProvince">
+                      <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <!-- <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderProvince"> -->
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderProvince">
+                      <mat-option *ngFor="let  province of provinces" [value]="province.name">{{province.name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <button mat-raised-button (click)="clearColumn('orderProvince')">Limpiar</button>
+                  <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+      
+                </div>
+              </mat-menu>
+      
+            </th>
+            <td mat-cell *matCellDef="let element">{{element.attributes.orderProvince}} </td>
+          </ng-container>
+
+            <!-- municipio Column -->
+        <ng-container matColumnDef="municipio">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Municipio    <i class="fa fa-filter"></i>           
+            </div>
+            <mat-menu #menu>           
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderMunicipio">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderMunicipio">
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderMunicipio">
+                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderMunicipio">{{order.attributes.orderMunicipio}}</mat-option>
+                  </mat-select> -->
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderMunicipio')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    
+              </div>
+            </mat-menu>
+    
+          </th>
+          <td mat-cell *matCellDef="let element">{{element.attributes.orderMunicipio}} </td>
         </ng-container>
-        <ng-container matColumnDef="adress">
-          <th mat-header-cell *matHeaderCellDef> Dirección </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderAddress}} </td>
-        </ng-container>
-        <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef> Teléfonos </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderMobile}} - {{element.attributes.orderPhone}}</td>
-        </ng-container>
+
+          <!-- phone Column -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header" [matMenuTriggerFor]="menu">
+                Teléfono <i class="fa fa-filter"></i>     
+              </div>
+              <mat-menu #menu>             
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderPhone">
+                      <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderPhone">
+                    <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderMunicipio">
+                      <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderMunicipio">{{order.attributes.orderMunicipio}}</mat-option>
+                    </mat-select> -->
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <button mat-raised-button (click)="clearColumn('orderPhone')">Limpiar</button>
+                  <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+      
+                </div>
+              </mat-menu>
+      
+            </th>
+            <td mat-cell *matCellDef="let element">  {{element.attributes.orderPhone}} </td>
+          </ng-container>
+
+          <!-- mobile Column -->
+          <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header" [matMenuTriggerFor]="menu">
+                Móvil   <i class="fa fa-filter"></i>  
+              </div>
+              <mat-menu #menu>             
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderMobile">
+                      <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <mat-form-field>
+                    <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderMobile">
+                    <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderMunicipio">
+                      <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderMunicipio">{{order.attributes.orderMunicipio}}</mat-option>
+                    </mat-select> -->
+                  </mat-form-field>
+                </div>
+      
+                <div mat-menu-item mat-filter-item [disableRipple]="true">
+                  <button mat-raised-button (click)="clearColumn('orderMobile')">Limpiar</button>
+                  <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+      
+                </div>
+              </mat-menu>
+      
+            </th>
+            <td mat-cell *matCellDef="let element"> {{element.attributes.orderMobile}}  </td>
+          </ng-container>
+
+            <!-- state Column -->
         <ng-container matColumnDef="state">
-          <th mat-header-cell *matHeaderCellDef> Estado </th>
-          <td mat-cell *matCellDef="let element"> <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Nuevo'">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Estado <i class="fa fa-filter"></i>   
+            </div>
+            <mat-menu #menu>             
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.state">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <!-- <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderId"> -->
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(ngModel)]="searchValue.state">
+                    <mat-option  value="Todos">Todos</mat-option>
+                    <mat-option  value="Nuevo">Nuevo</mat-option>
+                    <mat-option  value="Revisado">Revisado</mat-option>
+                    <mat-option  value="En Proceso">En Proceso</mat-option>
+                    <mat-option  value="Finalizado">Finalizado</mat-option>
+                    <mat-option  value=Cancelado>Cancelado</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+    
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('state')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+    
+              </div>
+            </mat-menu>
+    
+          </th>
+          <td mat-cell *matCellDef="let element">  <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Nuevo'">
             {{element.attributes.state}}     
           </div>
           <div class="badge bg-warning text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Revisado'">
@@ -113,27 +441,35 @@
           </div>
           <div class="badge bg-secondary text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Cancelado'">
             {{element.attributes.state}}     
-          </div> </td>
+          </div>  </td>
         </ng-container>
-        <ng-container matColumnDef="accions">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let element">
-            <div class="actions__row">
-              <div *ngIf="!admin && !sucursal">
-               <button class="btn btn-primary btn-xs" data-title="List" data-toggle="modal" data-target="#list" (click)="editOrder(element.attributes, element.id)"><span class="fa fa-list"></span></button>
+
+          <!-- accions Column -->
+          <ng-container matColumnDef="accions">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="header">
+                Acciones         
               </div>
-              <div *ngIf="admin || sucursal">
-                <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" (click)="editOrder(element.attributes, element.id)"><span class="fa fa-edit"></span></button>
+             
+            </th>
+            <td mat-cell *matCellDef="let element"> 
+              <div class="actions__row">
+                <div *ngIf="!admin && !sucursal">
+                 <button  matTooltip="Listar" class="btn btn-primary btn-xs" data-title="List" data-toggle="modal" data-target="#list" (click)="editOrder(element.attributes, element.id)"><span class="fa fa-list"></span></button>
+                </div>
+                <div *ngIf="!admin && !sucursal">
+                  <button matTooltip="Añadir Queja" class="btn btn-warning btn-xs" data-title="Complain" data-toggle="modal" data-target="#list" (click)="addComplain(element.attributes, element.id)"><span class="fa fa-exclamation-circle"></span></button>
+                 </div>
+                <div *ngIf="admin || sucursal">
+                  <button matTooltip="Editar" class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" (click)="editOrder(element.attributes, element.id)"><span class="fa fa-edit"></span></button>
+                </div>
+                <div *ngIf="admin">
+                 <button matTooltip="Eliminar" class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" (click)="deleteOrder(element)"><span class="fa fa-trash"></span></button>
+                </div>
               </div>
-              <div *ngIf="admin">
-               <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" (click)="deleteOrder(element)"><span class="fa fa-trash"></span></button>
-              </div>
-            </div>
-          
-          </td> 
-          
-        
-        </ng-container>
+            </td>
+          </ng-container>
+    
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>

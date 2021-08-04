@@ -13,9 +13,9 @@
   </div>
 
 
-  <div class="btn-group " role="group" >
+  <!-- <div class="btn-group " role="group" >
     <button type="button" (click)="addComplain()">Realizar queja</button>           
-  </div>
+  </div> -->
   <div class="card">
     <div class="order__spinner" *ngIf="loading">
       <mat-spinner  ></mat-spinner>
@@ -42,10 +42,7 @@
       <td>{{complain.attributes.complainOrder}}</td> 
       <td><div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="complain.attributes.complainState == 'Nuevo'">
         {{complain.attributes.complainState}}     
-      </div>
-      <div class="badge bg-warning text-wrap" style="width: 6rem;" *ngIf="complain.attributes.complainState == 'Revisado'">
-        {{complain.attributes.complainState}}     
-      </div>
+      </div>     
       <div class="badge bg-primary text-wrap" style="width: 6rem;" *ngIf="complain.attributes.complainState == 'En Proceso'">
         {{complain.attributes.complainState}}     
       </div>

@@ -5,6 +5,12 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from "@angular/material/select";
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DxPivotGridModule, DxChartModule } from 'devextreme-angular';
@@ -33,12 +39,13 @@ import { EditTransportComponent } from './pages/transport/edit-transport/edit-tr
 import { ModalModule } from './_modal';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SendSmsComponent } from './pages/order/send-sms/send-sms.component';
-
+import { FilterItemDirective } from "./filter-item.directive";
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
 (Parse as any).serverURL = environment.serverURL;
 
 @NgModule({
   declarations: [
+    FilterItemDirective,
     AppComponent,
     DashboardComponent,
     SidebarComponent,
@@ -64,7 +71,13 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     MatPaginatorModule,
     MatSortModule,
     MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    MatMenuModule,
     MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,   
@@ -82,7 +95,8 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     }),
   ],
   providers: [
-     
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   bootstrap: [AppComponent]
 })

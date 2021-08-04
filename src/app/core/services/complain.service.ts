@@ -9,11 +9,10 @@ import { Complain } from '../models/complain';
 })
 export class ComplainService {
   num: number=0;
+  numR: number=0;
   constructor() { }
 
-  createComplain(complain: Complain, user: string, files: string []){
-    
-    
+  createComplain(complain: Complain, user: string, files: string []){   
     (async () => {
       const myNewObject = new Parse.Object('complains');
       myNewObject.set('complainAgency', user);
@@ -51,7 +50,7 @@ export class ComplainService {
     }       
   }
 
-  updateComplain(complain: Complain, complainId: string){
+  updateComplain(complain: Complain, complainId: string, files: string []){
     (async () => {
       const query = new Parse.Query('complains');
       try {
@@ -62,6 +61,14 @@ export class ComplainService {
         object.set('complainOrder', complain.complainOrder);
         object.set('complainMotive', complain.complainMotive);
         object.set('complainState', complain.complainState);
+        object.set('complainAnalisis', complain.complainAnalisis);
+        object.set('complainSolution', complain.complainSolution);
+        for (let file of files) {    
+          console.log(this.numR+'sdgfd'+file);                 
+          object.set('resultPicture'+this.numR, new Parse.File("evidence"+this.numR+".jpg", { uri: file.toString() })); 
+          this.numR++
+        }  
+        object.set('resultPicNum', this.numR); 
         object.set('complainId', complain.complainId);
         try {
           const response = await object.save();

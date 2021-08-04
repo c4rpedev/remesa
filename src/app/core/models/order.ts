@@ -6,7 +6,7 @@ export class Order {
     orderClientName: string;
     orderRecieverName: string;
     orderProvince: string;
-    orderMunicipio: string;
+    orderMunicipio: string;    
     orderAddress: string;
     orderReference: string;
     orderPhone: string;

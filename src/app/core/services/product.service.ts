@@ -4,6 +4,7 @@ import { Product } from 'src/app/core/models/product';
 import { Router } from '@angular/router';
 
 import * as Parse from 'parse'
+import { StatesService } from './states.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,42 +17,69 @@ export class ProductService {
 
   constructor(private http:HttpClient, 
               private router: Router,   
-              
+              private stateService: StatesService
               ) { 
                 
               }
 
   getProductProperties(province: string, agency: string): Promise <any> {   
     console.log(agency);
+     console.log(this.stateService.getDeliveryTime(province));
      
-    if(province ){
+    if(this.stateService.getDeliveryTime(province) == 5){
+      
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
       query.containedIn("productAgency",
       [agency, null]); 
-      query3.equalTo('province', province);
+      query2.equalTo('province', province);
+      query3.equalTo('province', "Occidente");
           
       //const composedQuery = Parse.Query.or(query, query2);
       const composedQueryF = Parse.Query.and(query, query3);
-      return composedQueryF.find();
+      const composedQuery = Parse.Query.or(composedQueryF, query2);
+      return composedQuery.find();
     }else{
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
-      query.equalTo("productAgency", 'uj'
-                  );
-      return query.find();
+      const query2 = new Parse.Query(Products);
+      const query3 = new Parse.Query(Products);
+      query.containedIn("productAgency",
+      [agency, null]); 
+      query2.equalTo('province', province);
+      query3.equalTo('province', "Oriente");
+          
+      //const composedQuery = Parse.Query.or(query, query2);
+      const composedQueryF = Parse.Query.and(query, query3);
+      const composedQuery = Parse.Query.or(composedQueryF, query2);
+      return composedQuery.find();
     }           
   }
 
 
  
   public getAllProductProperties(province: string): Promise <any> {
-    const Products = Parse.Object.extend('products');
+    if(this.stateService.getDeliveryTime(province) == 5){
+      const Products = Parse.Object.extend('products');
     const query = new Parse.Query(Products);
+    const query2 = new Parse.Query(Products);
+    query2.equalTo('province', "Occidente");
     query.equalTo('province', province);
-    return query.find()
+    const composedQuery = Parse.Query.or(query, query2);
+    return composedQuery.find()
+
+    }else{
+      const Products = Parse.Object.extend('products');
+      const query = new Parse.Query(Products);
+      const query2 = new Parse.Query(Products);
+      query2.equalTo('province', "Oriente");
+      query.equalTo('province', province);
+      const composedQuery = Parse.Query.or(query, query2);
+      return composedQuery.find()
+    }
+    
   }
 
   addProduct(product: Product, img: string, products: any[], user: string){    
@@ -95,7 +123,7 @@ export class ProductService {
         const myNewObject = await query.get(id);
         // myNewObject.set('productId', product.productId);
       myNewObject.set('name', product.productName);
-      myNewObject.set('price', product.productPrice);
+      myNewObject.set('price', +product.productPrice);
       myNewObject.set('cost', product.productCost);
       myNewObject.set('um', product.productUM);
       myNewObject.set('amount', product.productAmount);

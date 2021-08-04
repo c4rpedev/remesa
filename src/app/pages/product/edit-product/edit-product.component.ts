@@ -62,8 +62,8 @@ export class EditProductComponent implements OnInit {
     console.log('Product ID');
     console.log(this.productsA);
     this.data(this.event);
-    this.provinces = this.provinceService.getProvinces();  
-    this.getProducts();
+    this.provinces = this.provinceService.getProvincesAdd();  
+    //this.getProducts();
    
   }
 

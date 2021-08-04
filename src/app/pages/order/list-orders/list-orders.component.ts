@@ -13,6 +13,33 @@ import { MatSort, MatSortable } from '@angular/material/sort';
 import {merge, Observable, of as observableOf} from 'rxjs';
 import {catchError, map, startWith, switchMap} from 'rxjs/operators';
 import { StatesService } from 'src/app/core/services/states.service';
+import { MunicipioService } from 'src/app/core/services/municipio.service';
+import { TransportService } from 'src/app/core/services/transport.service';
+import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DatePipe } from '@angular/common';
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
+
+export const CONDITIONS_LIST = [
+
+  { value: "is-equal", label: "Es igual" },
+  { value: "is-not-equal", label: "No es igual" },
+];
+
+export const CONDITIONS_FUNCTIONS = {
+  // search method base on conditions list value 
+  "is-equal": function (value, filterdValue) {
+    return value == filterdValue;
+  },
+  "is-not-equal": function (value, filterdValue) {
+    return value != filterdValue;
+  },
+};
 
 @Component({
   selector: 'app-list-orders',
@@ -25,12 +52,35 @@ export class ListOrdersComponent implements OnInit  {
   admin: boolean;
   sucursal: boolean;
   loading: boolean;
-  displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'adress', 'phone', 'state', 'accions'];
-  dataSource: any;
+  // displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','phone', 'state', 'accions'];
+  
+  dataSource : any;
   state: string = 'Selecciona un estado';
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
+  province: string;
+  provinces: any [] = [];
+  municipios: any [] = [];
+  transporte: any [] = [];
+  public displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+
+
+  public conditionsList = CONDITIONS_LIST;
+  public searchValue: any = {};
+  public searchCondition: any = {};
+
+  private _filterMethods = CONDITIONS_FUNCTIONS;
+
+  filterForm = new FormGroup({
+    fromDate: new FormControl(),
+    toDate: new FormControl(),
+  });
+
+  isnotequal: string = 'is-not-equal';
+  get fromDate() { return this.filterForm.get('fromDate').value; }
+  get toDate() { return this.filterForm.get('toDate').value; }
+  filterSelectObj = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,54 +89,32 @@ export class ListOrdersComponent implements OnInit  {
               private userService: UserService,
               private router: Router,
               private stateService: StatesService,
+              private municipioService: MunicipioService,
+              private provinceService: GetProvincesService,
+              private transportService: TransportService,
               public auth: AuthService,
                 @Inject(DOCUMENT) public document: Document) {
                 this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-                console.log("asdfasdf")
+                // Object to create Filter for
+             
                }
 
-  ngOnInit(): void {        
+  ngOnInit(): void {      
+    //this.initEqualOption();
     this.auth.user$.subscribe(user =>{
       this.loading = true;
-      this.user = user.nickname;   
+      this.user = user.nickname;  
+      this.provinces = this.provinceService.getProvinces(); 
+      this.transportService.getTransport().then(res =>{
+        this.transporte = res;           
+      });
       if(this.userService.isSucursal(this.user)){
         this.orderService.getOrderSucursal(this.user).then(res=>{
           res.forEach((element:any) => {
-            this.orders.push(element);
-            console.log(this.orders);            
+            this.orders.push(element);   
           });          
           this.dataSource = new MatTableDataSource<Order>(this.orders);
-          console.log(this.dataSource);
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sortingDataAccessor = (item:any, property:any) => {
-            switch (property) {
-              case 'date':  return item.attributes.createdAt;              
-              case 'id': return item.attributes.orderId;   
-              default: return item[property];
-            }
-          }
-          this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
-          this.dataSource.sort = this.sort;         
-          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
-          this.dataSource.filterPredicate = (data: any, filter: string) => {          
-            return data.attributes['state'] == filter;     
-           }; 
-          this.isAdmin();                
-          this.loading = false;
-           this.sucursal = this.userService.isSucursal(this.user);   
-
-        }) 
-      }else{
-        this.orderService.getOrder(this.user).then(res=>{
-          res.forEach((element:any) => {            
-            this.orders.push(element);
-            console.log('Order');
-            let d1 = new Date();
-            var diff = Math.abs(element.attributes.createdAt.getTime() - d1.getTime());
-            var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
-            console.log(diffDays);             
-          });          
-          this.dataSource = new MatTableDataSource<Order>(this.orders);
+          
           console.log(this.dataSource);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sortingDataAccessor = (item:any, property:any) => {
@@ -99,9 +127,83 @@ export class ListOrdersComponent implements OnInit  {
           this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
           this.dataSource.sort = this.sort;          
           this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
-          this.dataSource.filterPredicate = (data: any, filter: string) => {          
-            return data.attributes['state'] == filter;     
-           }; 
+          this.dataSource.filterPredicate = (p: any, filtre) => {
+            let result = true;
+            let keys = Object.keys(p.attributes); // k
+            for (const key of keys) {
+              let searchCondition = filtre.conditions[key]; // et search filter method            
+              if (this.fromDate && this.toDate) {
+                if(!(p.attributes.createdAt >= this.fromDate && p.attributes.createdAt <= this.toDate)){
+                  result = false; // if one of the filters method not succeed the row will be remove from the filter result
+                  break;
+                }
+              }
+              if (searchCondition && searchCondition !== "none") {               
+                if (
+                  filtre.methods[searchCondition](p.attributes[key], filtre.values[key]) ===
+                  false
+                ) {
+                  // invoke search filter
+                  result = false; // if one of the filters method not succeed the row will be remove from the filter result
+                  break;
+                }
+              }
+            }      
+            return result;
+          };
+
+          this.isAdmin();                
+          this.loading = false;
+           this.sucursal = this.userService.isSucursal(this.user);   
+
+        }) 
+      }else{
+        this.orderService.getOrder(this.user).then(res=>{
+          res.forEach((element:any) => {            
+            this.orders.push(element);   
+          });          
+          this.dataSource = new MatTableDataSource<Order>(this.orders);
+          
+          console.log(this.dataSource);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sortingDataAccessor = (item:any, property:any) => {
+            switch (property) {
+              case 'date':  return item.attributes.createdAt;              
+              case 'id': return item.attributes.orderId;   
+              default: return item[property];
+            }
+          }
+          this.sort.sort(({ id: 'date', start: 'desc'}) as MatSortable);
+          this.dataSource.sort = this.sort;          
+          this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0); 
+          this.dataSource.filterPredicate = (p: any, filtre) => {
+            let result = true;
+            let keys = Object.keys(p.attributes); // k
+            for (const key of keys) {
+              let searchCondition = filtre.conditions[key]; // et search filter method            
+              if (this.fromDate && this.toDate) {
+                if(!(p.attributes.createdAt >= this.fromDate && p.attributes.createdAt <= this.toDate)){
+                  result = false; // if one of the filters method not succeed the row will be remove from the filter result
+                  break;
+                }
+              }
+              if (searchCondition && searchCondition !== "none") {               
+                if (
+                  filtre.methods[searchCondition](p.attributes[key], filtre.values[key]) ===
+                  false
+                ) {
+                  // invoke search filter
+                  result = false; // if one of the filters method not succeed the row will be remove from the filter result
+                  break;
+                }
+              }
+            }      
+            return result;
+          };
+          
+          // this.dataSource.filterPredicate = (data: any, filter: string) => {          
+          //   return data.attributes['state'] == filter;     
+          //  }; 
           this.isAdmin();     
           this.checkState();     
           this.loading = false;
@@ -113,13 +215,52 @@ export class ListOrdersComponent implements OnInit  {
     
   }
 
-  applyFilter(event: string) {
-    console.log(event);         
-    const filterValue = event;   
-    this.dataSource.filter = filterValue.trim(); 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+ 
+  initEqualOption(){
+    this.searchCondition.orderId = 'is-equal';
+    this.searchCondition.orderAgency = 'is-equal';
+    this.searchCondition.orderClientName = 'is-equal';
+    this.searchCondition.orderRecieverName = 'is-equal';
+    this.searchCondition.orderProvince = 'is-equal';
+    this.searchCondition.orderMunicipio = 'is-equal';
+    this.searchCondition.orderPhone = 'is-equal';
+    this.searchCondition.orderMobile = 'is-equal';
+    this.searchCondition.state = 'is-equal';
+  }
+ 
+  // applyFilter(event: string) {
+  //   console.log(event);         
+  //   const filterValue = event;   
+  //   this.dataSource.filter = filterValue.trim(); 
+  //   this.dataSource = this.dataSource.filter;
+  //   if (this.dataSource.paginator) {
+  //     this.dataSource.paginator.firstPage();
+  //   }
+  // }
+
+  applyFilter() {
+   
+    let searchFilter: any = {
+      values: this.searchValue,
+      conditions: this.searchCondition,
+      methods: this._filterMethods,
+    };
+    console.log('SEART');
+    console.log(searchFilter);
+    this.dataSource.filter = searchFilter;
+  }
+  clearColumnDate(): void {
+    this.filterForm = new FormGroup({
+      fromDate: new FormControl(),
+      toDate: new FormControl(),
+    });
+    this.applyFilter();
+  }
+
+  clearColumn(columnKey: string): void {
+    this.searchValue[columnKey] = null;
+    this.searchCondition[columnKey] = "none";
+    this.applyFilter();
   }
 
   isAdmin(){
@@ -131,21 +272,27 @@ export class ListOrdersComponent implements OnInit  {
       let d1 = new Date();
       var diff = Math.abs(order.attributes.createdAt.getTime() - d1.getTime());
       var diffDays = Math.ceil(diff / (1000 * 3600 * 24));  
-      console.log(diffDays);       
-      console.log(this.stateService.getDeliveryTime(order.attributes.orderProvince));
+     
       var deliveryTime = this.stateService.getDeliveryTime(order.attributes.orderProvince);
-      if((diffDays - deliveryTime == 1) || diffDays == deliveryTime){
-        console.log('En termino');        
-      }else if(diffDays < deliveryTime){
-        console.log('En tiempo');
-      }else if(diffDays > deliveryTime){
-        console.log('Atrasado');
-        
+      if(order.attributes.state == "En Proceso"){
+        if((diffDays - deliveryTime == 1) || diffDays == deliveryTime){        
+          console.log('En termino');        
+        }else if(diffDays < deliveryTime){
+          console.log('En tiempo');
+        }else if(diffDays > deliveryTime){
+          console.log('Atrasado');
+          
+        }
       }
+     
       
     }
   }
-
+  
+  addComplain(order: any, orderId: String){
+    this.router.navigate(['/b']);
+    this.router.navigateByUrl('/add-complain', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin, sucursal: this.sucursal}});  
+  }
 
 
   addOrder() {    

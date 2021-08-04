@@ -70,7 +70,7 @@ export class AddProductComponent implements OnInit {
               }
 
   ngOnInit(): void {
-    this.provinces = this.provinceService.getProvinces();  
+    this.provinces = this.provinceService.getProvincesAdd();  
     this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
     })

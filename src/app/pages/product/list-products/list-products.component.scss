@@ -180,5 +180,20 @@
   justify-content: center;
   margin-top: 50px;
 }
+.shopping__cart{
+  font-size: 30px;
+  margin-left: 10px;
+  color: #52ad9c;
+  display: flex;
+  align-items: center;
+  span{
+    font-size: 20px;
+    margin-left: 5px;
+  }
+}
+.add__order{
+  display: flex;
+  align-items: center;
+}
   
   

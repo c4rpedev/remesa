@@ -26,6 +26,7 @@ export class AddOrderComponent implements OnInit {
   total:number = 0;
   totalAmount:number = 0;
   provinces: any [] = [];
+  province: string;
   municipios: any [] = [];
   user: string;
   mobNumberPattern = "^5+[0-9]{7}$"; 
@@ -34,7 +35,7 @@ export class AddOrderComponent implements OnInit {
   streetNumber: string;
   street: string;
   streetB: string;
- 
+  localidad: string;
   transporteArray: any;
   transporteArrayM: any;
   constructor(
@@ -48,33 +49,32 @@ export class AddOrderComponent implements OnInit {
                 @Inject(DOCUMENT) public document: Document
   ) { }
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {    
      this.provinces = this.provinceService.getProvinces(); 
      this.products = history.state.product;
-     this.order.orderProvince = this.products[0].province; 
-     
+     this.province =  history.state.province;
+     this.order.orderProvince = this.products[0].province;      
      this.initProvince();  
      this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
-      this.getTransportCost();
-      
+      this.getTransportCost();      
      }) 
   }
+
   initProvince(){
-    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+    this.municipioService.getMunicipio(this.province).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       console.log(this.municipios);
     })
   }
 
   changeProvince(){   
-    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+    this.municipioService.getMunicipio(this.province).then(res=>{
       this.municipios = res[0].attributes['municipios'];  
       this.order.orderMunicipio = this.municipios[0]['municipio'];
           })
     this.transporteArrayM.transporte.forEach((element:any) => {
-      if(element.municipio == this.order.orderProvince){
+      if(element.municipio == this.province){
         this.transportCost = 0;
        this.transportCost = +element.precio;       
        this.total = this.totalAmount + this.transportCost;   
@@ -88,7 +88,7 @@ export class AddOrderComponent implements OnInit {
       this.transporteArray = res;       
       this.transporteArrayM=this.transporteArray[0].attributes;           
        this.transporteArrayM.transporte.forEach((element:any) => {
-         if(element.municipio == this.order.orderProvince){
+         if(element.municipio == this.province){
            this.transportCost = 0;
           this.transportCost = +element.precio;
          }else{
@@ -106,15 +106,17 @@ export class AddOrderComponent implements OnInit {
       this.changeProvince();
     })
   }
+
   sendSms(number: string){
     this.smsService.sendSMS(number, this.order.orderClientName, this.order.orderRecieverName, this.user);
   }
+  
   onSubmit(form: NgForm){
     if(form.valid){   
-      if(!this.order.state){
-        this.sendSms(this.order.orderMobile);        
-      }      
-      this.order.orderAddress = this.streetNumber+', '+this.street+' entre '+this.streetB; 
+      // if(!this.order.state){
+      //   this.sendSms(this.order.orderMobile);        
+      // }      
+      this.order.orderAddress = this.localidad+', '+this.streetNumber+', '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);
       Swal.fire({

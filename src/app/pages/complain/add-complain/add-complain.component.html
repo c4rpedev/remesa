@@ -36,6 +36,7 @@
                       [(ngModel)]="complain.complainClient" 
                       [class.is-invalid]="complainClient.invalid && complainClient.touched"
                       required 
+                      disabled
                       placeholder="Nombre del Cliente"
                       name="complainClient"
                       #complainClient = "ngModel">
@@ -49,6 +50,7 @@
                       [(ngModel)]="complain.complainOrder" 
                       [class.is-invalid]="complainOrder.invalid && complainOrder.touched"
                       required 
+                      disabled
                       placeholder="Id del Pedido"
                       name="complainOrder"
                       #complainOrder = "ngModel">

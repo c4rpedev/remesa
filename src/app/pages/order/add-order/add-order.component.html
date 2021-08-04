@@ -50,10 +50,11 @@
    
     
       <label> <strong>Provincia</strong>  </label>
-      <select  [(ngModel)]="order.orderProvince"  
+      <select  [(ngModel)]="province"  
       (ngModelChange)="changeProvince()"
       class="form-select" 
       name="orderProvince"
+      disabled
       [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
       #orderProvince="ngModel"
       
@@ -82,7 +83,19 @@
   {{m.municipio}}
 </option>
 </select>
-           
+<label><strong>Localidad</strong>  </label>
+<div class="row">
+  <div class="col-md-12">
+    <input type="text" 
+  class="form-control" 
+  [(ngModel)]="localidad" 
+  [class.is-invalid]="localidadV.invalid && localidadV.touched"  
+  placeholder="Localidad"
+  name="localidad"
+  #localidadV = "ngModel">
+  </div>
+ </div>
+
   
   
       <label><strong>Dirección</strong>  </label>

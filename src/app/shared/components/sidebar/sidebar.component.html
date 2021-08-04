@@ -16,7 +16,7 @@
       <span>Pedidos</span>
     </div>
     
-      <div class="links" [routerLink]="['/list-product']" (click)="openMenu()" *ngIf="!sucursal">
+      <div class="links" [routerLink]="['/list-product']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
         <div class="icon">
           <i class="fa fa-shopping-cart"></i>
         </div>
@@ -38,7 +38,7 @@
       <div class="icon">
         <i class="fa fa-archive"></i>
       </div>
-       <span>Quejas</span><i class="fa fa-exclamation-circle alert__color" *ngIf="complains"></i>
+       <span>Quejas</span><b class="alert__color" *ngIf="complains">{{complainsCount}}</b>
     </div>
     <div class="links" [routerLink]="['/edit-province']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
       <div class="icon">

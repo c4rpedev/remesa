@@ -31,9 +31,11 @@
         <div class="btn-toolbar product__toolbar"  role="toolbar" aria-label="Toolbar with button groups">      
           
           
-          <div class="btn-group " role="group" *ngIf="who=='order'">
-            <button type="button"  (click)="addOrder()">Realizar Pedido</button>           
+          <div class="btn-group add__order" role="group" *ngIf="who=='order'">
+            <button type="button"  (click)="addOrder()">Realizar Pedido</button>    
+            <i class="fa fa-shopping-cart shopping__cart"> <span><b>{{productsCart.length}} </b></span> </i>      
           </div>
+        
           <div class="btn-group " role="group" >
             <button type="button"  (click)="createCombo()" *ngIf="who!='order'">Crear combo</button>           
           </div>
@@ -124,7 +126,7 @@
                           mdbTooltip="Add to Wishlist"
                           container="body"
                           (click)="editProduct(product, product.attributes)"
-                          *ngIf="(user == product.attributes.productAgency) || user == 'buttymanager'"
+                          *ngIf="(user == product.attributes.productAgency) || user == 'buttymanager' || user == 'buttyekonomico'"
                         >
                           <i class="fa fa-edit"></i>
                         </a>

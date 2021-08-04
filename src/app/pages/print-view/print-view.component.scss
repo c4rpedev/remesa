@@ -34,9 +34,7 @@ tr.mat-header-row {
     display: flex;
     flex-direction: column;
 }
-.print__p{
 
-}
 .product__name{
     display: flex;
 flex-direction: row;
@@ -57,13 +55,13 @@ table{
     }
     @page {
       margin: 0 !important;
-      size: A4 Landscape !important;
+      size: Letter portrait !important;
       -webkit-print-color-adjust: exact;
     }
     html,
     body {
       margin: 0 !important;
-      size: A4 Landscape !important;
+      size: Letter portrait !important;
       -webkit-print-color-adjust: exact;
     }
   }

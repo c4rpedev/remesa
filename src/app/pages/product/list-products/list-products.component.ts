@@ -10,6 +10,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import { PreviewProductComponent } from '../preview-product/preview-product.component';
+import { StatesService } from 'src/app/core/services/states.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class ListProductsComponent implements OnInit {
     private router: Router,
     private provinceService: GetProvincesService,
     private userService: UserService,
+    
     public auth: AuthService,
     public dialog: MatDialog,
     @Inject(DOCUMENT) public document: Document
@@ -74,7 +76,7 @@ export class ListProductsComponent implements OnInit {
   addOrder() {    
     if(this.productsCart.length > 0){
       this.router.navigate(['/b']);
-    this.router.navigateByUrl('/add-order', { state: {product: this.productsCart}});
+    this.router.navigateByUrl('/add-order', { state: {product: this.productsCart, province: this.selectedProvince}});
     }else{
       Swal.fire({
         position: 'top-end',

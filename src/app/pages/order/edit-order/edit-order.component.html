@@ -159,21 +159,7 @@
       name="orderPhone"
       #orderPhone = "ngModel">
     </label>
-    <label *ngIf="admin && (user!='buttycomercial')">
-      <span>Sucursal</span>
-      <select  [(ngModel)]="order.orderSucursal"  
-      
-    class="form-select" 
-    name="orderSucursal"
-    [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
-    #orderSucursal="ngModel"                        
-    >
-    
-<option *ngFor="let s of sucursalName" value={{s.attributes.user}}>
-{{s.attributes.name}}
-</option>
-</select>  
-    </label>
+   
     <label>
       <span>Estado </span>
       <select 
@@ -201,6 +187,21 @@
   Cancelado
 </option>
 </select>
+    </label>
+    <label *ngIf="admin && (user!='buttycomercial') && !(order.state == 'Nuevo' || order.state == 'Revisado' || order.state == 'Cancelado')">
+      <span>Sucursal</span>
+      <select  [(ngModel)]="order.orderSucursal"  
+      
+    class="form-select" 
+    name="orderSucursal"
+    [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
+    #orderSucursal="ngModel"                        
+    >
+    
+<option *ngFor="let s of sucursalName" value={{s.attributes.user}}>
+{{s.attributes.name}}
+</option>
+</select>  
     </label>
  <div class="row">
    
