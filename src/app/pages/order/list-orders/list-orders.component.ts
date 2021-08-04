@@ -63,7 +63,7 @@ export class ListOrdersComponent implements OnInit  {
   provinces: any [] = [];
   municipios: any [] = [];
   transporte: any [] = [];
-  public displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+  public displayedColumns: string[]; 
 
 
   public conditionsList = CONDITIONS_LIST;
@@ -155,7 +155,11 @@ export class ListOrdersComponent implements OnInit  {
           this.isAdmin();                
           this.loading = false;
            this.sucursal = this.userService.isSucursal(this.user);   
-
+           if(this.admin || this.sucursal){
+                this.displayedColumns =  ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+           }else{
+            this.displayedColumns =  ['id', 'date', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+           }
         }) 
       }else{
         this.orderService.getOrder(this.user).then(res=>{
@@ -207,6 +211,11 @@ export class ListOrdersComponent implements OnInit  {
           this.isAdmin();     
           this.checkState();     
           this.loading = false;
+          if(this.admin || this.sucursal){
+            this.displayedColumns =  ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+       }else{
+        this.displayedColumns =  ['id', 'date', 'client', 'products', 'reciver', 'province', 'municipio','mobile','phone', 'state', 'accions'];
+       }
         }) 
       }
       

@@ -29,7 +29,7 @@
       [(ngModel)]="order.orderId" 
       [class.is-invalid]="orderId.invalid && orderId.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Identificador de Pedido"
       name="orderId"
       #orderId = "ngModel">
@@ -54,7 +54,7 @@
       [(ngModel)]="order.orderClientName" 
       [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
@@ -66,7 +66,7 @@
       [(ngModel)]="order.orderRecieverName" 
       [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Nombre del que Recibe"
       name="orderRecieverName"
       #orderRecieverName = "ngModel">
@@ -92,7 +92,7 @@
       [(ngModel)]="order.orderMunicipio" 
       [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Municipio"
       name="orderMunicipio"
       #orderMunicipio = "ngModel">
@@ -104,7 +104,7 @@
       [(ngModel)]="order.orderAddress" 
       [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Número de la casa, calle y entre calles"
       name="orderAddress"
       #orderAddress = "ngModel">
@@ -117,7 +117,7 @@
       [(ngModel)]="order.orderReference" 
       [class.is-invalid]="orderReference.invalid && orderReference.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Ingrese una referencia"
       name="orderReference"
       #orderReference = "ngModel">      
@@ -134,7 +134,7 @@
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Número de teléfono"
       name="orderMobile"
       #orderMobile = "ngModel">
@@ -154,7 +154,7 @@
       [(ngModel)]="order.orderPhone" 
       [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Número de teléfono"
       name="orderPhone"
       #orderPhone = "ngModel">
@@ -166,8 +166,8 @@
       [(ngModel)]="order.state" 
       [class.is-invalid]="state.invalid && state.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && order.state == 'Revisado')"
-      placeholder="Número de teléfono"
+      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      
       name="state"
       #state = "ngModel"
       >
@@ -216,7 +216,7 @@
   
  
   <div class="col-lg-6">    
-    <div class="card mb-3 shadow" *ngIf="admin || order.state == 'Finalizado' || sucursal">
+    <div class="card mb-3 shadow" *ngIf="(admin  && user!='buttycomercial') || order.state == 'Finalizado' || sucursal">
       <h3 class="text-center mt-2" *ngIf="admin || sucursal">
         <b>
           Subir Albaran
@@ -231,7 +231,7 @@
         <a [href]='img' target="_blank">
           <img class="mb-3" src='{{img}}'  width="160" height="160" />
         </a>
-        <div  *ngIf="admin || sucursal">
+        <div  *ngIf="(admin && user!='buttycomercial') || sucursal">
           <input type="file" 
           name="photo"          
           accept="image/*"
