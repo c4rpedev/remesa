@@ -67,7 +67,7 @@ export class OrderService {
         myNewObject.set('orderSucursal', order.orderSucursal);
         myNewObject.set('orderNote', order.orderNote);
         myNewObject.set('orderCancelMotive', order.orderCancelMotive);
-        myNewObject.set('orderAlbaran', new Parse.File("albaran.jpg", { uri: img })); 
+        myNewObject.set('orderAlbaran', new Parse.File("albaranes.jpg", { uri: img })); 
         myNewObject.set('state', order.state);
         try {
           const response = await myNewObject.save();

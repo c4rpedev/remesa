@@ -13,7 +13,7 @@
       <div class="icon">
         <i class="fa fa-table"></i>
       </div>
-      <span>Pedidos</span>
+      <span>Pedidos</span><span class="badge rounded-pill bg-secondary alert__color" *ngIf="admin">{{ordersCount}}</span>
     </div>
     
       <div class="links" [routerLink]="['/list-product']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">

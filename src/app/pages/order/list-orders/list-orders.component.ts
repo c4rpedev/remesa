@@ -237,16 +237,7 @@ export class ListOrdersComponent implements OnInit  {
     this.searchCondition.state = 'is-equal';
   }
  
-  // applyFilter(event: string) {
-  //   console.log(event);         
-  //   const filterValue = event;   
-  //   this.dataSource.filter = filterValue.trim(); 
-  //   this.dataSource = this.dataSource.filter;
-  //   if (this.dataSource.paginator) {
-  //     this.dataSource.paginator.firstPage();
-  //   }
-  // }
-
+  
   applyFilter() {
    
     let searchFilter: any = {
