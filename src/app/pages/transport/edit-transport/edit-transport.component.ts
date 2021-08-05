@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { TransportService } from 'src/app/core/services/transport.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-transport',
@@ -69,8 +70,13 @@ export class EditTransportComponent implements OnInit {
     return Object.keys(this.transporteArray);
   }
   onSubmit() {  
-    console.log(this.transportForm.value['quantities']); 
-    console.log(this.transporteArray[0].id);    
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Transporte actualizado',
+      showConfirmButton: false,
+      timer: 1500
+    })  
     this.transportService. updateTransport(this.transporteArray[0].id, this.transportForm.value['quantities']);    
   } 
  

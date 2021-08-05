@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { MunicipioService } from 'src/app/core/services/municipio.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-edit-province',
   templateUrl: './edit-province.component.html',
@@ -71,6 +71,13 @@ export class EditProvinceComponent implements OnInit  {
   onSubmit() {  
     console.log(this.productForm.value['quantities']);  
     console.log(this.municipios[0].id);
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Municipios actualizados',
+      showConfirmButton: false,
+      timer: 1500
+    })
     this.municipioService.updateMunicipio(this.municipios[0].id, this.productForm.value['quantities']);
   } 
 } 

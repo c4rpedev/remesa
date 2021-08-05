@@ -18,6 +18,7 @@ import { EditComplainComponent } from './pages/complain/edit-complain/edit-compl
 import { ListComplainComponent } from './pages/complain/list-complain/list-complain.component';
 import { EditProvinceComponent } from './pages/province/edit-province/edit-province.component';
 import { EditTransportComponent } from './pages/transport/edit-transport/edit-transport.component';
+import { SucursalComponent } from './pages/sucursal/sucursal.component';
 
 const routes: Routes = [
  
@@ -51,8 +52,10 @@ const routes: Routes = [
   { path: 'edit-province', component: EditProvinceComponent},
 
    //-- Transport --//
-   { path: 'edit-transport', component: EditTransportComponent}
+   { path: 'edit-transport', component: EditTransportComponent},
 
+   //-- Sucursal --//
+   { path: 'edit-sucursal', component: SucursalComponent}
 
 ];
 

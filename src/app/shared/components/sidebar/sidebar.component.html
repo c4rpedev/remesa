@@ -52,6 +52,12 @@
       </div>
       <span>Transporte</span>
     </div>
+    <div class="links" [routerLink]="['/edit-sucursal']" (click)="openMenu()" *ngIf="admin && !sucursal && !isComercial()">
+      <div class="icon">
+        <i class="fa fa-dot-circle-o"></i>
+      </div>
+      <span>Sucursales</span>
+    </div>
   </div>
 
  </div> 

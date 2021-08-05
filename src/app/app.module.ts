@@ -40,6 +40,7 @@ import { ModalModule } from './_modal';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SendSmsComponent } from './pages/order/send-sms/send-sms.component';
 import { FilterItemDirective } from "./filter-item.directive";
+import { SucursalComponent } from './pages/sucursal/sucursal.component';
 Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
 (Parse as any).serverURL = environment.serverURL;
 
@@ -63,6 +64,7 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     EditProvinceComponent,
     EditTransportComponent,
     SendSmsComponent,
+    SucursalComponent,
     
       
   ],
