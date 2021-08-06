@@ -29,9 +29,7 @@
       <label class="fname"><strong>Cliente</strong> </label>
       <input type="text" 
       class="form-control" 
-      [(ngModel)]="order.orderClientName" 
-      [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
-      required 
+      [(ngModel)]="order.orderClientName"         
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
@@ -120,8 +118,7 @@
           <input type="text" 
         class="form-control" 
         [(ngModel)]="streetB" 
-        [class.is-invalid]="streetBV.invalid && streetBV.touched"
-        required 
+       
         placeholder="Entre calles"
         name="streetB"
         #streetBV = "ngModel">
@@ -134,8 +131,7 @@
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderReference" 
-      [class.is-invalid]="orderReference.invalid && orderReference.touched"
-      required 
+    
       placeholder="Ingrese un lugar de referencia"
       name="orderReference"
       #orderReference = "ngModel">      

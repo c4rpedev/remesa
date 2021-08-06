@@ -53,7 +53,7 @@
       class="form-control" 
       [(ngModel)]="order.orderClientName" 
       [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
-      required 
+      
       [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Nombre del Cliente"
       name="orderClientName"
@@ -116,7 +116,7 @@
       class="form-control" 
       [(ngModel)]="order.orderReference" 
       [class.is-invalid]="orderReference.invalid && orderReference.touched"
-      required 
+      
       [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Ingrese una referencia"
       name="orderReference"
@@ -133,7 +133,7 @@
       class="form-control" 
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
-      required 
+      
       [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Número de teléfono"
       name="orderMobile"
@@ -153,7 +153,7 @@
       class="form-control" 
       [(ngModel)]="order.orderPhone" 
       [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
-      required 
+      
       [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
       placeholder="Número de teléfono"
       name="orderPhone"
@@ -203,7 +203,7 @@
       
     class="form-select" 
     name="orderSucursal"
-    [class.is-invalid]="orderSucursal.invalid && orderSucursal.touched"
+  
     #orderSucursal="ngModel"                        
     >
     

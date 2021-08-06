@@ -30,7 +30,7 @@ export class SmsService {
       const data: any = {
         api_key : this.api_key,
         numero : 53+number,
-        sms : 'Estimado '+receiverName+' desde la Agencia '+agencia.toUpperCase()+' le notificamos que nuestro cliente '+clientName+' ha solicitado un Combo a su nombre',
+        sms : 'Estimado/a '+receiverName+' desde la Agencia '+agencia.toUpperCase()+' le notificamos que nuestro cliente '+clientName+' ha solicitado un Combo a su nombre',
         remitente : this.remitente
       };
         

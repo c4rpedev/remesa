@@ -85,15 +85,20 @@ export class AddOrderComponent implements OnInit {
   getTransportCost(){
     console.log(this.user);    
     this.transportService.getTransportForAgency(this.user).then(res=>{
-      this.transporteArray = res;       
+      this.transporteArray = res;    
+      console.log('Transporte');
+      
+      console.log(this.transporteArray[0].attributes);
+         console.log(this.order.orderProvince);
+         
       this.transporteArrayM=this.transporteArray[0].attributes;           
        this.transporteArrayM.transporte.forEach((element:any) => {
-         if(element.municipio == this.province){
+         if(element.municipio == this.order.orderProvince){
            this.transportCost = 0;
           this.transportCost = +element.precio;
-         }else{
-           this.transportCost = 0;
-         }       
+          console.log(this.transportCost);
+          
+         }      
        });
        
        this.products.forEach(element => { 
@@ -103,20 +108,32 @@ export class AddOrderComponent implements OnInit {
         console.log(this.total);      
       });
       this.total = this.total + this.transportCost;
+      console.log('TOTAL');
+      console.log(this.total);
+      
+      
       this.changeProvince();
     })
   }
 
   sendSms(number: string){
-    this.smsService.sendSMS(number, this.order.orderClientName, this.order.orderRecieverName, this.user);
+    if(this.order.orderClientName){
+      this.smsService.sendSMS(number, this.order.orderClientName, this.order.orderRecieverName, this.user);
+    }else{
+      this.smsService.sendSMS(number, ' ', this.order.orderRecieverName, this.user);
+    }
+    
   }
   
   onSubmit(form: NgForm){
+
+    console.log(form);
+    
     if(form.valid){   
       if(!this.order.state){
         this.sendSms(this.order.orderMobile);        
       }      
-      this.order.orderAddress = this.localidad+', '+this.streetNumber+', '+this.street+' entre '+this.streetB; 
+      this.order.orderAddress = this.localidad+', # '+this.streetNumber+', Calle '+this.street+' entre '+this.streetB; 
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);
       Swal.fire({

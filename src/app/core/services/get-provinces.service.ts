@@ -17,7 +17,7 @@ export class GetProvincesService {
     { name: "Camagüey", value: 10 },
     { name: "Las Tunas", value: 11 },   
     { name: "Granma", value: 12 },
-    { name: "Holguín", value: 13 },
+    { name: "Holguin", value: 13 },
     { name: "Santiago de Cuba", value: 14 },
     { name: "Guantánamo", value: 15 },
     { name: "Isla de la Juventud", value: 16 }
@@ -37,7 +37,7 @@ export class GetProvincesService {
     { name: "Camagüey", value: 10 },
     { name: "Las Tunas", value: 11 },   
     { name: "Granma", value: 12 },
-    { name: "Holguín", value: 13 },
+    { name: "Holguin", value: 13 },
     { name: "Santiago de Cuba", value: 14 },
     { name: "Guantánamo", value: 15 },
     { name: "Isla de la Juventud", value: 16 }
