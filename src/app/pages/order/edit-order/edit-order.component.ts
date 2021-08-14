@@ -78,17 +78,17 @@ export class EditOrderComponent implements OnInit {
 }
   onSubmit(form: NgForm){
     // var albaranes = 'albaranes.jpg'
-    // var hasAlbaran = false;
+    var hasAlbaran = false;
     console.log(form);
     
     if(form.valid || form.disabled){
-      // if((this.order.state != 'Finalizado' && this.order.state != 'Nuevo' && this.order.state != 'Revisado') && this.order.orderAlbaran.name.indexOf(albaranes, this.order.orderAlbaran.name.length - albaranes.length) !== -1){
-      //   hasAlbaran = true
+      if( this.order.state != 'Nuevo' && this.order.state != 'Revisado' && this.order.state != 'En Proceso'){
+        hasAlbaran = true
 
-      // }
+       }
       console.log(this.order.orderSucursal);
       
-      this.orderService.updateOrder(this.order, this.orderId, this.img.toString());
+      this.orderService.updateOrder(this.order, this.orderId, this.img.toString(), hasAlbaran);
       Swal.fire({
         position: 'top-end',
         icon: 'success',
