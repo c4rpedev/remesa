@@ -5,7 +5,7 @@ export const environment = {
   production: true,
   PARSE_APP_ID: 'buttybd8803',
   PARSE_JS_KEY: '880309113002021',
-  serverURL: 'http://buttyparse.herokuapp.com/parse'
+  serverURL: 'https://buttyparse.herokuapp.com/parse'
 };
 
 //-- old
