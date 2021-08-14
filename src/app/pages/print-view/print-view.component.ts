@@ -52,7 +52,11 @@ export class PrintViewComponent implements OnInit {
         
       }else{
         console.log('ELSSS');
-        this.prod = <Object>product.products;  
+        this.prod = <Object>product.products; 
+        this.productview = {Nombre: product['name'],
+          UM: '',
+          Cantidad: ''};
+        this.row_data.push(this.productview);         
         for (const p of this.prod) {
           this.row_data.push(p);
         }
