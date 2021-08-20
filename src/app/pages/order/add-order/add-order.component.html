@@ -6,7 +6,7 @@
                 Configurar pedido
             </h3>
             <p class="subtitle-a">
-                Complete todos los datos para realizar su pedido
+                Complete todos los datos para realizar su pedido (los campos con * son requeridos)
             </p>
             <div class="line-mf"></div>
         </div>
@@ -15,7 +15,7 @@
 <div class="d-flex card">
   <form (ngSubmit)="onSubmit( f )"  #f="ngForm">
    
-      <label class="fname"><strong>ID</strong>  </label>
+      <label class="fname"><strong>ID *</strong>  </label>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderId" 
@@ -35,7 +35,7 @@
       #orderClientName = "ngModel">
     
     
-      <label class="lname"> <strong>Recibe</strong> </label>
+      <label class="lname"> <strong>Recibe *</strong> </label>
       <input type="text" 
       class="form-control" 
       [(ngModel)]="order.orderRecieverName" 
@@ -92,7 +92,7 @@
 
   
   
-      <label><strong>Dirección</strong>  </label>
+      <label><strong>Dirección *</strong>  </label>
       <div class="row">
         <div class="col-md-4">
           <input type="text" 
@@ -140,7 +140,7 @@
  
       <div class="col-md-12">
         <div class="row">
-          <label> <strong>Teléfonos</strong>  </label>
+          <label> <strong>Teléfonos *(requerido uno de los dos)</strong>  </label>
         <div class="col-md-6"> <input type="text" 
           class="form-control" 
           [(ngModel)]="order.orderMobile" 
