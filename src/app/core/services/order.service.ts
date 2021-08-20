@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Order } from '../models/order';
 import * as Parse from 'parse'
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -50,6 +51,10 @@ export class OrderService {
     })();
   }
   updateOrder(order: Order, orderId: string, img: string, hasAlbaran: boolean){
+    console.log('asdfsd');
+    
+    console.log(img);
+    
     (async () => {
       const query = new Parse.Query('order');
       try {
@@ -68,7 +73,7 @@ export class OrderService {
         myNewObject.set('orderNote', order.orderNote);
         myNewObject.set('orderCancelMotive', order.orderCancelMotive);
         if(hasAlbaran){       
-          myNewObject.set('orderAlbaran', new Parse.File("albaranes.jpg", { uri: img })); 
+           myNewObject.set('orderAlbaran', new Parse.File("albaranes.jpg", { uri: img })); 
         }
         
         myNewObject.set('state', order.state);

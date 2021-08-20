@@ -49,12 +49,19 @@ export class ProductService {
       query.containedIn("productAgency",
       [agency, null]); 
       query2.equalTo('province', province);
-      query3.equalTo('province', "Oriente");
+      if(province == "Santiago de Cuba"){
+        const composedQuery = Parse.Query.and(query, query2);
+        return composedQuery.find();
+      }else{
+        query3.equalTo('province', "Oriente");
           
       //const composedQuery = Parse.Query.or(query, query2);
-      const composedQueryF = Parse.Query.and(query, query3);
-      const composedQuery = Parse.Query.or(composedQueryF, query2);
-      return composedQuery.find();
+       const composedQueryF = Parse.Query.and(query, query3);
+        const composedQuery = Parse.Query.or(composedQueryF, query2);
+        return composedQuery.find();
+      }
+      
+      
     }           
   }
 
@@ -74,10 +81,16 @@ export class ProductService {
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
-      query2.equalTo('province', "Oriente");
+      
       query.equalTo('province', province);
-      const composedQuery = Parse.Query.or(query, query2);
-      return composedQuery.find()
+      if(province == "Santiago de Cuba"){
+        return query.find();
+      }else{
+        query2.equalTo('province', "Oriente");
+        const composedQuery = Parse.Query.or(query, query2);
+        return composedQuery.find()
+      }
+     
     }
     
   }
