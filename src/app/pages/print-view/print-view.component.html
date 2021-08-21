@@ -7,7 +7,7 @@
         <div class="header__right mt-3">
             <b>ENTREGA</b><br>
             <div >
-                <b>FECHA: </b>{{dateS}} <b>ID: </b>{{orders.orderId}}
+                <b>FECHA: </b>{{dateS}} <b>ID: </b>{{orders.orderId  }}
             </div>
            
         </div>
@@ -17,6 +17,9 @@
     
     
     <div class="print__middle mt-5">
+        <div>
+            <b>Agencia: </b> {{orders.orderAgency  | uppercase}}
+        </div>
         <div>
             <b>Envia: </b> {{orders.orderClientName}}
         </div>
