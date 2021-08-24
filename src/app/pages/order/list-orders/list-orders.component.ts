@@ -18,6 +18,8 @@ import { TransportService } from 'src/app/core/services/transport.service';
 import { GetProvincesService } from 'src/app/core/services/get-provinces.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { stringify } from '@angular/compiler/src/util';
+
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -34,10 +36,12 @@ export const CONDITIONS_LIST = [
 export const CONDITIONS_FUNCTIONS = {
   // search method base on conditions list value 
   "is-equal": function (value, filterdValue) {
-    return value == filterdValue;
+    let valueF = value.toString().toLowerCase();
+    return valueF.indexOf(filterdValue) !== -1;
   },
   "is-not-equal": function (value, filterdValue) {
-    return value != filterdValue;
+    let valueF = value.toString().toLowerCase();
+    return valueF.indexOf(filterdValue) == -1;
   },
 };
 

@@ -173,7 +173,7 @@
               </div>
             </mat-menu>
           </th>
-          <td mat-cell *matCellDef="let element"> {{element.attributes.orderClientName}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.attributes.orderClientName }} </td>
         </ng-container>
 
           <!-- products -->
@@ -224,11 +224,9 @@
               </div>
     
               <div mat-menu-item mat-filter-item [disableRipple]="true">
-                <mat-form-field>
-                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderRecieverName">
-                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchAtributos.orderRecieverName">
-                    <mat-option *ngFor="let  order of orders" [value]="order.attributes.orderRecieverName">{{order.attributes.orderRecieverName}}</mat-option>
-                  </mat-select> -->
+                <mat-form-field >
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderRecieverName" >
+                 
                 </mat-form-field>
               </div>
     

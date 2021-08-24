@@ -41,3 +41,7 @@ td.mat-cell{
 table{
     width: 100%;
 }
+.disable-block {
+    pointer-events: none;
+    opacity: .7;
+}
