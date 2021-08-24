@@ -7,6 +7,8 @@ import { DOCUMENT } from '@angular/common';
 import { AuthServices } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { MatTableDataSource } from '@angular/material/table';
+
+
 import { Order } from 'src/app/core/models/order';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
@@ -51,6 +53,7 @@ export const CONDITIONS_FUNCTIONS = {
   styleUrls: ['./list-orders.component.scss']
 })
 export class ListOrdersComponent implements OnInit  {
+  options: string[] = ['Delhi', 'Mumbai', 'Banglore'];
   orders: Array<any> = [];
   user: string;
   admin: boolean;

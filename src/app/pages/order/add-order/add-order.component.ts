@@ -132,8 +132,13 @@ export class AddOrderComponent implements OnInit {
     if(form.valid){   
       if(!this.order.state){
         this.sendSms(this.order.orderMobile);        
-      }      
-      this.order.orderAddress = this.localidad+', # '+this.streetNumber+', Calle '+this.street+' entre '+this.streetB; 
+      } 
+      if(this.streetB ){
+        this.order.orderAddress = (this.localidad || "")+' Calle '+this.street+' # '+this.streetNumber+' entre '+(this.streetB || ""); 
+      }else{
+        this.order.orderAddress = (this.localidad || "")+' Calle '+this.street+' # '+this.streetNumber; 
+      }     
+      
       this.order.orderPrice = this.total;     
       this.orderService.createOrder(this.order, this.products, this.user);
       Swal.fire({
