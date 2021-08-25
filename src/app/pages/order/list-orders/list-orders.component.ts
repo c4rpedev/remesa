@@ -47,6 +47,17 @@ export const CONDITIONS_FUNCTIONS = {
   },
 };
 
+export const CONDITIONS_FUNCTIONSES = {
+  // search method base on conditions list value 
+  "is-equal": function (value, filterdValue) {   
+    return value == filterdValue;
+  },
+  "is-not-equal": function (value, filterdValue) {
+    
+    return value != filterdValue;
+  },
+};
+
 @Component({
   selector: 'app-list-orders',
   templateUrl: './list-orders.component.html',
@@ -78,6 +89,7 @@ export class ListOrdersComponent implements OnInit  {
   public searchCondition: any = {};
 
   private _filterMethods = CONDITIONS_FUNCTIONS;
+  private _filterMethodsEs = CONDITIONS_FUNCTIONSES;
 
   filterForm = new FormGroup({
     fromDate: new FormControl(),
@@ -256,6 +268,7 @@ export class ListOrdersComponent implements OnInit  {
     console.log(searchFilter);
     this.dataSource.filter = searchFilter;
   }
+  
   clearColumnDate(): void {
     this.filterForm = new FormGroup({
       fromDate: new FormControl(),
@@ -263,11 +276,29 @@ export class ListOrdersComponent implements OnInit  {
     });
     this.applyFilter();
   }
+  // --- applyFilter for other columns diferents a Recibe y Cliente
+  applyFilterEs() {
+   
+    let searchFilter: any = {
+      values: this.searchValue,
+      conditions: this.searchCondition,
+      methods: this._filterMethodsEs,
+    };
+    console.log('SEART');
+    console.log(searchFilter);
+    this.dataSource.filter = searchFilter;
+  }
+
 
   clearColumn(columnKey: string): void {
     this.searchValue[columnKey] = null;
     this.searchCondition[columnKey] = "none";
     this.applyFilter();
+  }
+  clearColumnES(columnKey: string): void {
+    this.searchValue[columnKey] = null;
+    this.searchCondition[columnKey] = "none";
+    this.applyFilterEs();
   }
 
   isAdmin(){

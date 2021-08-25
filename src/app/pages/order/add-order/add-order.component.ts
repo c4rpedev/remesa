@@ -130,7 +130,7 @@ export class AddOrderComponent implements OnInit {
     console.log(form);
     
     if(form.valid){   
-      if(!this.order.state){
+      if(!this.order.state && (this.order.orderAgency != 'esencialpack' && this.order.orderAgency != 'agenciaespaña')){
         this.sendSms(this.order.orderMobile);        
       } 
       if(this.streetB ){

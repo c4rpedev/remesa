@@ -49,7 +49,7 @@ export class ProductService {
       query.containedIn("productAgency",
       [agency, null]); 
       query2.equalTo('province', province);
-      if(province == "Santiago de Cuba"){
+      if(province == "Santiago de Cuba" || province == "Pinar del Río"){
         const composedQuery = Parse.Query.and(query, query2);
         return composedQuery.find();
       }else{
@@ -83,7 +83,7 @@ export class ProductService {
       const query2 = new Parse.Query(Products);
       
       query.equalTo('province', province);
-      if(province == "Santiago de Cuba"){
+      if(province == "Santiago de Cuba" || province == "Pinar del Río"){
         return query.find();
       }else{
         query2.equalTo('province', "Oriente");

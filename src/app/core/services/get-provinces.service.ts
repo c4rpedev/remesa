@@ -42,8 +42,7 @@ export class GetProvincesService {
     { name: "Guantánamo", value: 15 },
     { name: "Isla de la Juventud", value: 16 }
   ]
-  occidente = [          
-    { name: "Pinar del Río", value: 1 },
+  occidente = [    
     { name: "Artemisa", value: 2 },
     { name: "La Habana", value: 3 },
     { name: "Mayabeque", value: 4 },
