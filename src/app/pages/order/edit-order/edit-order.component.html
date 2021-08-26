@@ -29,7 +29,7 @@
       [(ngModel)]="order.orderId" 
       [class.is-invalid]="orderId.invalid && orderId.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Identificador de Pedido"
       name="orderId"
       #orderId = "ngModel">
@@ -54,7 +54,7 @@
       [(ngModel)]="order.orderClientName" 
       [class.is-invalid]="orderClientName.invalid && orderClientName.touched"
       
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Nombre del Cliente"
       name="orderClientName"
       #orderClientName = "ngModel">
@@ -66,7 +66,7 @@
       [(ngModel)]="order.orderRecieverName" 
       [class.is-invalid]="orderRecieverName.invalid && orderRecieverName.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Nombre del que Recibe"
       name="orderRecieverName"
       #orderRecieverName = "ngModel">
@@ -104,7 +104,7 @@
       [(ngModel)]="order.orderAddress" 
       [class.is-invalid]="orderAddress.invalid && orderAddress.touched"
       required 
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Número de la casa, calle y entre calles"
       name="orderAddress"
       #orderAddress = "ngModel">
@@ -117,7 +117,7 @@
       [(ngModel)]="order.orderReference" 
       [class.is-invalid]="orderReference.invalid && orderReference.touched"
       
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Ingrese una referencia"
       name="orderReference"
       #orderReference = "ngModel">      
@@ -134,7 +134,7 @@
       [(ngModel)]="order.orderMobile" 
       [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
       
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Número de teléfono"
       name="orderMobile"
       #orderMobile = "ngModel">
@@ -154,7 +154,7 @@
       [(ngModel)]="order.orderPhone" 
       [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
       
-      [disabled]="!admin || (user=='buttycomercial' && !(order.state == 'Nuevo'))"
+      [disabled]="!admin && !(order.state == 'Nuevo')"
       placeholder="Número de teléfono"
       name="orderPhone"
       #orderPhone = "ngModel">
@@ -280,11 +280,11 @@
    </div>
  </div>
     
-    <div class="row col-lg-12" *ngIf="admin || sucursal">
+    <div class="row col-lg-12" *ngIf="(admin || sucursal) || (order.state == 'Nuevo')">
       <div class="col-lg-6">
         <button type="submit" >Actualizar Pedido</button>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-6" *ngIf="(admin || sucursal)">
         <button type="submit" class="print__factura" (click)="print()">Imprimir Factura</button>
       </div>
   

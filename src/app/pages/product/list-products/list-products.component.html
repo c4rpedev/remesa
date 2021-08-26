@@ -123,7 +123,7 @@
                           mdbTooltip="Add to Wishlist"
                           container="body"
                           (click)="editProduct(product, product.attributes)"
-                          *ngIf="(user == product.attributes.productAgency) || user == 'buttymanager' || user == 'buttyekonomico'"
+                          *ngIf="user == 'buttymanager' || user == 'buttyekonomico'"
                         >
                           <i class="fa fa-edit"></i>
                         </a>
