@@ -32,20 +32,39 @@ export class ProductService {
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
-      if(agency == 'franklin' || agency == 'domiciliohabana'){
-        query.equalTo("productAgency", agency);
-      }else{
-        query.containedIn("productAgency",
-      [agency, null]); 
+      if(province == 'Matanzas'){
+        if(agency == 'franklin' || agency == 'domiciliohabana'){
+          query.equalTo("productAgency", agency);
+          console.log('Entro');        
+        }else{
+          query.containedIn("productAgency", [agency, null]); 
+          console.log('No Entro');
+        } 
+        query2.equalTo('province', province);
+        query3.equalTo('province', "Occidente");
+            
+        const composedQuery = Parse.Query.and(query, query3);
+        // const composedQueryF = Parse.Query.and(query, query2);
+        // const composedQuery = Parse.Query.and(composedQueryF, query3);
+        return composedQuery.find();
+      }else{  
+        if(agency == 'franklin' || agency == 'domiciliohabana'){
+          query.equalTo("productAgency", agency);
+          console.log('Entro');        
+        }else{
+          query.containedIn("productAgency", [agency, null]); 
+          console.log('No Entro');
+        }  
+        query2.equalTo('province', province);
+        query3.equalTo('province', "Occidente");
+            
+        //const composedQuery = Parse.Query.or(query, query2);
+        const composedQueryF = Parse.Query.and(query, query3);
+        const composedQuery = Parse.Query.or(composedQueryF, query2);
+        return composedQuery.find();
       }
-      
-      query2.equalTo('province', province);
-      query3.equalTo('province', "Occidente");
-          
-      //const composedQuery = Parse.Query.or(query, query2);
-      const composedQueryF = Parse.Query.and(query, query3);
-      const composedQuery = Parse.Query.or(composedQueryF, query2);
-      return composedQuery.find();
+         
+    
     }else{
       const Products = Parse.Object.extend('products');
       const query = new Parse.Query(Products);
