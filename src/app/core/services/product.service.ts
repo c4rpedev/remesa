@@ -32,8 +32,13 @@ export class ProductService {
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
-      query.containedIn("productAgency",
+      if(agency == 'franklin' || agency == 'domiciliohabana'){
+        query.equalTo("productAgency", agency);
+      }else{
+        query.containedIn("productAgency",
       [agency, null]); 
+      }
+      
       query2.equalTo('province', province);
       query3.equalTo('province', "Occidente");
           
@@ -57,7 +62,13 @@ export class ProductService {
         return composedQuery.find();
       }else{
         query3.equalTo('province', "Oriente");
-        query.containedIn("productAgency",[agency, null]); 
+        if(agency == 'franklin' || agency == 'domiciliohabana'){
+          query.equalTo("productAgency", agency);
+        }else{
+          query.containedIn("productAgency",
+        [agency, null]); 
+        }        
+      
         query2.equalTo('province', province);
       //const composedQuery = Parse.Query.or(query, query2);
        const composedQueryF = Parse.Query.and(query, query3);
