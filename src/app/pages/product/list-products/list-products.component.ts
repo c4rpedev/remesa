@@ -20,6 +20,7 @@ import { MunicipioService } from 'src/app/core/services/municipio.service';
   styleUrls: ['./list-products.component.scss']
 })
 export class ListProductsComponent implements OnInit {
+  admin: boolean;
   who:string;
   products: Array<any>;
   productsEdit: Array<any> = [];
@@ -28,10 +29,12 @@ export class ListProductsComponent implements OnInit {
   provinces: any = [];
   provincesP: any;
   selectedProvince: null;
+  selectedCategory: null;
   img: String;
   user: string;
   term: string;
   loading: boolean;
+  categorys: any = ['Combo', 'Producto', 'Restaurante' ]
   
   
 
@@ -45,7 +48,7 @@ export class ListProductsComponent implements OnInit {
     @Inject(DOCUMENT) public document: Document
    
     ) {
-     
+      this.selectedCategory = null;
       this.selectedProvince = null;
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -53,7 +56,8 @@ export class ListProductsComponent implements OnInit {
   ngOnInit(): void {
      this.auth.user$.subscribe(user =>{
       
-       this.user = user.nickname;           
+       this.user = user.nickname;    
+       this.isAdmin();        
       this.who= history.state.who;       
       this.getProvinces();
       //this.getProductForProvince();  
@@ -148,7 +152,9 @@ export class ListProductsComponent implements OnInit {
       }) 
     }  
   }
-
+  isAdmin(){
+    this.admin = this.userService.isAdmin(this.user);
+  }
   addToCart(product: any){
     Swal.fire({
     position: 'top-end',

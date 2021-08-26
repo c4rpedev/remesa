@@ -5,25 +5,24 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class MyFilterPipe implements PipeTransform {
 
-  transform(items: any[], keyword: any, properties: string[]): any[] {
+  transform(items: any[], keyword: any, keyword2: any, properties: string[], properties2: string[]): any[] {
       console.log('Items');
       console.log(items);
       
       
     if (!items) return [];
-    if (!keyword) return items;
-    return items.filter(item => {
-        console.log('Item');
-        console.log(item.attributes);
-        
-      var itemFound: Boolean;
-      for (let i = 0; i < properties.length; i++) {
-        if (item.attributes[properties[i]].toLowerCase().indexOf(keyword.toLowerCase()) !== -1) {
-          itemFound = true;
-          break;
-        }
-      }
-      return itemFound;
+    if (!(keyword) && !(keyword2)) return items;    
+    return items.filter(item => {     
+      var itemFound: Boolean;   
+          if (keyword && item.attributes[properties[0]].toLowerCase().indexOf(keyword.toLowerCase()) === -1) {
+            return false;
+            
+          } 
+          if (keyword2 && item.attributes[properties2[0]].toLowerCase().indexOf(keyword2.toLowerCase()) === -1) {
+            return false;
+            
+          }        
+      return true;
     });
 
   }

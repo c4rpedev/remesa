@@ -33,7 +33,7 @@ export class ProductService {
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
       if(province == 'Matanzas'){
-        if(agency == 'franklin' || agency == 'domiciliohabana'){
+        if(agency == 'franklin' || agency == 'domiciliohabana'){          
           query.equalTo("productAgency", agency);
           console.log('Entro');        
         }else{
@@ -41,7 +41,7 @@ export class ProductService {
           console.log('No Entro');
         } 
         query2.equalTo('province', province);
-        query3.equalTo('province', "Occidente");
+        query3.containedIn("province", [province, "Occidente"]);
             
         const composedQuery = Parse.Query.and(query, query3);
         // const composedQueryF = Parse.Query.and(query, query2);

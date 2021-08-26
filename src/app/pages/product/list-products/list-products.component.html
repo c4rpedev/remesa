@@ -43,6 +43,14 @@
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-search"></i> </span>
             <input type="text" class="form-control" placeholder="Busca por nombre" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="term">
           </div>
+          <div class="province-select" *ngIf="selectedProvince && (admin || user=='franklin' || user=='tushoponline' ||user=='domiciliohabanan')">
+            <select [(ngModel)]="selectedCategory"  class="form-select" id="selectedCategory" >  
+              <option [ngValue]="null">Seleccione una categoria</option>            
+              <option *ngFor="let p of categorys">
+                {{p}}
+             </option>
+            </select>            
+          </div>
           <div class="province-select">
             <select [(ngModel)]="selectedProvince"  (ngModelChange)="getProductForProvince()" class="form-select" id="selectProvince" >
               <option [ngValue]="null">Seleccione una provincia</option>
@@ -64,7 +72,7 @@
             </div>
             <div
             class="col-sm-3 mb-2"
-            *ngFor="let product of products | myFilter:term:['name']; let i = index">
+            *ngFor="let product of products | myFilter:term:selectedCategory:['name']:['category']; let i = index">
             
             <div class="item">
               <div class="mb-r">
