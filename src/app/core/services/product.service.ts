@@ -46,8 +46,7 @@ export class ProductService {
       const query = new Parse.Query(Products);
       const query2 = new Parse.Query(Products);
       const query3 = new Parse.Query(Products);
-      query.containedIn("productAgency",
-      [agency, null]); 
+      query.equalTo("productAgency",agency); 
       query2.equalTo('province', province);
       if(province == "Santiago de Cuba" || province == "Pinar del Río"){
         const composedQuery = Parse.Query.and(query, query2);
