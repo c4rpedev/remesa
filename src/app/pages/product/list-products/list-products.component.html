@@ -43,7 +43,7 @@
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-search"></i> </span>
             <input type="text" class="form-control" placeholder="Busca por nombre" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="term">
           </div>
-          <div class="province-select" *ngIf="selectedProvince && (admin || user=='franklin' || user=='tushoponline' ||user=='domiciliohabanan')">
+          <div class="province-select" *ngIf="selectedProvince && (admin || user=='franklin' || user=='tushoponline' ||user=='domiciliohabana')">
             <select [(ngModel)]="selectedCategory"  class="form-select" id="selectedCategory" >  
               <option [ngValue]="null">Seleccione una categoria</option>            
               <option *ngFor="let p of categorys">
@@ -70,11 +70,15 @@
             <div class="order__spinner" *ngIf="loading">
               <mat-spinner  ></mat-spinner>
             </div>
+            <div *ngIf="selectedCategory == 'Restaurante 1' && selectedProvince == 'Matanzas'" class="container text-center mt-5">                         
+              <h3><b>ALCANCE:</b> CARDENAS -STA MARTA-GUASIMAS-BOCA-CANTEL-LA CONCHITA-MATANZAS CIUDAD-GUANABANA</h3> 
+              <h3><b>HORARIO DE ENTREGAS:</b> 11AM - 7PM</h3> 
+          </div> 
             <div
             class="col-sm-3 mb-2"
             *ngFor="let product of products | myFilter:term:selectedCategory:['name']:['category']; let i = index">
             
-            <div class="item">
+            <div class="item" *ngIf="(product.attributes.state || product.attributes.state == null) || admin">
               <div class="mb-r">
                 <!--Card-->
                 <div class="card card-cascade wider shadow">
@@ -100,6 +104,7 @@
                   <div class="card-body text-center no-padding">
                     <!--Category & Title-->
                    
+                      <h4><b>{{ product.attributes.description}}</b></h4>
                       <h5>{{ product.attributes.name}}</h5>
                    
                     <p class="card-title">
@@ -143,6 +148,11 @@
                         >
                           <i class="fa fa-plus-circle"></i>
                         </a>
+                        <div class="product__checkbox"        
+                        *ngIf="user == 'buttymanager' || user == 'buttyekonomico'"
+                      >
+                      <input type="checkbox" id="cbox1" value="checkbox"  [(ngModel)]="productState"  (ngModelChange)="changeState(product.id)">
+                      </div>
                         <!-- <a
                           placement="top"
                           mdbTooltip="Remove Product"

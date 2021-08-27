@@ -12,5 +12,6 @@ export class Product {
   productProvince: string;   
   productSeller: string;
   productAgency: string;
+  productState: boolean;
   products: Product[];
 }

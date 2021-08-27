@@ -34,7 +34,7 @@ export class ProductService {
       const query3 = new Parse.Query(Products);
       if(province == 'Matanzas'){
         if(agency == 'franklin' || agency == 'domiciliohabana'){          
-          query.equalTo("productAgency", agency);
+          query.equalTo("productAgency", 'franklin');
           console.log('Entro');        
         }else{
           query.containedIn("productAgency", [agency, null]); 
@@ -109,6 +109,7 @@ export class ProductService {
     query2.equalTo('province', "Occidente");
     query.equalTo('province', province);
     const composedQuery = Parse.Query.or(query, query2);
+    composedQuery.limit(1000)
     return composedQuery.find()
 
     }else{
@@ -245,5 +246,30 @@ export class ProductService {
         console.error('Error while creating products: ', error);
       }
     })();    
+  }
+
+  updateProductState(id: string, state: boolean){  
+    (async () => {
+      const query = new Parse.Query('products');
+      try {
+        // here you put the objectId that you want to update
+        const myNewObject = await query.get(id);
+        // myNewObject.set('productId', product.productId);
+     
+      myNewObject.set('state', state); 
+        try {
+          const response = await myNewObject.save();
+          // You can use the "get" method to get the value of an attribute
+          // Ex: response.get("<ATTRIBUTE_NAME>")
+          // Access the Parse Object attributes using the .GET method         
+          console.log(response.get('state'));
+          console.log('products updated', response);
+        } catch (error) {
+          console.error('Error while updating products', error);
+          }
+        } catch (error) {
+          console.error('Error while retrieving object products', error);
+        }
+    })(); 
   }
 }

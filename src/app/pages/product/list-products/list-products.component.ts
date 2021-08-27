@@ -34,7 +34,8 @@ export class ListProductsComponent implements OnInit {
   user: string;
   term: string;
   loading: boolean;
-  categorys: any = ['Combo', 'Producto', 'Restaurante' ]
+  categorys: any = ['Combo', 'Producto', 'Restaurante 1' ];
+  productState: boolean; 
   
   
 
@@ -140,7 +141,9 @@ export class ListProductsComponent implements OnInit {
       this.service.getAllProductProperties(this.selectedProvince).then(res=>{
         this.products = res; 
         this.loading = false;
-        console.log(this.products[0].attributes);        
+        console.log('Products');
+        
+        console.log(this.products);        
       }) 
     }else{
       this.loading = true;
@@ -166,6 +169,14 @@ export class ListProductsComponent implements OnInit {
     console.log(product);
     this.productsCart.push(product);
     console.log(this.productsCart);
+  }
+  changeState(id: string){
+    console.log('Changed');
+    console.log(id);
+    console.log(this.productState);
+    
+   this.service.updateProductState(id, !this.productState);
+    
   }
 
 }
