@@ -61,7 +61,7 @@ export class ListProductsSucursalComponent implements OnInit {
        this.isAdmin();        
       this.who= history.state.who;       
       this.getProvinces();
-      //this.getProductForProvince();  
+      this.getProductForProvince();  
     })
 
   }

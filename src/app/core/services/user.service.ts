@@ -27,7 +27,7 @@ export class UserService {
 
   isSucursal(user: string): boolean{
      
-    if(user == 'sucursalhol' || user == 'sucursalstgo'  || user == 'sucursalhab' || user == 'sucursalmtz' || user == 'restaurante1'){
+    if(user == 'sucursalhol' || user == 'sucursalstgo'  || user == 'sucursalhab' || user == 'sucursalmtz' || user == 'restaurante1' || user == 'santamarta'){
       return true;
     }else{
       return false;
