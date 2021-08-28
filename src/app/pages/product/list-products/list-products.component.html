@@ -78,10 +78,10 @@
             class="col-sm-3 mb-2"
             *ngFor="let product of products | myFilter:term:selectedCategory:['name']:['category']; let i = index">
             
-            <div class="item" *ngIf="(product.attributes.state || product.attributes.state == null) || admin">
+            <div class="item" >
               <div class="mb-r">
                 <!--Card-->
-                <div class="card card-cascade wider shadow">
+                <div class="card card-cascade wider shadow" [class.active]='!product.attributes.state'>
                   <!--Card image-->
                   <a >
                     <div >
@@ -105,7 +105,7 @@
                     <!--Category & Title-->
                    
                       <h4><b>{{ product.attributes.description}}</b></h4>
-                      <h5>{{ product.attributes.name}}</h5>
+                      <h5 *ngIf="product.attributes.name">{{ product.attributes.name}}</h5>
                    
                     <p class="card-title">
                       <strong>
@@ -140,7 +140,7 @@
                         >
                           <i class="fa fa-edit"></i>
                         </a>
-                        <a class="add__product"                       
+                        <a *ngIf="product.attributes.state" class="add__product"                       
                           placement="top"
                           mdbTooltip="Add to Wishlist"
                           container="body"
@@ -151,7 +151,7 @@
                         <div class="product__checkbox"        
                         *ngIf="user == 'buttymanager' || user == 'buttyekonomico'"
                       >
-                      <input type="checkbox" id="cbox1" value="checkbox"  [(ngModel)]="productState"  (ngModelChange)="changeState(product.id)">
+                      <input type="checkbox" [value]="product.id" [checked]="!product.attributes.state"  (change)="changeState(product.id, product.attributes.state)" />
                       </div>
                         <!-- <a
                           placement="top"

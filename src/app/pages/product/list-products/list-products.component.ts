@@ -170,12 +170,12 @@ export class ListProductsComponent implements OnInit {
     this.productsCart.push(product);
     console.log(this.productsCart);
   }
-  changeState(id: string){
+  changeState(id: string, state: boolean){
     console.log('Changed');
     console.log(id);
-    console.log(this.productState);
+    console.log(state);
     
-   this.service.updateProductState(id, !this.productState);
+   this.service.updateProductState(id, !state);
     
   }
 
