@@ -14,6 +14,7 @@ import { MyFilterPipe } from './search-by-name.pipe'
 
 import { ProductComponent } from "./product.component";
 import { ListProductsComponent } from './list-products/list-products.component';
+import { ListProductsSucursalComponent } from './list-products-sucursal/list-products-sucursal.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { CreateComboComponent } from './create-combo/create-combo.component';
@@ -35,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   declarations: [
     ProductComponent,
     ListProductsComponent,
+    ListProductsSucursalComponent,
     AddProductComponent,
     EditProductComponent,
     CreateComboComponent,

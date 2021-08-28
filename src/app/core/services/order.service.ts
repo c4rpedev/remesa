@@ -148,10 +148,12 @@ export class OrderService {
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);    
       query.equalTo('orderAgency', agency);
+      query.limit(1000);
       return query.find() 
     }else{
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);
+      query.limit(1000);
       return query.find()
     }   
 

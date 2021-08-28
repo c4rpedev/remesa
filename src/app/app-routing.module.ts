@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AddOrderComponent } from './pages/order/add-order/add-order.component';
 import { ListOrdersComponent } from './pages/order/list-orders/list-orders.component';
 import { ListProductsComponent } from './pages/product/list-products/list-products.component';
+import { ListProductsSucursalComponent } from './pages/product/list-products-sucursal/list-products-sucursal.component';
 import { ReportComponent } from './pages/report/report.component';
 import { AddComplainComponent } from './pages/complain/add-complain/add-complain.component';
 import { AddProductComponent } from './pages/product/add-product/add-product.component';
@@ -25,6 +26,7 @@ const routes: Routes = [
   //-- Product --//
   { path: '', component: ListOrdersComponent},
   { path: 'list-product', component: ListProductsComponent},
+  { path: 'list-product-sucursal', component: ListProductsSucursalComponent},
   { path: 'add-product', component: AddProductComponent},
   { path: 'edit-product', component: EditProductComponent},
   { path: 'create-combo', component: CreateComboComponent},
