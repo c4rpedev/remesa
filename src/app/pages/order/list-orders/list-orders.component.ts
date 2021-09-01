@@ -374,7 +374,8 @@ export class ListOrdersComponent implements OnInit  {
   }
 
   editOrder(order: any, orderId: String){
-    console.log(orderId);
+    console.log(orderId + ' <--orderId');
+    this.orderService.orderIdEdit = orderId;
     this.router.navigate(['/b']);
     this.router.navigateByUrl('/edit-order', { state: {order: order, orderId: orderId, user: this.user, admin: this.admin, sucursal: this.sucursal}});
   }

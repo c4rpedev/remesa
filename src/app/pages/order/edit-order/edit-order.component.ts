@@ -97,7 +97,7 @@ export class EditOrderComponent implements OnInit {
         hasAlbaran = true
 
        }
-
+       console.log(this.orderId + '<--OrderID EDIT!')
       this.orderService.updateOrder(this.order, this.orderId, this.img.toString(), hasAlbaran);
       Swal.fire({
         position: 'top-end',

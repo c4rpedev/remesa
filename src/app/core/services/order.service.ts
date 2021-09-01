@@ -7,7 +7,7 @@ import * as Parse from 'parse'
   providedIn: 'root'
 })
 export class OrderService {
-
+  orderIdEdit: String;
   constructor() { }
 
   createOrder(order: Order, user: string){
@@ -38,11 +38,13 @@ export class OrderService {
 
     console.log(img);
 
+    console.log(this.orderIdEdit + ' <--orderEdit');
+
     (async () => {
       const query = new Parse.Query('order');
       try {
         // here you put the objectId that you want to update
-        const myNewObject = await query.get(orderId);
+        const myNewObject = await query.get(this.orderIdEdit.toString());
         myNewObject.set('orderCancelMotive', order.orderCancelMotive);
 
         myNewObject.set('orderId', order.orderId);
@@ -86,10 +88,12 @@ export class OrderService {
   }
 
   updateOrderState(orderId: string, state: string){
+    console.log(orderId + ' <--orderID antes de buscar!!');
     (async () => {
       const query = new Parse.Query('order');
       try {
         // here you put the objectId that you want to update
+        console.log(orderId + ' <--orderID buscar!!')
         const myNewObject = await query.get(orderId);
 
         myNewObject.set('state', state);

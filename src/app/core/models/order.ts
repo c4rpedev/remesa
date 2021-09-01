@@ -1,6 +1,8 @@
 import { Product } from "./product";
 
 export class Order {
+    $key: string;
+    orderId: string;
     orderRecieverName: string;
     orderProvince: string;
     orderMunicipio: string;
@@ -15,7 +17,7 @@ export class Order {
 
 
 
-    orderId: number;
+
     orderAgency: string;
     orderClientName: string;
     orderClientNumber: number;

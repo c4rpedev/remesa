@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Attribute } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { map } from 'rxjs/operators';
@@ -145,18 +145,17 @@ export class AddOrderComponent implements OnInit {
       //   console.log(r + ' <--r')
       //   console.log('asd')
       // })
-      var x = 0
-
       this.orderService.getAllOrders().then(res=>{
+
+
         var obj = res[0];
         if(obj){
-          res.forEach((element:any) => {
-            x++;
-          });
-          this.order.orderId = x + 1;
+          this.order.orderId = (parseInt(res[0].attributes.orderId) + 1).toString();
+          console.log(res[0].attributes.orderId + ' <---res[0]');
+          console.log(res[0].attributes.orderClientName + ' <---res[1]');
         }
         else{
-          this.order.orderId = 1;
+          this.order.orderId = '1';
         }
         console.log(this.order.orderId + ' <--THIS.ORDERID')
         this.order.state = 'Nuevo';
