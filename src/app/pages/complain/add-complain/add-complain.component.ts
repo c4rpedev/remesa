@@ -27,12 +27,12 @@ export class AddComplainComponent implements OnInit {
 
   ngOnInit(): void {
     this.order = history.state.order;
-    
+
     this.complain.complainClient = this.order.orderClientName;
-    this.complain.complainOrder = this.order.orderId;
+    this.complain.complainOrder = this.order.orderId.toString();
     this.user = this.userService.getUser;
     console.log(this.user);
-    
+
   }
 
   detectFiles(event: any) {
@@ -44,14 +44,14 @@ export class AddComplainComponent implements OnInit {
         reader.onload = (e: any) => {
           this.urls.push(e.target.result);
         }
-        reader.readAsDataURL(file);        
+        reader.readAsDataURL(file);
       }
-    } 
+    }
   }
 
   onSubmit(form: NgForm){
     console.log(this.user);
-    
+
     if(form.valid){
       this.complainService.createComplain(this.complain, this.user, this.urls)
       Swal.fire({
@@ -66,9 +66,9 @@ export class AddComplainComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Complete todos los campos obligatorios!',        
+        text: 'Complete todos los campos obligatorios!',
       })
-    } 
+    }
   }
 
 }

@@ -1,23 +1,29 @@
 import { Product } from "./product";
 
-export class Order {    
-    orderId: string;
-    orderAgency: string;
-    orderClientName: string;
+export class Order {
     orderRecieverName: string;
     orderProvince: string;
-    orderMunicipio: string;    
+    orderMunicipio: string;
     orderAddress: string;
     orderReference: string;
     orderPhone: string;
-    orderMobile: string;
     orderSucursal: string;
     orderNote: string;
     orderPrice: number;
+    orderCancelMotive: string;
+    productArray: Product[];
+
+
+
+    orderId: number;
+    orderAgency: string;
+    orderClientName: string;
+    orderClientNumber: number;
+    orderAmount: number;
+    orderCurrency: string;
     orderAlbaran: File;
     orderDays: number;
-    orderCancelMotive: string;
-    productArray: Product[];  
     state: string;
+    orderMobile: string;
   }
-  
+

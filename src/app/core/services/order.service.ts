@@ -10,37 +10,20 @@ export class OrderService {
 
   constructor() { }
 
-  createOrder(order: Order, products: any[], user: string){
+  createOrder(order: Order, user: string){
     (async () => {
       const myNewObject = new Parse.Object('order');
       myNewObject.set('orderId', order.orderId);
       myNewObject.set('orderClientName', order.orderClientName);
-      myNewObject.set('orderRecieverName', order.orderRecieverName);
-      myNewObject.set('orderProvince', order.orderProvince);
-      myNewObject.set('orderMunicipio', order.orderMunicipio);
-      myNewObject.set('orderAddress', order.orderAddress);
-      myNewObject.set('orderPhone', order.orderPhone);
-      myNewObject.set('orderMobile', order.orderMobile);
-      myNewObject.set('orderPrice', order.orderPrice);
-      myNewObject.set('orderReference', order.orderReference);
-      myNewObject.set('orderNote', order.orderNote);
-      if(order.orderProvince == "Pinar del Río" || 
-      order.orderProvince == "Matanzas" || 
-      order.orderProvince == "Artemisa" || 
-      order.orderProvince == "Cienfuegos" || 
-      order.orderProvince == "Sancti Spíritus" || 
-      order.orderProvince == "La Habana" || 
-      order.orderProvince == "Ciego de Ávila" ||
-      order.orderProvince == "Villa Clara" || 
-      order.orderProvince == "Mayabeque" || 
-      order.orderProvince == "Camagüey" ||
-      order.orderProvince == "Isla de la Juventud"){
-        myNewObject.set('orderDays', 5);
-      }else{
-        myNewObject.set('orderDays', 7);
-      }
-      myNewObject.set('productArray', products);
-      myNewObject.set('orderAgency', user);
+      myNewObject.set('orderClientNumber', order.orderClientNumber);
+      myNewObject.set('orderAmount', order.orderAmount);
+      myNewObject.set('orderCurrency', order.orderCurrency);
+      myNewObject.set('orderAlbaran', order.orderAlbaran);
+      myNewObject.set('orderDays', order.orderDays);
+      myNewObject.set('state', order.state);
+
+      myNewObject.set('orderAgency', order.orderAgency);
+      // myNewObject.set('orderAgency', user);
       try {
         const result = await myNewObject.save();
         // Access the Parse Object attributes using the .GET method
@@ -52,31 +35,32 @@ export class OrderService {
   }
   updateOrder(order: Order, orderId: string, img: string, hasAlbaran: boolean){
     console.log('asdfsd');
-    
+
     console.log(img);
-    
+
     (async () => {
       const query = new Parse.Query('order');
       try {
         // here you put the objectId that you want to update
         const myNewObject = await query.get(orderId);
+        myNewObject.set('orderCancelMotive', order.orderCancelMotive);
+
         myNewObject.set('orderId', order.orderId);
         myNewObject.set('orderClientName', order.orderClientName);
-        myNewObject.set('orderRecieverName', order.orderRecieverName);
-        myNewObject.set('orderProvince', order.orderProvince);
-        myNewObject.set('orderMunicipio', order.orderMunicipio);
-        myNewObject.set('orderAddress', order.orderAddress);
-        myNewObject.set('orderReference', order.orderReference);
-        myNewObject.set('orderPhone', order.orderPhone);
-        myNewObject.set('orderMobile', order.orderMobile);
-        myNewObject.set('orderSucursal', order.orderSucursal);
-        myNewObject.set('orderNote', order.orderNote);
-        myNewObject.set('orderCancelMotive', order.orderCancelMotive);
-        if(hasAlbaran){       
-           myNewObject.set('orderAlbaran', new Parse.File("albaranes.jpg", { uri: img })); 
-        }
-        
+        myNewObject.set('orderClientNumber', order.orderClientNumber);
+        myNewObject.set('orderAmount', order.orderAmount);
+        myNewObject.set('orderCurrency', order.orderCurrency);
+        myNewObject.set('orderDays', order.orderDays);
         myNewObject.set('state', order.state);
+
+        myNewObject.set('orderAgency', order.orderAgency);
+
+
+        if(hasAlbaran){
+          console.log('ALBARAN!!!!')
+           myNewObject.set('orderAlbaran', new Parse.File("albaranes.jpg", { uri: img }));
+        }
+
         try {
           const response = await myNewObject.save();
           // You can use the "get" method to get the value of an attribute
@@ -107,16 +91,16 @@ export class OrderService {
       try {
         // here you put the objectId that you want to update
         const myNewObject = await query.get(orderId);
-      
+
         myNewObject.set('state', state);
         try {
           const response = await myNewObject.save();
           // You can use the "get" method to get the value of an attribute
           // Ex: response.get("<ATTRIBUTE_NAME>")
           // Access the Parse Object attributes using the .GET method
-         
+
           console.log(response.get('state'));
-         
+
         } catch (error) {
           console.error('Error while updating order', error);
           }
@@ -143,34 +127,43 @@ export class OrderService {
     })();
   }
 
-  getOrder(agency: string): Promise <any> {    
-    if(agency && agency != 'buttymanager' && agency != 'buttycomercial' && agency != 'buttyoperaciones' && agency != 'buttyekonomico'){   
+  getOrder(agency: string): Promise <any> {
+    if(agency && agency != 'clevercloud1' && agency != 'buttycomercial' && agency != 'buttyoperaciones' && agency != 'buttyekonomico'){
       const Orders = Parse.Object.extend('order');
-      const query = new Parse.Query(Orders);    
+      const query = new Parse.Query(Orders);
       query.equalTo('orderAgency', agency);
       query.limit(1000);
-      return query.find() 
+      return query.find()
     }else{
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);
       query.limit(1000);
       return query.find()
-    }   
+    }
 
-    
+
   }
-  getOrderSucursal(sucursal: string): Promise <any> {    
-    if(sucursal && sucursal != 'buttymanager' && sucursal != 'buttycomercial' && sucursal != 'buttyoperaciones' && sucursal != 'buttyekonomico'){   
+
+
+  getAllOrders(): Promise <any> {
+    const Orders = Parse.Object.extend('order');
+      const query = new Parse.Query(Orders);
+      query.limit(1000);
+      return query.find()
+  }
+
+  getOrderSucursal(sucursal: string): Promise <any> {
+    if(sucursal && sucursal != 'buttymanager' && sucursal != 'buttycomercial' && sucursal != 'buttyoperaciones' && sucursal != 'buttyekonomico'){
       const Orders = Parse.Object.extend('order');
-      const query = new Parse.Query(Orders);    
-      query.equalTo('orderSucursal', sucursal);
-      return query.find() 
+      const query = new Parse.Query(Orders);
+      query.equalTo('orderAgency', sucursal);
+      return query.find()
     }else{
       const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);
       return query.find()
-    }   
+    }
 
-    
+
   }
 }

@@ -58,7 +58,7 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     AddOrderComponent,
     LoginComponent,
     EditOrderComponent,
-    AddComplainComponent,    
+    AddComplainComponent,
     RegistroComponent,
     PrintViewComponent,
     EditComplainComponent,
@@ -67,8 +67,8 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     EditTransportComponent,
     SendSmsComponent,
     SucursalComponent,
-     
-      
+
+
   ],
   imports: [
     MatTableModule,
@@ -85,23 +85,23 @@ Parse.initialize(environment.PARSE_APP_ID, environment.PARSE_JS_KEY, );
     MatTooltipModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,   
+    HttpClientModule,
     BrowserAnimationsModule,
     ProductModule,
-    FormsModule,    
+    FormsModule,   
     ReactiveFormsModule,
     DxPivotGridModule,
     DxChartModule,
-    ModalModule, 
-    Ng2SearchPipeModule,   
+    ModalModule,
+    Ng2SearchPipeModule,
     AuthModule.forRoot({
-      domain: 'buttymanager.us.auth0.com',
-      clientId: 'HqCeBy0WHL7qHa7MSQWFUWB6QcohLYzT'
+      domain: 'dev-ft3ekf7b.us.auth0.com',
+      clientId: 'S9Ja1IysHAA0k7BbD8p8jClINzNrnx43'
     }),
   ],
   providers: [
     MatDatepickerModule,
-    MatNativeDateModule 
+    MatNativeDateModule
   ],
   bootstrap: [AppComponent]
 })

@@ -35,9 +35,9 @@ export class ListProductsComponent implements OnInit {
   term: string;
   loading: boolean;
   categorys: any = ['Combo', 'Producto', 'Restaurante 1' ];
-  productState: boolean; 
-  
-  
+  productState: boolean;
+
+
 
   constructor(private service: ProductService,
     private router: Router,
@@ -47,7 +47,7 @@ export class ListProductsComponent implements OnInit {
     public auth: AuthService,
     public dialog: MatDialog,
     @Inject(DOCUMENT) public document: Document
-   
+
     ) {
       this.selectedCategory = null;
       this.selectedProvince = null;
@@ -56,16 +56,16 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
      this.auth.user$.subscribe(user =>{
-      
-       this.user = user.nickname;    
-       this.isAdmin();        
-      this.who= history.state.who;       
-      this.getProvinces();
-      //this.getProductForProvince();  
+
+       this.user = user.nickname;
+       this.isAdmin();
+      this.who= history.state.who;
+      // this.getProvinces();
+      this.getProductForProvince();
     })
 
   }
-  
+
   openDialog(product: any): void {
     const dialogRef = this.dialog.open(PreviewProductComponent, {
       width: '600px',
@@ -74,13 +74,13 @@ export class ListProductsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-     
+
     });
   }
 
 
 
-  addOrder() {    
+  addOrder() {
     if(this.productsCart.length > 0){
       this.router.navigate(['/b']);
     this.router.navigateByUrl('/add-order', { state: {product: this.productsCart, province: this.selectedProvince}});
@@ -93,20 +93,20 @@ export class ListProductsComponent implements OnInit {
         timer: 1500
       })
     }
-      
+
   };
 
-  editProduct(product: any, productsA: any) {    
+  editProduct(product: any, productsA: any) {
     this.productsEdit.push(product);
     this.productsAttr.push(productsA);
     this.router.navigate(['/b']);
-    this.router.navigateByUrl('/edit-product', { state: {product: this.productsEdit, productA: this.productsAttr}});  
+    this.router.navigateByUrl('/edit-product', { state: {product: this.productsEdit, productA: this.productsAttr}});
   };
 
-  createCombo() {    
+  createCombo() {
     if(this.productsCart.length > 1){
       this.router.navigate(['/b']);
-      this.router.navigateByUrl('/create-combo', { state: {product: this.productsCart}}); 
+      this.router.navigateByUrl('/create-combo', { state: {product: this.productsCart}});
     }else{
       Swal.fire({
         position: 'top-end',
@@ -116,45 +116,36 @@ export class ListProductsComponent implements OnInit {
         timer: 1500
       })
     }
-     
+
   };
-  getProvinces(){
-    this.provincesP = this.provinceService.getProvinces();  
-    for (const province of this.provincesP) {
-      this.municipioService.getMunicipio(province.name).then(res=>{
-        console.log(res[0].attributes['municipios'][0].municipio);        
-        if(res[0].attributes['municipios'][0].municipio != ''){
-          this.provinces.push(province);
-          console.log('PRovinces');
-          console.log(this.provinces);
-        }
-      })
-  
-    }
-   
-  }
+  // getProvinces(){
+  //   this.provincesP = this.provinceService.getProvinces();
+  //   for (const province of this.provincesP) {
+  //     this.municipioService.getMunicipio(province.name).then(res=>{
+  //       console.log(res[0].attributes['municipios'][0].municipio);
+  //       if(res[0].attributes['municipios'][0].municipio != ''){
+  //         this.provinces.push(province);
+  //         console.log('PRovinces');
+  //         console.log(this.provinces);
+  //       }
+  //     })
+
+  //   }
+
+  // }
 
   getProductForProvince() {
-    console.log(this.selectedProvince);  
-    if(this.userService.isAdmin(this.user)){
-      this.loading = true;
-      this.service.getAllProductProperties(this.selectedProvince).then(res=>{
-        this.products = res; 
+    this.loading = true;
+      this.service.getAllConsignment().then(res=>{
+        this.products = res;
         this.loading = false;
         console.log('Products');
-        
-        console.log(this.products);        
-      }) 
-    }else{
-      this.loading = true;
-      this.service.getProductProperties(this.selectedProvince, this.user).then(res=>{
-        this.products = res; 
-        this.loading = false;
+
         console.log(this.products);
-        
-      }) 
-    }  
+        console.log(res);
+      })
   }
+
   isAdmin(){
     this.admin = this.userService.isAdmin(this.user);
   }
@@ -174,9 +165,9 @@ export class ListProductsComponent implements OnInit {
     console.log('Changed');
     console.log(id);
     console.log(state);
-    
+
    this.service.updateProductState(id, !state);
-    
+
   }
 
 }

@@ -17,8 +17,8 @@ export class UserService {
     return this.user;
   }
 
-  isAdmin(user: string): boolean{      
-    if(user == 'buttymanager' || user == 'buttycomercial'  || user == 'buttyoperaciones' || user == 'buttyekonomico'){
+  isAdmin(user: string): boolean{
+    if(user == 'clevercloud1' || user == 'buttycomercial'  || user == 'buttyoperaciones' || user == 'buttyekonomico'){
       return true;
     }else{
       return false;
@@ -26,8 +26,17 @@ export class UserService {
   }
 
   isSucursal(user: string): boolean{
-     
+
     if(user == 'sucursalhol' || user == 'sucursalstgo'  || user == 'sucursalhab' || user == 'sucursalmtz' || user == 'restaurante1' || user == 'santamarta'){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  isAgency(user: string): boolean{
+
+    if(user == 'agencymanag3r'){
       return true;
     }else{
       return false;
