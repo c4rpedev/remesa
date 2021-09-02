@@ -39,6 +39,9 @@ export class AddOrderComponent implements OnInit {
   localidad: string;
   transporteArray: any;
   transporteArrayM: any;
+
+  tarjeta = false;
+
   constructor(
     private router: Router,
     private smsService: SmsService,
@@ -129,6 +132,14 @@ export class AddOrderComponent implements OnInit {
   //   })
   // }
 
+  contarjeta(){
+    if(this.tarjeta){
+      this.tarjeta = false;
+    }else{
+      this.tarjeta = true;
+    }
+  }
+
 
 
   onSubmit(form: NgForm){
@@ -139,26 +150,24 @@ export class AddOrderComponent implements OnInit {
       if(!this.order.state && (this.order.orderAgency != 'esencialpack' && this.order.orderAgency != 'agenciaespaña')){
         this.sendSms(this.order.orderMobile);
       }
-      // this.orderService.getOrder('agency').then(r => {
-      //   this.order.orderId =  r.count().toString();
-      //   console.log(this.order.orderId + ' <---orderiD');
-      //   console.log(r + ' <--r')
-      //   console.log('asd')
-      // })
-      this.orderService.getAllOrders().then(res=>{
+      this.orderService.getLasOrder().then(res=>{
 
 
         var obj = res[0];
         if(obj){
           this.order.orderId = (parseInt(res[0].attributes.orderId) + 1).toString();
-          console.log(res[0].attributes.orderId + ' <---res[0]');
-          console.log(res[0].attributes.orderClientName + ' <---res[1]');
         }
         else{
           this.order.orderId = '1';
         }
-        console.log(this.order.orderId + ' <--THIS.ORDERID')
         this.order.state = 'Nuevo';
+        this.order.orderAgency = this.user;
+        this.order.orderMunicipio = this.localidad;
+        this.order.numerocasa = this.streetNumber;
+        this.order.calleP = this.street;
+        this.order.callE = this.streetB;
+        this.order.orderAddress = "#" +this.streetNumber + " calle: " + this.street + ' entre ' + this.streetB;
+
         this.orderService.createOrder(this.order, this.user);
       })
       Swal.fire({

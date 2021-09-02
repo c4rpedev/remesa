@@ -109,7 +109,7 @@
         </ng-container>
 
         <!-- Weight Column -->
-        <ng-container matColumnDef="agency" >
+        <ng-container *ngIf="this.admin" matColumnDef="agency" >
           <th mat-header-cell *matHeaderCellDef>
             <div class="header" [matMenuTriggerFor]="menu">
               Agencia <i class="fa fa-filter"></i>
@@ -180,7 +180,7 @@
           <ng-container matColumnDef="products">
             <th mat-header-cell *matHeaderCellDef>
               <div class="header" [matMenuTriggerFor]="menu">
-                Productos
+                Cantidad
               </div>
               <mat-menu #menu hidden>
                 <div mat-menu-item mat-filter-item [disableRipple]="true">
@@ -193,7 +193,7 @@
 
                 <div mat-menu-item mat-filter-item [disableRipple]="true">
                   <mat-form-field>
-                    <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderId">
+                    <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderAmount">
                   </mat-form-field>
                 </div>
 
@@ -205,19 +205,19 @@
               </mat-menu>
 
             </th>
-            <td mat-cell *matCellDef="let element">  <p *ngFor="let product of element.attributes.productArray">{{product.name}}</p> </td>
+            <td mat-cell *matCellDef="let element"> {{element.attributes.orderAmount }} </td>
           </ng-container>
 
             <!-- reciver Column -->
         <ng-container matColumnDef="reciver">
           <th mat-header-cell *matHeaderCellDef>
             <div class="header" [matMenuTriggerFor]="menu">
-              Recibe <i class="fa fa-filter"></i>
+              Moneda <i class="fa fa-filter"></i>
             </div>
             <mat-menu #menu>
               <div mat-menu-item mat-filter-item [disableRipple]="true">
                 <mat-form-field>
-                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderRecieverName">
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderCurrency">
                     <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -225,9 +225,7 @@
 
               <div mat-menu-item mat-filter-item [disableRipple]="true">
                 <mat-form-field >
-                  <input type="text" matInput placeholder="Atributos" [(ngModel)]="searchValue.orderRecieverName">
-
-
+                  <input type="text" matInput placeholder="Atributos" [(ngModel)]="searchValue.orderCurrency">
                 </mat-form-field>
               </div>
 
@@ -239,7 +237,10 @@
             </mat-menu>
 
           </th>
-          <td mat-cell *matCellDef="let element">{{element.attributes.orderRecieverName}}</td>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.attributes.orderCurrency == 'Moneda Nacional(MN)'">(MN)</div>
+            <div *ngIf="element.attributes.orderCurrency == 'Dolar Estadounidense(USD)'">(USD)</div>
+          </td>
         </ng-container>
 
           <!-- province Column -->
@@ -312,6 +313,38 @@
           <td mat-cell *matCellDef="let element">{{element.attributes.orderMunicipio}} </td>
         </ng-container>
 
+         <!-- address Column -->
+         <!-- <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>
+            <div class="header" [matMenuTriggerFor]="menu">
+              Dirección   <i class="fa fa-filter"></i>
+            </div>
+            <mat-menu #menu>
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderAddress">
+                    <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <mat-form-field>
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderAddress">
+                </mat-form-field>
+              </div>
+
+              <div mat-menu-item mat-filter-item [disableRipple]="true">
+                <button mat-raised-button (click)="clearColumn('orderMobile')">Limpiar</button>
+                <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
+
+              </div>
+            </mat-menu>
+
+          </th>
+          <td mat-cell *matCellDef="let element"> {{element.attributes.orderAddress}}  </td>
+        </ng-container> -->
+
           <!-- phone Column -->
           <ng-container matColumnDef="phone">
             <th mat-header-cell *matHeaderCellDef>
@@ -344,7 +377,8 @@
               </mat-menu>
 
             </th>
-            <td mat-cell *matCellDef="let element">  {{element.attributes.orderPhone}} </td>
+            <td mat-cell *matCellDef="let element">{{element.attributes.orderPhone}}</td>
+
           </ng-container>
 
           <!-- mobile Column -->
@@ -403,10 +437,7 @@
                   <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(ngModel)]="searchValue.state">
                     <mat-option  value="Todos">Todos</mat-option>
                     <mat-option  value="Nuevo">Nuevo</mat-option>
-                    <mat-option  value="Revisado">Revisado</mat-option>
-                    <mat-option  value="En Tiempo">En Tiempo</mat-option>
-                    <mat-option  value="En Termino">En Termino</mat-option>
-                    <mat-option  value="Atrasado">Atrasado</mat-option>
+                    <mat-option  value="En Proceso">En Proceso</mat-option>
                     <mat-option  value="Finalizado">Finalizado</mat-option>
                     <mat-option  value=Cancelado>Cancelado</mat-option>
                   </mat-select>

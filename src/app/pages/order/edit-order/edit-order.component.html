@@ -34,16 +34,96 @@
       style="height: 35px;">
 
 
-      <label class="lname"> <strong>Número del Cliente</strong> </label>
-      <input type="number"
-      class="form-control"
-      [(ngModel)]="order.orderClientNumber"
-      [class.is-invalid]="orderClientNumber.invalid && orderClientNumber.touched"
-      required
-      placeholder="Número del Cliente"
-      name="orderClientNumber"
-      #orderClientNumber = "ngModel"
+      <div class="col-md-12 mt-2">
+        <div class="row">
+          <label> <strong>Teléfonos del Cliente *(requerido uno de los dos)</strong>  </label>
+        <div class="col-md-6">
+          <input type="text"
+          class="form-control"
+          [(ngModel)]="order.orderMobile"
+          [class.is-invalid]="orderMobile.invalid && orderMobile.touched"
+          placeholder="Teléfono Móvil"
+          [pattern]="mobNumberPattern"
+          [required]
+          name="orderMobile"
+          #orderMobile = "ngModel"
+          style="height: 35px;">
+          <small *ngIf="orderMobile.invalid && orderMobile.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe comenzar con 5 y tener 8 caracteres)</small>
+        </div>
+        <div class="col-md-6"> <input type="text"
+          class="form-control"
+          [(ngModel)]="order.orderPhone"
+          [class.is-invalid]="orderPhone.invalid && orderPhone.touched"
+          placeholder="Teléfono Fijo"
+          [pattern]="fixNumberPattern"
+          [required]="!order.orderMobile"
+          name="orderPhone"
+          #orderPhone = "ngModel"
+          style="height: 35px;">
+          <small *ngIf="orderPhone.invalid && orderPhone.touched" class="form-text text-danger">No es un número de teléfono válido. (Debe tener 8 caracteres)</small>
+          </div>
+        </div>
+      </div>
+
+      <label> <strong>Provincia*</strong>  </label>
+      <select  [(ngModel)]="order.orderProvince"
+      class="form-select"
+      name="orderProvince"
+      [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
+      #orderProvince="ngModel"
+      style="height: 35px;"
       style="height: 35px;">
+
+              <option>
+                Pinar del Río
+              </option>
+              <option>
+               La Habana
+              </option>
+              <option>
+                Artemisa
+               </option>
+               <option>
+                Mayabeque
+               </option>
+               <option>
+                Matanzas
+               </option>
+               <option>
+                Villa Clara
+               </option>
+               <option>
+                Cienfuegos
+               </option>
+               <option>
+                Sancti Spíritus
+               </option>
+               <option>
+                Ciego de Ávila
+               </option>
+               <option>
+                Camagüey
+               </option>
+               <option>
+                Las Tunas
+               </option>
+               <option>
+                Holguín
+               </option>
+               <option>
+                Granma
+               </option>
+               <option>
+                Santiago de Cuba
+               </option>
+               <option>
+                Guantánamo
+               </option>
+               <option>
+                Isla de la Juventud
+               </option>
+            </select>
+
 
 
       <div class="col-md-12 mt-2">
@@ -77,32 +157,77 @@
               Moneda Nacional(MN)
             </option>
             <option>
-              Moneda Libremente Convertible(MLC)
+              Dolar Estadounidense(USD)
             </option>
           </select>
         </div>
         </div>
       </div>
 
-      <label> <strong>Agencia</strong>  </label>
-          <select type="text"
-          class="form-select"
-          [(ngModel)]="order.orderAgency"
-          [class.is-invalid]="orderAgency.invalid && orderAgency.touched"
-          required
-          disabled
-          placeholder="Municipio"
-          name="orderAgency"
-          #orderAgency = "ngModel"
-          style="height: 35px;">
+      <label><strong>Municipio*</strong>  </label>
+      <div class="row">
+        <div class="col-md-12">
+          <input type="text"
+        class="form-control"
+        [(ngModel)]="order.orderMunicipio"
+        [class.is-invalid]="localidadV.invalid && localidadV.touched"
+        placeholder="Localidad"
+        name="localidad"
+        #localidadV = "ngModel"
+        style="height: 35px;"
+        required>
+        </div>
+      </div>
 
-            <option>
-              agencymanag3r
-            </option>
-            <option>
-             Opción 2
-            </option>
-          </select>
+
+
+    <label><strong>Dirección*</strong>  </label>
+    <div class="row">
+      <div class="col-md-4">
+        <input type="text"
+      class="form-control"
+      [(ngModel)]="order.numerocasa"
+      [class.is-invalid]="streetNumberV.invalid && streetNumberV.touched"
+      required
+      placeholder="Número de la casa"
+      name="streetNumber"
+      #streetNumberV = "ngModel"
+      style="height: 35px;">
+      </div>
+      <div class="col-md-4">
+        <input type="text"
+      class="form-control"
+      [(ngModel)]="order.calleP"
+      [class.is-invalid]="streetV.invalid && streetV.touched"
+      required
+      placeholder="Calle principal"
+      name="street"
+      #streetV = "ngModel"
+      style="height: 35px;">
+      </div>
+      <div class="col-md-4">
+        <input type="text"
+      class="form-control"
+      [(ngModel)]="order.callE"
+
+      placeholder="Entre calles"
+      name="streetB"
+      #streetBV = "ngModel"
+      style="height: 35px;">
+      </div>
+    </div>
+
+
+
+    <label> <strong>Referencia</strong> </label>
+    <input type="text"
+    class="form-control"
+    [(ngModel)]="order.orderReference"
+
+    placeholder="Ingrese un lugar de referencia"
+    name="orderReference"
+    #orderReference = "ngModel"
+    style="height: 35px;">
 
 
     <label>
@@ -120,20 +245,8 @@
           <option value="Nuevo">
             Nuevo
           </option>
-          <option value="Revisado">
-            Revisado
-          </option>
           <option value="En Proceso">
             En Proceso
-          </option>
-          <option value="En Tiempo">
-            En Tiempo
-          </option>
-          <option value="En Termino">
-            En Termino
-          </option>
-          <option value="Atrasado">
-            Atrasado
           </option>
           <option value="Finalizado">
             Finalizado
@@ -160,12 +273,12 @@
     <div class="card mb-3 shadow" *ngIf="admin || order.state == 'Finalizado' || sucursal">
       <h3 class="text-center mt-2" *ngIf="admin || sucursal">
         <b>
-          Subir Albaran
+          Subir Evidencia
         </b>
         </h3>
         <h3 class="text-center mt-2" *ngIf="!admin || !sucursal">
           <b>
-            Albaran
+            Evidencia
           </b>
           </h3>
       <div class="card-body text-center ">

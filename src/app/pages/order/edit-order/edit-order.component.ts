@@ -32,6 +32,12 @@ export class EditOrderComponent implements OnInit {
   "https://bulma.io/images/placeholders/480x480.png";
   photosrc: String;
   filePath:String;
+  mobNumberPattern = "^5+[0-9]{7}$";
+  fixNumberPattern = "^[0-9]{8}$";
+  streetNumber: string;
+  street: string;
+  streetB: string;
+  localidad: string;
   file: File;
   constructor(
     private router: Router,
@@ -96,8 +102,12 @@ export class EditOrderComponent implements OnInit {
       if( this.order.state != 'Nuevo' && this.order.state != 'Revisado' && this.order.state != 'En Proceso'){
         hasAlbaran = true
 
-       }
-       console.log(this.orderId + '<--OrderID EDIT!')
+      }
+        // this.order.orderMunicipio = this.localidad;
+        // if(this.streetNumber && this.street && this.streetB){
+          this.order.orderAddress = "#" +this.order.numerocasa + " calle: " + this.order.calleP + ' entre ' + this.order.callE;
+        // }
+      console.log(this.orderId + '<--OrderID EDIT!')
       this.orderService.updateOrder(this.order, this.orderId, this.img.toString(), hasAlbaran);
       Swal.fire({
         position: 'top-end',

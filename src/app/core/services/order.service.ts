@@ -15,12 +15,22 @@ export class OrderService {
       const myNewObject = new Parse.Object('order');
       myNewObject.set('orderId', order.orderId);
       myNewObject.set('orderClientName', order.orderClientName);
-      myNewObject.set('orderClientNumber', order.orderClientNumber);
       myNewObject.set('orderAmount', order.orderAmount);
       myNewObject.set('orderCurrency', order.orderCurrency);
       myNewObject.set('orderAlbaran', order.orderAlbaran);
       myNewObject.set('orderDays', order.orderDays);
       myNewObject.set('state', order.state);
+
+      myNewObject.set('orderMobile', order.orderMobile);
+      myNewObject.set('orderPhone', order.orderPhone);
+      myNewObject.set('orderProvince', order.orderProvince);
+      myNewObject.set('orderMunicipio', order.orderMunicipio);
+      myNewObject.set('orderReference', order.orderReference);
+      myNewObject.set('orderAddress', order.orderAddress);
+      myNewObject.set('calleP', order.calleP);
+      myNewObject.set('callE', order.callE);
+      myNewObject.set('numerocasa', order.numerocasa);
+
 
       myNewObject.set('orderAgency', order.orderAgency);
       // myNewObject.set('orderAgency', user);
@@ -56,6 +66,16 @@ export class OrderService {
         myNewObject.set('state', order.state);
 
         myNewObject.set('orderAgency', order.orderAgency);
+
+        myNewObject.set('orderMobile', order.orderMobile);
+        myNewObject.set('orderPhone', order.orderPhone);
+        myNewObject.set('orderProvince', order.orderProvince);
+        myNewObject.set('orderMunicipio', order.orderMunicipio);
+        myNewObject.set('orderReference', order.orderReference);
+        myNewObject.set('orderAddress', order.orderAddress);
+        myNewObject.set('calleP', order.calleP);
+        myNewObject.set('callE', order.callE);
+        myNewObject.set('numerocasa', order.numerocasa);
 
 
         if(hasAlbaran){
@@ -153,6 +173,14 @@ export class OrderService {
     const Orders = Parse.Object.extend('order');
       const query = new Parse.Query(Orders);
       query.limit(1000);
+      return query.find()
+  }
+
+  getLasOrder(): Promise <any> {
+    const Orders = Parse.Object.extend('order');
+      const query = new Parse.Query(Orders);
+      query.descending("orderId");
+      query.limit(1);
       return query.find()
   }
 

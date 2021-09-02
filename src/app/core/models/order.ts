@@ -27,5 +27,8 @@ export class Order {
     orderDays: number;
     state: string;
     orderMobile: string;
+    calleP: string;
+    callE: string;
+    numerocasa: string;
   }
 
