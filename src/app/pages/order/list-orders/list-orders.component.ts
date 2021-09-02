@@ -70,6 +70,7 @@ export class ListOrdersComponent implements OnInit  {
   admin: boolean;
   sucursal: boolean;
   loading: boolean;
+
   // displayedColumns: string[] = ['id', 'date', 'agency', 'client', 'products', 'reciver', 'province', 'municipio','phone', 'state', 'accions'];
 
   dataSource : any;
@@ -120,10 +121,17 @@ export class ListOrdersComponent implements OnInit  {
 
   ngOnInit(): void {
     //this.initEqualOption();
+
+    this.init();
+
+  }
+
+  init(){
+    this.orders= new Array();
     this.auth.user$.subscribe(user =>{
       this.loading = true;
       this.user = user.nickname;
-      // this.provinces = this.provinceService.getProvinces();
+      this.provinces = this.provinceService.getProvinces();
       // this.transportService.getTransport().then(res =>{
       //   this.transporte = res;
       // });
@@ -242,10 +250,7 @@ export class ListOrdersComponent implements OnInit  {
       }
 
     })
-
-
   }
-
 
   initEqualOption(){
     this.searchCondition.orderId = 'is-equal';
@@ -317,19 +322,19 @@ export class ListOrdersComponent implements OnInit  {
       var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
 
       var deliveryTime = this.stateService.getDeliveryTime(order.attributes.orderProvince);
-      if(order.attributes.state == "En Proceso"){
-        if((diffDays - deliveryTime == 1) || diffDays == deliveryTime){
-          this.orderService.updateOrderState(order.id, 'En Termino')
-          console.log('En termino');
-        }else if(diffDays < deliveryTime){
-          this.orderService.updateOrderState(order.id, 'En Tiempo')
-          console.log('En tiempo');
-        }else if(diffDays > deliveryTime){
-          this.orderService.updateOrderState(order.id, 'Atrasado')
-          console.log('Atrasado');
+      // if(order.attributes.state == "En Proceso"){
+      //   if((diffDays - deliveryTime == 1) || diffDays == deliveryTime){
+      //     this.orderService.updateOrderState(order.id, 'En Termino')
+      //     console.log('En termino');
+      //   }else if(diffDays < deliveryTime){
+      //     this.orderService.updateOrderState(order.id, 'En Tiempo')
+      //     console.log('En tiempo');
+      //   }else if(diffDays > deliveryTime){
+      //     this.orderService.updateOrderState(order.id, 'Atrasado')
+      //     console.log('Atrasado');
 
-        }
-      }
+      //   }
+      // }
 
 
     }
@@ -367,8 +372,11 @@ export class ListOrdersComponent implements OnInit  {
           'El producto ha sido eliminado.',
           'success'
         )
-        this.router.navigate(['/b']);
-        this.router.navigateByUrl('/list-order');
+
+        this.init();
+        // this.router.navigate(['/b']);
+        // this.router.navigateByUrl('/list-order');
+
       }
     })
   }

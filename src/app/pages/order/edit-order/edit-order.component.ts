@@ -103,11 +103,9 @@ export class EditOrderComponent implements OnInit {
         hasAlbaran = true
 
       }
-        // this.order.orderMunicipio = this.localidad;
-        // if(this.streetNumber && this.street && this.streetB){
-          this.order.orderAddress = "#" +this.order.numerocasa + " calle: " + this.order.calleP + ' entre ' + this.order.callE;
-        // }
-      console.log(this.orderId + '<--OrderID EDIT!')
+
+      this.order.orderAddress = "#" +this.order.numerocasa + " calle: " + this.order.calleP + ' entre ' + this.order.callE;
+      this.orderService.canUpdateOrder = true;
       this.orderService.updateOrder(this.order, this.orderId, this.img.toString(), hasAlbaran);
       Swal.fire({
         position: 'top-end',

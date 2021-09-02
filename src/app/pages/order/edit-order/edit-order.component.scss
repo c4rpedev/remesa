@@ -310,3 +310,10 @@ input {
 select{
   width: -moz-available !important;
 }
+
+@media screen and (max-width: 500px) {
+  .inputimg {
+    width: 230px;
+  }
+}
+

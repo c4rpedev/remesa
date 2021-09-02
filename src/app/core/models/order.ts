@@ -30,5 +30,8 @@ export class Order {
     calleP: string;
     callE: string;
     numerocasa: string;
+
+    orderMN: number;
+    orderUSD: number;
   }
 

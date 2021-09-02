@@ -12,11 +12,11 @@
         </div>
     </div>
 </div>
-<div class="send__sms__container" *ngIf="admin">
+<!-- <div class="send__sms__container" *ngIf="admin">
   <div class="send__sms">
     <button class="sms__button"  (click)="openDialog()"><i class="fa fa-mobile-phone fa-2x"></i>Enviar SMS a Cliente</button>
   </div>
-</div>
+</div> -->
 
 
 <div class="d-flex card">
@@ -236,7 +236,7 @@
       [(ngModel)]="order.state"
       [class.is-invalid]="state.invalid && state.touched"
       required
-      [disabled]="!admin || !(order.state == 'Nuevo')"
+      [disabled]="!admin || (order.state == 'Finalizado')"
 
       name="state"
       #state = "ngModel"
@@ -270,7 +270,7 @@
 
 
   <div class="col-lg-6">
-    <div class="card mb-3 shadow" *ngIf="admin || order.state == 'Finalizado' || sucursal">
+    <div class="card mb-3 shadow" *ngIf="order.state == 'Finalizado' || sucursal">
       <h3 class="text-center mt-2" *ngIf="admin || sucursal">
         <b>
           Subir Evidencia
@@ -281,13 +281,13 @@
             Evidencia
           </b>
           </h3>
-      <div class="card-body text-center ">
+      <div class="card-body text-center">
         comprobante
         <a [href]='img' target="_blank">
 
-          <img class="mb-3" src='{{img}}'  width="160" height="160" />
+          <img class="mb-3 img-fluid" src='{{img}}'  width="160" height="160" />
         </a>
-        <div  *ngIf="(admin && user!='buttycomercial') || sucursal">
+        <div class="inputimg" *ngIf="(admin && user!='buttycomercial') || sucursal">
           <input type="file"
           name="photo"
           accept="image/*"
@@ -295,10 +295,8 @@
            [(ngModel)]="photosrc"
           (change)="photo($event)" >
         </div>
+      </div>
 
-
-
-    </div>
     </div>
 
   </div>

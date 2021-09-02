@@ -125,10 +125,10 @@
 
               <div mat-menu-item mat-filter-item [disableRipple]="true">
                 <mat-form-field>
-                  <!-- <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderAgency"> -->
-                  <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderAgency">
+                  <input matInput placeholder="Atributos" [(ngModel)]="searchValue.orderAgency">
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(value)]="searchValue.orderAgency">
                     <mat-option *ngFor="let t of transporte" [value]="t.attributes.agencia">{{t.attributes.agencia}}</mat-option>
-                  </mat-select>
+                  </mat-select> -->
                 </mat-form-field>
               </div>
 
@@ -185,7 +185,7 @@
               <mat-menu #menu hidden>
                 <div mat-menu-item mat-filter-item [disableRipple]="true">
                   <mat-form-field>
-                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderId">
+                    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Condiciones' [(value)]="searchCondition.orderAmount">
                       <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
                     </mat-select>
                   </mat-form-field>
@@ -198,7 +198,7 @@
                 </div>
 
                 <div mat-menu-item mat-filter-item [disableRipple]="true">
-                  <button mat-raised-button (click)="clearColumn('position')">Limpiar</button>
+                  <button mat-raised-button (click)="clearColumn('orderAmount')">Limpiar</button>
                   <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
 
                 </div>
@@ -226,11 +226,15 @@
               <div mat-menu-item mat-filter-item [disableRipple]="true">
                 <mat-form-field >
                   <input type="text" matInput placeholder="Atributos" [(ngModel)]="searchValue.orderCurrency">
+                  <!-- <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Atributos' [(ngModel)]="searchValue.orderCurrency">
+                    <mat-option value="MN">MN</mat-option>
+                    <mat-option value="USD">USD</mat-option>
+                  </mat-select> -->
                 </mat-form-field>
               </div>
 
               <div mat-menu-item mat-filter-item [disableRipple]="true">
-                <button mat-raised-button (click)="clearColumn('orderRecieverName')">Limpiar</button>
+                <button mat-raised-button (click)="clearColumn('orderCurrency')">Limpiar</button>
                 <button mat-raised-button color="primary" (click)="applyFilter()">Buscar</button>
 
               </div>
@@ -458,8 +462,11 @@
           <div class="badge bg-primary text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Revisado'">
             {{element.attributes.state}}
           </div>
-          <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Tiempo'">
-            {{element.attributes.state}}
+          <!-- <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Tiempo'">
+            En Proceso
+          </div> -->
+          <div class="badge bg-success text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'En Proceso'">
+            En Proceso
           </div>
           <div class="badge bg-dark text-wrap" style="width: 6rem;" *ngIf="element.attributes.state == 'Finalizado'">
             {{element.attributes.state}}

@@ -12,18 +12,32 @@ export class ReportComponent implements AfterViewInit {
 
   @ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
   @ViewChild(DxChartComponent, { static: false }) chart: DxChartComponent;
-  orders= new Array<Order>();
+  orders= new Array<any>();
   pivotGridDataSource: any;
 
   constructor(private orderService: OrderService) {
-   
+
   }
 
   ngAfterViewInit() {
-    this.orderService.getOrderSucursal('buttymanager').then(res=>{      
+    this.orderService.getOrderSucursal('buttymanager').then(res=>{
       for (let order of res) {
-        console.log('Order');
-        this.orders.push(order.attributes);
+
+        var ord = {
+          orderAgency: order.attributes.orderAgency,
+          state: order.attributes.state,
+          orderProvince: order.attributes.orderProvince,
+          orderMunicipio: order.attributes.orderMunicipio,
+          createdAt: order.attributes.createdAt,
+          orderUSD: order.attributes.orderAmount,
+          ordermn: 0
+        }
+        if(order.attributes.orderCurrency == 'Moneda Nacional(MN)'){
+          ord.orderUSD = 0;
+          ord.ordermn = order.attributes.orderAmount
+        }
+
+        this.orders.push(ord);
       }
       this.pivotGridDataSource = {
         fields: [{
@@ -42,7 +56,7 @@ export class ReportComponent implements AfterViewInit {
           caption: "Provincia",
           width: 120,
           dataField: "orderProvince",
-          area: "row",          
+          area: "row",
         }, {
           caption: "Municipio",
           dataField: "orderMunicipio",
@@ -61,16 +75,23 @@ export class ReportComponent implements AfterViewInit {
           summaryType: "count",
           area: "data"
         },{
-          caption: "Total",
-          dataField: "orderPrice",
+          caption: "Total(MN)",
+          dataField: "ordermn",
+          dataType: "number",
+          summaryType: "sum",
+          format: "currency",
+          area: "data"
+        },{
+          caption: "Total(USD)",
+          dataField: "orderUSD",
           dataType: "number",
           summaryType: "sum",
           format: "currency",
           area: "data"
         }],
         store: this.orders
-      }                 
-    }); 
+      }
+    });
     this.pivotGrid.instance.bindChart(this.chart.instance, {
       dataFieldsDisplayMode: "splitPanes",
       alternateDataFields: false
@@ -78,7 +99,7 @@ export class ReportComponent implements AfterViewInit {
 
     setTimeout(() => {
         var dataSource = this.pivotGrid.instance.getDataSource();
-       
+
     }, 0);
   }
 
