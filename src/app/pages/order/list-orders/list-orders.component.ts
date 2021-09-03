@@ -142,7 +142,6 @@ export class ListOrdersComponent implements OnInit  {
           });
           this.dataSource = new MatTableDataSource<Order>(this.orders);
 
-          console.log(this.dataSource);
           this.dataSource.paginator = this.paginator;
           this.dataSource.sortingDataAccessor = (item:any, property:any) => {
             switch (property) {
@@ -353,8 +352,8 @@ export class ListOrdersComponent implements OnInit  {
     this.router.navigateByUrl('/add-order');
   };
 
-  deleteOrder(order: any){
-    Swal.fire({
+  async deleteOrder(order: any){
+    await Swal.fire({
       title: 'Estás seguro?',
       text: "No serás capaz de revertir esto!",
       icon: 'warning',
@@ -362,23 +361,22 @@ export class ListOrdersComponent implements OnInit  {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, borralo!'
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        console.log(order.id);
 
-        this.orderService.deleteOrder(order.id);
+        await this.orderService.deleteOrder(order.id);
         Swal.fire(
           'Borrado!',
           'El producto ha sido eliminado.',
           'success'
         )
 
-        this.init();
         // this.router.navigate(['/b']);
         // this.router.navigateByUrl('/list-order');
-
+        this.router.navigate(['/orders']);
       }
     })
+    // this.init();
   }
 
   editOrder(order: any, orderId: String){

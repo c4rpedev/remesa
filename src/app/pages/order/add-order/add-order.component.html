@@ -91,13 +91,52 @@
         </div>
       </div>
 
-      <label> <strong>Provincia*</strong>  </label>
+
+        <div class="col-md-12">
+          <div class="row">
+          <div class="col-md-6">
+            <label class="lname"> <strong>Cantidad*</strong> </label>
+            <input type="number"
+            class="form-control"
+            [(ngModel)]="order.orderAmount"
+            [class.is-invalid]="orderAmount.invalid && orderAmount.touched"
+            required
+            placeholder="Cantidad"
+            name="orderAmount"
+            #orderAmount = "ngModel"
+            style="height: 35px;">
+          </div>
+
+          <div class="col-md-6">
+            <label> <strong>Moneda*</strong>  </label>
+            <select type="text"
+            class="form-select"
+            [(ngModel)]="order.orderCurrency"
+            [class.is-invalid]="orderCurrency.invalid && orderCurrency.touched"
+            required
+            placeholder="Municipio"
+            name="orderCurrency"
+            #orderCurrency = "ngModel"
+            style="height: 35px;">
+
+              <option>
+                Moneda Nacional(MN)
+              </option>
+              <option>
+                Dolar Estadounidense(USD)
+              </option>
+            </select>
+          </div>
+          </div>
+        </div>
+
+        <label> <strong>Provincia*</strong>  </label>
       <select  [(ngModel)]="order.orderProvince"
       class="form-select"
       name="orderProvince"
       [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
+      (change)="initProvince()"
       #orderProvince="ngModel"
-      style="height: 35px;"
       style="height: 35px;">
 
               <option>
@@ -150,105 +189,27 @@
                </option>
             </select>
 
-
-
-<!--
-      <label class="lname"> <strong>Cantidad</strong> </label>
-      <input type="number"
-      class="form-control"
-      [(ngModel)]="order.orderAmount"
-      [class.is-invalid]="orderAmount.invalid && orderAmount.touched"
-      required
-      placeholder="Número del Cliente"
-      name="orderAmount"
-      #orderAmount = "ngModel">
-
-
-
-
-      <label> <strong>Moneda</strong>  </label>
+        <label> <strong>Municipio</strong>  </label>
       <select type="text"
       class="form-select"
-      [(ngModel)]="order.orderCurrency"
-      [class.is-invalid]="orderCurrency.invalid && orderCurrency.touched"
-      required
+      [(ngModel)]="order.orderMunicipio"
+      [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
       placeholder="Municipio"
-      name="orderCurrency"
-      #orderCurrency = "ngModel">
+      name="orderMunicipio"
+      #orderMunicipio = "ngModel"
+      style="height: 35px;">
 
-        <option>
-          Moneda Nacional(MN)
-        </option>
-        <option>
-          Moneda Libremente Convertible(MLC)
-        </option>
+<option *ngFor="let m of municipios">
+  {{m}}
+</option>
+</select>
 
-        </select>
- -->
-
-        <div class="col-md-12 mt-2">
-          <div class="row">
-          <div class="col-md-6">
-            <label class="lname"> <strong>Cantidad*</strong> </label>
-            <input type="number"
-            class="form-control"
-            [(ngModel)]="order.orderAmount"
-            [class.is-invalid]="orderAmount.invalid && orderAmount.touched"
-            required
-            placeholder="Cantidad"
-            name="orderAmount"
-            #orderAmount = "ngModel"
-            style="height: 35px;">
-          </div>
-
-          <div class="col-md-6">
-            <label> <strong>Moneda*</strong>  </label>
-            <select type="text"
-            class="form-select"
-            [(ngModel)]="order.orderCurrency"
-            [class.is-invalid]="orderCurrency.invalid && orderCurrency.touched"
-            required
-            placeholder="Municipio"
-            name="orderCurrency"
-            #orderCurrency = "ngModel"
-            style="height: 35px;">
-
-              <option>
-                Moneda Nacional(MN)
-              </option>
-              <option>
-                Dolar Estadounidense(USD)
-              </option>
-            </select>
-          </div>
-          </div>
-        </div>
-
-        <!-- <label> <strong>Agencia</strong>  </label>
-            <select type="text"
-            class="form-select"
-            [(ngModel)]="order.orderAgency"
-            [class.is-invalid]="orderAgency.invalid && orderAgency.touched"
-            required
-            placeholder="Municipio"
-            name="orderAgency"
-            #orderAgency = "ngModel"
-            style="height: 35px;">
-
-              <option>
-                agencymanag3r
-              </option>
-              <option>
-               Opción 2
-              </option>
-            </select> -->
-
-        <label><strong>Municipio*</strong>  </label>
+<label><strong>Localidad*</strong>  </label>
         <div class="row">
           <div class="col-md-12">
             <input type="text"
           class="form-control"
-          [(ngModel)]="localidad"
+          [(ngModel)]="order.orderLocalidad"
           [class.is-invalid]="localidadV.invalid && localidadV.touched"
           placeholder="Localidad"
           name="localidad"
@@ -257,7 +218,6 @@
           required>
           </div>
         </div>
-
 
 
       <label><strong>Dirección*</strong>  </label>

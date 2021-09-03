@@ -1,3 +1,4 @@
+import { MunicipioService } from 'src/app/core/services/municipio.service';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from 'src/app/core/services/user.service';
 import { Component, OnInit } from '@angular/core';
@@ -39,6 +40,7 @@ export class EditOrderComponent implements OnInit {
   streetB: string;
   localidad: string;
   file: File;
+  municipios: any [] = [];
   constructor(
     private router: Router,
     private sucursalService: SucursalService,
@@ -46,19 +48,22 @@ export class EditOrderComponent implements OnInit {
     private orderService: OrderService,
     public auth: AuthService,
     public dialog: MatDialog,
+    private municipioService: MunicipioService
   ) { }
 
   ngOnInit(): void {
     this.auth.user$.subscribe(user =>{
       this.user = user.nickname;
       this.admin = this.userService.isAdmin(this.user);
-      console.log(this.admin + ' <----admin')
     })
     this.order = history.state.order;
-    this.img=  history.state.order.orderAlbaran._url;
+    if(history.state.order.orderAlbaran){
+      this.img=  history.state.order.orderAlbaran._url;
+    }
     this.orderId = history.state.orderId;
     // this.user = history.state.user;
     // this.admin = history.state.admin;
+    this.initProvince();
 
 
     // this.sucursal = history.state.sucursal;
@@ -93,6 +98,19 @@ export class EditOrderComponent implements OnInit {
         this.img = reader.result;
       };
 }
+
+initProvince(){
+  console.log(this.order.orderProvince + ' <--provinciaaa!!')
+  this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+    this.municipios = [];
+    res.forEach(element => {
+      this.municipios.push(element.attributes['municipios'])
+    })
+    // this.municipios = res[0].attributes['municipios'];
+    console.log(this.municipios);
+  })
+}
+
   onSubmit(form: NgForm){
     // var albaranes = 'albaranes.jpg'
     var hasAlbaran = false;
@@ -105,6 +123,15 @@ export class EditOrderComponent implements OnInit {
       }
 
       this.order.orderAddress = "#" +this.order.numerocasa + " calle: " + this.order.calleP + ' entre ' + this.order.callE;
+      var municip = true;
+      this.municipios.forEach(element => {
+        if(element ==  this.order.orderMunicipio){
+          municip = false;
+        }
+      });
+      if(municip){
+        this.order.orderMunicipio = this.municipios[0];
+      }
       this.orderService.canUpdateOrder = true;
       this.orderService.updateOrder(this.order, this.orderId, this.img.toString(), hasAlbaran);
       Swal.fire({

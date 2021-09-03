@@ -25,6 +25,7 @@ export class Order {
     orderCurrency: string;
     orderAlbaran: File;
     orderDays: number;
+    orderLocalidad: string;
     state: string;
     orderMobile: string;
     calleP: string;

@@ -31,6 +31,8 @@ export class OrderService {
       myNewObject.set('calleP', order.calleP);
       myNewObject.set('callE', order.callE);
       myNewObject.set('numerocasa', order.numerocasa);
+      myNewObject.set('orderMunicipio', order.orderMunicipio);
+      myNewObject.set('orderLocalidad', order.orderLocalidad);
 
 
       myNewObject.set('orderAgency', order.orderAgency);
@@ -73,6 +75,8 @@ export class OrderService {
         myNewObject.set('calleP', order.calleP);
         myNewObject.set('callE', order.callE);
         myNewObject.set('numerocasa', order.numerocasa);
+        myNewObject.set('orderMunicipio', order.orderMunicipio);
+        myNewObject.set('orderLocalidad', order.orderLocalidad);
 
 
         if(hasAlbaran){

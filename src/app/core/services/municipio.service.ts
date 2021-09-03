@@ -15,7 +15,7 @@ export class MunicipioService {
       try {
         // here you put the objectId that you want to update
         const object = await query.get(provinciaId);
-       
+
         object.set('municipios', municipio);
         try {
           const response = await object.save();
@@ -66,10 +66,11 @@ export class MunicipioService {
       }
     })();
   }
-  getMunicipio(province: string): Promise <any> {    
+  getMunicipio(province: string): Promise <any> {
+    console.log(province + ' <--provincia para buscar municipios')
       const Municipios = Parse.Object.extend('municipios');
-      const query = new Parse.Query(Municipios);    
+      const query = new Parse.Query(Municipios);
       query.equalTo('provincia', province);
-      return query.find();   
+      return query.find();
   }
 }

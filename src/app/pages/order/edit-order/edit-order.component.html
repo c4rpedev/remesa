@@ -65,13 +65,51 @@
         </div>
       </div>
 
+      <div class="col-md-12 mt-2">
+        <div class="row">
+        <div class="col-md-6">
+          <label class="lname"> <strong>Cantidad</strong> </label>
+          <input type="number"
+          class="form-control"
+          [(ngModel)]="order.orderAmount"
+          [class.is-invalid]="orderAmount.invalid && orderAmount.touched"
+          required
+          placeholder="Cantidad"
+          name="orderAmount"
+          #orderAmount = "ngModel"
+          style="height: 35px;">
+        </div>
+
+        <div class="col-md-6">
+          <label> <strong>Moneda</strong>  </label>
+          <select type="text"
+          class="form-select"
+          [(ngModel)]="order.orderCurrency"
+          [class.is-invalid]="orderCurrency.invalid && orderCurrency.touched"
+          placeholder="Municipio"
+          name="orderCurrency"
+          #orderCurrency = "ngModel"
+          style="height: 35px;">
+
+            <option>
+              Moneda Nacional(MN)
+            </option>
+            <option>
+              Dolar Estadounidense(USD)
+            </option>
+          </select>
+        </div>
+        </div>
+      </div>
+
+
       <label> <strong>Provincia*</strong>  </label>
       <select  [(ngModel)]="order.orderProvince"
       class="form-select"
       name="orderProvince"
       [class.is-invalid]="orderProvince.invalid && orderProvince.touched"
       #orderProvince="ngModel"
-      style="height: 35px;"
+      (change)="initProvince()"
       style="height: 35px;">
 
               <option>
@@ -124,60 +162,36 @@
                </option>
             </select>
 
+      <label> <strong>Municipio</strong>  </label>
+      <select type="text"
+      class="form-select"
+      [(ngModel)]="order.orderMunicipio"
+      [class.is-invalid]="orderMunicipio.invalid && orderMunicipio.touched"
+      required
+      placeholder="Municipio"
+      name="orderMunicipio"
+      #orderMunicipio = "ngModel"
+      style="height: 35px;">
 
+<option *ngFor="let m of municipios">
+  {{m}}
+</option>
+</select>
 
-      <div class="col-md-12 mt-2">
+<label><strong>Localidad*</strong>  </label>
         <div class="row">
-        <div class="col-md-6">
-          <label class="lname"> <strong>Cantidad</strong> </label>
-          <input type="number"
+          <div class="col-md-12">
+            <input type="text"
           class="form-control"
-          [(ngModel)]="order.orderAmount"
-          [class.is-invalid]="orderAmount.invalid && orderAmount.touched"
-          required
-          placeholder="Cantidad"
-          name="orderAmount"
-          #orderAmount = "ngModel"
-          style="height: 35px;">
+          [(ngModel)]="order.orderLocalidad"
+          [class.is-invalid]="localidadV.invalid && localidadV.touched"
+          placeholder="Localidad"
+          name="localidad"
+          #localidadV = "ngModel"
+          style="height: 35px;"
+          required>
+          </div>
         </div>
-
-        <div class="col-md-6">
-          <label> <strong>Moneda</strong>  </label>
-          <select type="text"
-          class="form-select"
-          [(ngModel)]="order.orderCurrency"
-          [class.is-invalid]="orderCurrency.invalid && orderCurrency.touched"
-          required
-          placeholder="Municipio"
-          name="orderCurrency"
-          #orderCurrency = "ngModel"
-          style="height: 35px;">
-
-            <option>
-              Moneda Nacional(MN)
-            </option>
-            <option>
-              Dolar Estadounidense(USD)
-            </option>
-          </select>
-        </div>
-        </div>
-      </div>
-
-      <label><strong>Municipio*</strong>  </label>
-      <div class="row">
-        <div class="col-md-12">
-          <input type="text"
-        class="form-control"
-        [(ngModel)]="order.orderMunicipio"
-        [class.is-invalid]="localidadV.invalid && localidadV.touched"
-        placeholder="Localidad"
-        name="localidad"
-        #localidadV = "ngModel"
-        style="height: 35px;"
-        required>
-        </div>
-      </div>
 
 
 

@@ -77,12 +77,16 @@ export class AddOrderComponent implements OnInit {
   }
 
 
-  // initProvince(){
-  //   this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
-  //     this.municipios = res[0].attributes['municipios'];
-  //     console.log(this.municipios);
-  //   })
-  // }
+  initProvince(){
+    this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
+      this.municipios = [];
+      res.forEach(element => {
+        this.municipios.push(element.attributes['municipios'])
+      })
+      // this.municipios = res[0].attributes['municipios'];
+      console.log(this.municipios);
+    })
+  }
 
   // changeProvince(){
   //   this.municipioService.getMunicipio(this.order.orderProvince).then(res=>{
@@ -142,7 +146,7 @@ export class AddOrderComponent implements OnInit {
 
 
 
-  onSubmit(form: NgForm){
+  async onSubmit(form: NgForm){
 
     console.log(form);
 
@@ -150,7 +154,7 @@ export class AddOrderComponent implements OnInit {
       if(!this.order.state && (this.order.orderAgency != 'esencialpack' && this.order.orderAgency != 'agenciaespaña')){
         this.sendSms(this.order.orderMobile);
       }
-      this.orderService.getLasOrder().then(res=>{
+     await this.orderService.getLasOrder().then(async res=>{
 
 
         var obj = res[0];
@@ -162,13 +166,16 @@ export class AddOrderComponent implements OnInit {
         }
         this.order.state = 'Nuevo';
         this.order.orderAgency = this.user;
-        this.order.orderMunicipio = this.localidad;
+        // this.order.orderLocalidad = this.localidad;
         this.order.numerocasa = this.streetNumber;
         this.order.calleP = this.street;
         this.order.callE = this.streetB;
+        if(this.order.orderMunicipio == null){
+          this.order.orderMunicipio = this.municipios[0];
+        }
         this.order.orderAddress = "#" +this.streetNumber + " calle: " + this.street + ' entre ' + this.streetB;
 
-        this.orderService.createOrder(this.order, this.user);
+       await this.orderService.createOrder(this.order, this.user);
       })
       Swal.fire({
         position: 'top-end',
